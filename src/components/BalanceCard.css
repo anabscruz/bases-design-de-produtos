@@ -1,0 +1,48 @@
+.balance-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 342px;
+  height: 209px;
+  padding: 24px 16px 16px;
+  border-radius: 12px;
+  background: var(--color-primary);
+  color: #fff;
+  overflow: hidden;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+.balance-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.balance-card__value {
+  font-size: 24px;
+  line-height: 20px;
+}
+
+.balance-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.balance-card__actions button {
+  padding: 4px 8px;
+  border: 1px solid #fff;
+  border-radius: 50px;
+}
+
+.balance-card__footer {
+  width: 100%;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-primary-line);
+  text-align: center;
+}

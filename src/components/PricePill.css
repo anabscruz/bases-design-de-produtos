@@ -1,0 +1,12 @@
+.price-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px 2px 4px;
+  border-radius: 50px;
+  background: var(--color-price);
+  color: #fff;
+  font-size: 12px;
+  line-height: 20px;
+  white-space: nowrap;
+}

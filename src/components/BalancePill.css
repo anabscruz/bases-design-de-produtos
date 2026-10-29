@@ -1,0 +1,15 @@
+.balance-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 4px 8px 4px 4px;
+  border-radius: 50px;
+  background: var(--color-primary);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.balance-pill__value {
+  font-size: 16px;
+  line-height: 20px;
+}

@@ -1,0 +1,61 @@
+.wallet__cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 var(--screen-padding);
+}
+
+/* Hugs the 342px balance card; the other cards stretch to match it */
+.wallet__cards--visible {
+  align-items: stretch;
+  gap: 12px;
+  padding: 0;
+}
+
+.wallet__add-method {
+  width: 100%;
+  padding: 9px 23px;
+  border-radius: 12px;
+  background: #fff;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.45px;
+}
+
+.wallet__transactions {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  padding: 24px var(--screen-padding);
+}
+
+.wallet__transactions--visible {
+  padding: 0;
+}
+
+.wallet__transactions-title {
+  margin: 0;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.48px;
+}
+
+.wallet__filter {
+  display: flex;
+}
+
+.wallet__list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 0;
+  padding: 10px 0;
+  list-style: none;
+}
+
+.wallet .floating-menu__bar {
+  background: rgba(235, 235, 235, 0.2);
+}

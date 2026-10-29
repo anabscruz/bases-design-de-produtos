@@ -1,0 +1,49 @@
+.transaction {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.transaction__info,
+.transaction__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  line-height: 20px;
+}
+
+.transaction--spaced .transaction__info {
+  gap: 10px;
+}
+
+.transaction__title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.transaction__date {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.transaction__source {
+  font-size: 16px;
+  color: var(--color-text-tertiary);
+}
+
+.transaction__amount {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.transaction__amount--debit {
+  color: var(--color-negative);
+}
+
+.transaction__amount--credit {
+  color: var(--color-positive);
+}

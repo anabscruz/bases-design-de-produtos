@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header__profile {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header__avatar {
+  flex-shrink: 0;
+  width: 73px;
+  height: 73px;
+  margin-right: -12px;
+  border-radius: 50%;
+}
+
+.header__avatar--small {
+  width: 44px;
+  height: 44px;
+  margin-right: 0;
+}
+
+.header__profile .balance-pill {
+  position: relative;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__actions button,
+.header__close {
+  display: flex;
+}
