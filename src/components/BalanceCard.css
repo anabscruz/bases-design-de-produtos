@@ -46,7 +46,13 @@
 
 .balance-card__footer {
   width: 100%;
+  transition: font-weight 200ms ease;
   padding-top: 8px;
   border-top: 1px solid var(--color-primary-line);
   text-align: center;
+}
+
+/* Filter on: only wallet transactions are listed */
+.balance-card__footer[aria-pressed='true'] {
+  font-weight: 600;
 }

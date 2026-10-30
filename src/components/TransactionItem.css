@@ -1,3 +1,37 @@
+/* Row wrapper: collapses its height (0fr) and the 32px spacing above it */
+.transaction-row {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition:
+    grid-template-rows 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin-top 450ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 300ms ease;
+}
+
+.transaction-row + .transaction-row {
+  margin-top: 32px;
+}
+
+.transaction-row--collapsed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.transaction-row + .transaction-row--collapsed {
+  margin-top: 0;
+}
+
+.transaction-row__clip {
+  min-height: 0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transaction-row {
+    transition: none;
+  }
+}
+
 .transaction {
   display: flex;
   align-items: flex-end;
