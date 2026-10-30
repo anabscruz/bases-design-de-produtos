@@ -64,3 +64,24 @@
 .carousel > * {
   scroll-snap-align: start;
 }
+
+/*
+ * Full-bleed carousel: spans the whole screen width so the neighbouring items
+ * peek in from both edges, while the snapped item lines up with the content
+ * padding. Dragging with a mouse pauses snapping (see useDragScroll).
+ */
+.carousel--bleed {
+  position: relative;
+  flex-shrink: 0;
+  width: calc(100% + var(--screen-padding) * 2);
+  margin-left: calc(var(--screen-padding) * -1);
+  padding-left: var(--screen-padding);
+  scroll-padding-inline: var(--screen-padding);
+  cursor: grab;
+}
+
+.carousel--bleed.is-dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
+}

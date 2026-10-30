@@ -1,4 +1,6 @@
+import { useRef } from 'react'
 import Header from '../components/Header.jsx'
+import useDragScroll from '../hooks/useDragScroll.js'
 import barcode from '../assets/images/barcode.png'
 import '../components/Screen.css'
 import './TicketDetails.css'
@@ -39,6 +41,9 @@ function Field({ label, value, wide = false }) {
 
 /** Figma "Ticket" (139:405): opened from the Home "Upcoming events" tickets. */
 export default function TicketDetails({ navigate, onBack, balanceHidden, onToggleBalance }) {
+  const cardsRef = useRef(null)
+  useDragScroll(cardsRef)
+
   return (
     <main className="screen screen--padded ticket-details">
       <Header
@@ -49,7 +54,7 @@ export default function TicketDetails({ navigate, onBack, balanceHidden, onToggl
         onMenu={() => navigate('menu')}
       />
 
-      <div className="carousel ticket-details__cards">
+      <div className="carousel carousel--bleed ticket-details__cards" ref={cardsRef} tabIndex={0} aria-label="Ingressos">
         {TICKETS.map((ticket) => (
           <article className="ticket-card" key={ticket.id}>
             <h1 className="ticket-card__event">{ticket.event}</h1>
