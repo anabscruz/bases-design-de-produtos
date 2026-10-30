@@ -46,3 +46,17 @@ Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
 - Seria a lista completa dos próximos eventos/ingressos do usuário (hoje a Home mostra só dois tickets na seção "Upcoming events").
 - Pontos de entrada naturais: o título "Upcoming events" da Home (como já foi feito com "Top Event", com seta e título clicáveis) e o item "Tickets" do menu, que hoje leva para a tela de Events.
 - Cada item da lista deve abrir a tela de ingresso (`#/ticket`), como os tickets da Home já fazem.
+
+## 8. Remover o ícone de notificação do header da tela de Events
+
+- Basta tirar a prop `showBell` do `<Header>` em `src/screens/Events.jsx` (como já foi feito na carteira).
+- Depois disso, o sino fica só na barra de navegação. Hoje ele não abre nada lá (ver item 2).
+
+## 9. Desenhar e implementar o filtro
+
+- Ainda não há desenho no Figma: primeiro desenhar e depois implementar.
+- Hoje existem dois botões de filtro (ícone `tune`) que não fazem nada:
+  - "All Events", na tela de Events (`events__filter` em `src/screens/Events.jsx`);
+  - "Transactions", na carteira (`wallet__filter` em `src/screens/Wallet.jsx`).
+- Definir no desenho: se é um mesmo componente para os dois, quais critérios cada um tem (ex.: data, local e preço nos eventos; origem e tipo nas transações) e o formato (bottom sheet, painel ou chips).
+- Na carteira já existe um filtro parecido: o botão "Transactions" do cartão de saldo mostra só as transações da "Wallet", com a animação de desfoque. Vale reaproveitar essa animação.
