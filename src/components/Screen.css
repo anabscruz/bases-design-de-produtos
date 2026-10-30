@@ -1,11 +1,11 @@
-/* Base layout shared by every screen: 79px top padding and 32px vertical rhythm */
+/* Base layout shared by every screen: top padding token and 32px vertical rhythm */
 .screen {
   min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
-  padding: 79px 0 130px;
+  padding: var(--screen-padding-top) 0 130px;
   background: var(--color-bg);
 }
 

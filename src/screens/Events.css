@@ -6,7 +6,7 @@
  * Everything is plain CSS (sticky positioning), so it stays in sync with the scroll.
  */
 .screen.events {
-  --sheet-stop: 168px; /* 79 top padding + 73 header + 16 */
+  --sheet-stop: calc(var(--screen-padding-top) + 73px + 16px); /* top padding + header + 16 */
   gap: 0;
   padding-top: 0;
 }
@@ -17,7 +17,7 @@
   z-index: 2;
   width: 100%;
   height: var(--sheet-stop);
-  padding-top: 79px;
+  padding-top: var(--screen-padding-top);
   background: var(--color-bg);
 }
 
