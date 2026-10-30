@@ -19,32 +19,13 @@
     0 30px 80px rgba(20, 16, 60, 0.35);
 }
 
-/* Wrapper of the current screen: the part that gets pushed aside by the menu */
+/* Wrapper of the current screen (the full-screen menu slides in over it) */
 .phone__screen {
   position: absolute;
   inset: 0;
   z-index: 1;
   overflow: hidden;
   background: var(--color-bg);
-  transform-origin: 0 50%;
-  transition:
-    transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-radius 600ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 600ms ease;
-}
-
-.phone__screen--pushed {
-  transform: translateX(56%) scale(0.86);
-  border-radius: 36px;
-  box-shadow: -20px 0 60px rgba(20, 16, 60, 0.18);
-}
-
-/* Covers the pushed screen so a tap anywhere on it closes the menu */
-.phone__screen-close {
-  position: absolute;
-  inset: 0;
-  z-index: 20;
-  cursor: pointer;
 }
 
 .phone__viewport {
@@ -95,10 +76,6 @@
 @media (prefers-reduced-motion: reduce) {
   .phone__viewport {
     animation: none !important;
-  }
-
-  .phone__screen {
-    transition: none;
   }
 }
 

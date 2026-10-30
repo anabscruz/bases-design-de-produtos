@@ -29,7 +29,7 @@ function initialState() {
 export default function App() {
   const [{ route, lastTab, transition, backTo }, setNav] = useState(initialState)
   const [balanceHidden, setBalanceHidden] = useState(false)
-  // The menu isn't a route: it's a layer the current screen slides away from
+  // The menu isn't a route: it's a full-screen layer over the current screen
   const [menuOpen, setMenuOpen] = useState(false)
   const goingBack = useRef(false)
   const leavingMenu = useRef(false)
@@ -91,9 +91,16 @@ export default function App() {
       screenKey={route}
       transition={transition}
       overlay={<FloatingMenu active={lastTab} hidden={menuOpen} navigate={navigate} />}
-      menu={<Menu open={menuOpen} active={route} navigate={navigate} balanceHidden={balanceHidden} />}
+      menu={
+        <Menu
+          open={menuOpen}
+          active={route}
+          navigate={navigate}
+          onClose={() => setMenuOpen(false)}
+          balanceHidden={balanceHidden}
+        />
+      }
       menuOpen={menuOpen}
-      onCloseMenu={() => setMenuOpen(false)}
     >
       <Screen
         navigate={navigate}

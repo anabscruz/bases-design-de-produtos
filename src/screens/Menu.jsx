@@ -1,4 +1,5 @@
 import BalancePill from '../components/BalancePill.jsx'
+import Icon from '../components/Icon.jsx'
 import avatar from '../assets/images/avatar.png'
 import '../components/Header.css'
 import './Menu.css'
@@ -14,16 +15,21 @@ const ITEMS = [
 ]
 
 /**
- * Side menu. It sits *under* the current screen: opening it pushes the screen
- * to the right (see PhoneFrame) while the items slide in from the left. The
- * item for the current screen is emphasised.
+ * Full-screen menu. It slides in from the left edge over the current screen,
+ * then its items follow one after another; the current screen's item is
+ * emphasised. Closes with the X (or Escape, handled in App).
  */
-export default function Menu({ open, active, navigate, balanceHidden }) {
+export default function Menu({ open, active, navigate, onClose, balanceHidden }) {
   return (
     <aside className={`menu${open ? ' menu--open' : ''}`} aria-label="Menu" aria-hidden={!open} inert={!open}>
-      <div className="header__profile menu__profile">
-        <img className="header__avatar" src={avatar} width="73" height="73" alt="Clinton Elvis" />
-        <BalancePill value="356.90" hidden={balanceHidden} />
+      <div className="menu__top">
+        <div className="header__profile menu__profile">
+          <img className="header__avatar" src={avatar} width="73" height="73" alt="Clinton Elvis" />
+          <BalancePill value="356.90" hidden={balanceHidden} />
+        </div>
+        <button type="button" className="menu__close" onClick={onClose} aria-label="Fechar menu">
+          <Icon name="close" size={36} />
+        </button>
       </div>
 
       <nav className="menu__list">

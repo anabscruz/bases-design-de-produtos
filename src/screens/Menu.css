@@ -1,15 +1,39 @@
+/* Full-screen panel: parked off the left edge, slides in over the current screen */
 .menu {
   --menu-ease: cubic-bezier(0.22, 1, 0.36, 1);
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 30;
   display: flex;
   flex-direction: column;
   padding: var(--screen-padding-top) var(--screen-padding);
   background: var(--color-bg);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition:
+    transform 450ms cubic-bezier(0.55, 0, 0.75, 0.2),
+    visibility 0s linear 450ms;
 }
 
-/* Items stay in the left column the pushed screen leaves free, vertically centred */
+.menu--open {
+  transform: none;
+  visibility: visible;
+  transition: transform 550ms var(--menu-ease);
+}
+
+.menu__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 73px;
+}
+
+.menu__close {
+  display: flex;
+  color: var(--color-icon);
+}
+
+/* Items stay in a left column, vertically centred */
 .menu__list {
   flex: 1;
   display: flex;
@@ -17,7 +41,6 @@
   align-items: flex-start;
   justify-content: center;
   gap: 16px;
-  width: 50%;
 }
 
 .menu__item {
@@ -57,15 +80,17 @@
     transform 600ms var(--menu-ease);
 }
 
+/* They start once the panel is most of the way in */
 .menu--open .menu__profile {
-  transition-delay: 80ms;
+  transition-delay: 180ms;
 }
 
 .menu--open .menu__item {
-  transition-delay: calc(120ms + var(--i) * 40ms);
+  transition-delay: calc(220ms + var(--i) * 40ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .menu,
   .menu__profile,
   .menu__item {
     transition: none !important;
