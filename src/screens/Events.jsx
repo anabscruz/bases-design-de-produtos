@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import Header from '../components/Header.jsx'
+import ExpandingSearch from '../components/ExpandingSearch.jsx'
 import Attendees from '../components/Attendees.jsx'
 import PricePill from '../components/PricePill.jsx'
 import Icon from '../components/Icon.jsx'
@@ -49,6 +51,13 @@ const ALL_EVENTS = [
 ]
 
 export default function Events({ navigate, balanceHidden, onToggleBalance }) {
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const term = query.trim().toLowerCase()
+  const events = term
+    ? ALL_EVENTS.filter((event) => `${event.name} ${event.address}`.toLowerCase().includes(term))
+    : ALL_EVENTS
+
   return (
     <main className="screen events">
       {/* Opaque header band: always on top, so nothing scrolls over the header */}
@@ -90,8 +99,15 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
           <div className="events__sheet-header">
             <div className="events__handle" aria-hidden="true" />
 
-            <div className="section-header">
-              <h2 className="section-title">All Events</h2>
+            <div className={`section-header events__section-header${searchOpen ? ' is-searching' : ''}`}>
+              <h2 className="section-title events__section-title">All Events</h2>
+              <ExpandingSearch
+                open={searchOpen}
+                onOpenChange={setSearchOpen}
+                value={query}
+                onChange={setQuery}
+                label="Buscar eventos"
+              />
               <button type="button" className="events__filter" aria-label="Filtrar eventos">
                 <Icon name="tune" size={30} />
               </button>
@@ -99,7 +115,8 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
           </div>
 
           <div className="events__list">
-            {ALL_EVENTS.map((event) => (
+            {events.length === 0 && <p className="events__empty">No events found for “{query.trim()}”</p>}
+            {events.map((event) => (
               <article className="event-item" key={event.id}>
                 <div className="poster poster--list">
                   <img className="poster__image" src={event.image} alt="" />
