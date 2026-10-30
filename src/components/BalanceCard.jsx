@@ -2,9 +2,18 @@ import Amount from './Amount.jsx'
 import flash from '../assets/icons/flash-white.svg'
 import './BalanceCard.css'
 
-export default function BalanceCard({ value, hidden }) {
+export default function BalanceCard({ value, hidden, onCardClick }) {
+  // Tapping the card itself toggles the card stack; its own buttons keep their action
+  const handleClick = (event) => {
+    if (onCardClick && !event.target.closest('button')) onCardClick()
+  }
+
   return (
-    <section className="balance-card" aria-label="Account balance">
+    <section
+      className={`balance-card${onCardClick ? ' balance-card--clickable' : ''}`}
+      aria-label="Account balance"
+      onClick={handleClick}
+    >
       <div className="balance-card__top">
         <img src={flash} width="27" height="25" alt="" />
         <p>Account Balance</p>

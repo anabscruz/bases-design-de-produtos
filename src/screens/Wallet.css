@@ -1,15 +1,35 @@
+/* Shared timing for the card stack sliding open/closed */
+.wallet {
+  --wallet-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --wallet-duration: 520ms;
+}
+
 .wallet__cards {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 var(--screen-padding);
+  width: 342px;
 }
 
-/* Hugs the 342px balance card; the other cards stretch to match it */
-.wallet__cards--visible {
-  align-items: stretch;
-  gap: 12px;
-  padding: 0;
+/* "Add payment method" only exists in the visible state: it grows in above the cards */
+.wallet__add-method-slot {
+  display: grid;
+  grid-template-rows: 0fr;
+  width: 100%;
+  margin-bottom: 0;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    grid-template-rows var(--wallet-duration) var(--wallet-ease),
+    margin-bottom var(--wallet-duration) var(--wallet-ease),
+    opacity 250ms ease,
+    transform var(--wallet-duration) var(--wallet-ease);
+}
+
+/* A padding-free wrapper lets the 0fr row collapse to exactly 0px */
+.wallet__add-method-clip {
+  min-height: 0;
+  overflow: hidden;
 }
 
 .wallet__add-method {
@@ -23,16 +43,25 @@
   letter-spacing: 0.45px;
 }
 
+.wallet--cards-visible .wallet__add-method-slot {
+  grid-template-rows: 1fr;
+  margin-bottom: 12px;
+  opacity: 1;
+  transform: none;
+  transition-delay: 0ms, 0ms, 120ms, 0ms;
+}
+
 .wallet__transactions {
   display: flex;
   flex-direction: column;
   gap: 32px;
   width: 100%;
-  padding: 24px var(--screen-padding);
+  padding-top: 24px;
+  transition: padding-top var(--wallet-duration) var(--wallet-ease);
 }
 
-.wallet__transactions--visible {
-  padding: 0;
+.wallet--cards-visible .wallet__transactions {
+  padding-top: 0;
 }
 
 .wallet__transactions-title {
@@ -45,6 +74,12 @@
 
 .wallet__filter {
   display: flex;
+  transition: opacity 250ms ease;
+}
+
+.wallet--cards-visible .wallet__filter {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .wallet__list {
@@ -54,4 +89,18 @@
   margin: 0;
   padding: 10px 0;
   list-style: none;
+}
+
+.wallet .transaction__info {
+  transition: gap var(--wallet-duration) var(--wallet-ease);
+}
+
+.wallet--cards-visible .transaction__info {
+  gap: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wallet {
+    --wallet-duration: 0ms;
+  }
 }

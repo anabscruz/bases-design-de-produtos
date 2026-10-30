@@ -16,6 +16,10 @@
   white-space: nowrap;
 }
 
+.balance-card--clickable {
+  cursor: pointer;
+}
+
 .balance-card__top {
   display: flex;
   align-items: flex-start;

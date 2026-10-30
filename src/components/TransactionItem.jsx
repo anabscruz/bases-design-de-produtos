@@ -1,9 +1,9 @@
 import Amount from './Amount.jsx'
 import './TransactionItem.css'
 
-export default function TransactionItem({ title, date, source, amount, type, spaced = false, hidden }) {
+export default function TransactionItem({ title, date, source, amount, type, hidden }) {
   return (
-    <li className={`transaction${spaced ? ' transaction--spaced' : ''}`}>
+    <li className="transaction">
       <div className="transaction__info">
         <p className="transaction__title">{title}</p>
         <div className="transaction__meta">

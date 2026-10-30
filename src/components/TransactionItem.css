@@ -15,10 +15,6 @@
   line-height: 20px;
 }
 
-.transaction--spaced .transaction__info {
-  gap: 10px;
-}
-
 .transaction__title {
   font-size: 18px;
   font-weight: 500;

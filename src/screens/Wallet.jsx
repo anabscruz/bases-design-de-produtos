@@ -15,72 +15,52 @@ const TRANSACTIONS = [
 
 const BALANCE = '356.90'
 
+/**
+ * One layout for both Figma frames — "Wallet Cards Collapsed" and "Wallet Cards
+ * Visible" — so tapping either card slides the stack open/closed with CSS transitions.
+ */
 export default function Wallet({ navigate, balanceHidden, onToggleBalance }) {
-  // "Wallet Cards Collapsed" ↔ "Wallet Cards Visible": tap the card stack to toggle
   const [cardsVisible, setCardsVisible] = useState(false)
-
-  const header = (
-    <Header
-      avatarSize="small"
-      balanceHidden={balanceHidden}
-      onToggleBalance={onToggleBalance}
-      onMenu={() => navigate('menu')}
-      showBell
-    />
-  )
-
-  const greeting = (
-    <div className="greeting">
-      <p>Hello,</p>
-      <p>Clinton Elvis</p>
-    </div>
-  )
-
-  const transactions = TRANSACTIONS.map((transaction) => (
-    <TransactionItem key={transaction.id} {...transaction} spaced={cardsVisible} hidden={balanceHidden} />
-  ))
-
-  if (cardsVisible) {
-    return (
-      <main className="screen screen--padded wallet">
-        {header}
-        {greeting}
-
-        <section className="wallet__cards wallet__cards--visible">
-          <button type="button" className="wallet__add-method">Add payment method</button>
-          <CreditCard variant="full" onClick={() => setCardsVisible(false)} />
-          <BalanceCard value={BALANCE} hidden={balanceHidden} />
-        </section>
-
-        <section className="wallet__transactions wallet__transactions--visible">
-          <h2 className="wallet__transactions-title">Transactions</h2>
-          <ul className="wallet__list">{transactions}</ul>
-        </section>
-
-      </main>
-    )
-  }
+  const toggleCards = () => setCardsVisible((visible) => !visible)
 
   return (
-    <main className="screen wallet">
-      <div className="screen__inset">{header}</div>
-      <div className="screen__inset">{greeting}</div>
+    <main className={`screen screen--padded wallet${cardsVisible ? ' wallet--cards-visible' : ''}`}>
+      <Header
+        avatarSize="small"
+        balanceHidden={balanceHidden}
+        onToggleBalance={onToggleBalance}
+        onMenu={() => navigate('menu')}
+        showBell
+      />
+
+      <div className="greeting">
+        <p>Hello,</p>
+        <p>Clinton Elvis</p>
+      </div>
 
       <section className="wallet__cards">
-        <CreditCard variant="stacked" onClick={() => setCardsVisible(true)} />
-        <BalanceCard value={BALANCE} hidden={balanceHidden} />
+        <div className="wallet__add-method-slot" inert={!cardsVisible}>
+          <div className="wallet__add-method-clip">
+            <button type="button" className="wallet__add-method">Add payment method</button>
+          </div>
+        </div>
+        <CreditCard expanded={cardsVisible} onClick={toggleCards} />
+        <BalanceCard value={BALANCE} hidden={balanceHidden} onCardClick={toggleCards} />
       </section>
 
       <section className="wallet__transactions">
         <div className="section-header">
           <h2 className="wallet__transactions-title">Transactions</h2>
-          <button type="button" className="wallet__filter" aria-label="Filtrar transações">
+          <button type="button" className="wallet__filter" aria-label="Filtrar transações" tabIndex={cardsVisible ? -1 : undefined}>
             <img src={filterIcon} width="26" height="22" alt="" />
           </button>
         </div>
-        <ul className="wallet__list">{transactions}</ul>
+        <ul className="wallet__list">
+          {TRANSACTIONS.map((transaction) => (
+            <TransactionItem key={transaction.id} {...transaction} hidden={balanceHidden} />
+          ))}
+        </ul>
       </section>
-
     </main>
   )
 }
