@@ -39,3 +39,10 @@ Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
 - Bug encontrado: o X do menu volta para a última *aba* (`onClose={() => navigate(lastTab)}` em `src/App.jsx`), não para a tela anterior. Ex.: Ticket → menu → X leva para a Home, não de volta ao Ticket. Usar o mesmo `goBack` do botão de voltar resolveria.
 - "Saved Events", "Invite", "Profile" e "Logout" ainda não fazem nada.
 - Ideias de transição: menu deslizando como painel por cima da tela atual, itens entrando em sequência (stagger).
+
+## 7. Tela de upcoming events
+
+- Verificar se existe frame no Figma; nos frames usados até agora não há essa tela.
+- Seria a lista completa dos próximos eventos/ingressos do usuário (hoje a Home mostra só dois tickets na seção "Upcoming events").
+- Pontos de entrada naturais: o título "Upcoming events" da Home (como já foi feito com "Top Event", com seta e título clicáveis) e o item "Tickets" do menu, que hoje leva para a tela de Events.
+- Cada item da lista deve abrir a tela de ingresso (`#/ticket`), como os tickets da Home já fazem.
