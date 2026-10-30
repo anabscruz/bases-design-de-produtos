@@ -43,6 +43,7 @@ export default function TicketDetails({ navigate, onBack, balanceHidden, onToggl
     <main className="screen screen--padded ticket-details">
       <Header
         onBack={onBack}
+        showBalance={false}
         balanceHidden={balanceHidden}
         onToggleBalance={onToggleBalance}
         onMenu={() => navigate('menu')}

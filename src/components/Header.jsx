@@ -9,6 +9,7 @@ import './Header.css'
  * - "small": 44px avatar alone (Wallet)
  * With `onBack`, a back chevron takes the avatar's place (Ticket, Wallet); the
  * header keeps the avatar's height so the screen layout doesn't move.
+ * `showBalance={false}` drops the balance pill (Ticket).
  */
 export default function Header({
   avatarSize = 'large',
@@ -19,6 +20,7 @@ export default function Header({
   onMenu,
   onClose,
   onBack,
+  showBalance = true,
 }) {
   const backButton = onBack && (
     <button className="header__back" type="button" onClick={onBack} aria-label="Voltar">
@@ -29,7 +31,7 @@ export default function Header({
   return (
     <header className={`header header--${avatarSize}`}>
       {onBack ? (
-        avatarSize === 'large' ? (
+        avatarSize === 'large' && showBalance ? (
           <div className="header__profile header__profile--back">
             {backButton}
             <BalancePill value={balance} hidden={balanceHidden} />
