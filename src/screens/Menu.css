@@ -1,4 +1,9 @@
-/* Full-screen panel: parked off the left edge, slides in over the current screen */
+/*
+ * Frosted full-screen menu. Open: the screen behind blurs and washes out
+ * (backdrop-filter + light tint) over ~450ms, then the content fades in,
+ * items one after another. Close: content fades out first, then the blur
+ * clears, so the screen comes back into focus.
+ */
 .menu {
   --menu-ease: cubic-bezier(0.22, 1, 0.36, 1);
   position: absolute;
@@ -7,25 +12,34 @@
   display: flex;
   flex-direction: column;
   padding: var(--screen-padding-top) var(--screen-padding);
-  background: var(--color-bg);
-  transform: translateX(-100%);
+  background-color: rgba(252, 250, 250, 0);
+  backdrop-filter: blur(0) saturate(1);
   visibility: hidden;
   transition:
-    transform 450ms cubic-bezier(0.55, 0, 0.75, 0.2),
-    visibility 0s linear 450ms;
+    backdrop-filter 450ms ease 150ms,
+    background-color 450ms ease 150ms,
+    visibility 0s linear 600ms;
 }
 
 .menu--open {
-  transform: none;
+  background-color: rgba(252, 250, 250, 0.55);
+  backdrop-filter: blur(32px) saturate(1.3);
   visibility: visible;
-  transition: transform 550ms var(--menu-ease);
+  transition:
+    backdrop-filter 500ms ease,
+    background-color 500ms ease;
 }
 
 .menu__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 73px;
+  min-height: 44px;
+}
+
+.menu__title {
+  font-size: 16px;
+  color: var(--color-text-tertiary);
 }
 
 .menu__close {
@@ -33,65 +47,61 @@
   color: var(--color-icon);
 }
 
-/* Items stay in a left column, vertically centred */
 .menu__list {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  gap: 16px;
+  gap: 20px;
+  margin-top: 88px;
 }
 
 .menu__item {
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1.2;
   text-align: left;
   white-space: nowrap;
-  color: #9a9a9a;
+  color: var(--color-icon);
 }
 
+/* The current screen's item gets a slightly heavier weight */
 .menu__item--active {
-  font-size: 28px;
-  font-weight: 500;
-  color: var(--color-icon);
+  font-weight: 600;
 }
 
 .menu__item:active {
   opacity: 0.6;
 }
 
-/* Everything slides in from the left, the items one after another */
-.menu__profile,
+/* Content: hidden quickly on close, revealed after the blur on open */
+.menu__top,
 .menu__item {
   opacity: 0;
-  transform: translateX(-32px);
+  transform: translateY(6px);
   transition:
-    opacity 250ms ease,
-    transform 300ms var(--menu-ease);
+    opacity 150ms ease,
+    transform 150ms ease;
 }
 
-.menu--open .menu__profile,
+.menu--open .menu__top,
 .menu--open .menu__item {
   opacity: 1;
   transform: none;
   transition:
-    opacity 400ms ease,
-    transform 600ms var(--menu-ease);
+    opacity 350ms ease,
+    transform 450ms var(--menu-ease);
 }
 
-/* They start once the panel is most of the way in */
-.menu--open .menu__profile {
-  transition-delay: 180ms;
+.menu--open .menu__top {
+  transition-delay: 320ms;
 }
 
 .menu--open .menu__item {
-  transition-delay: calc(220ms + var(--i) * 40ms);
+  transition-delay: calc(360ms + var(--i) * 60ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .menu,
-  .menu__profile,
+  .menu__top,
   .menu__item {
     transition: none !important;
   }

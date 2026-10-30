@@ -34,7 +34,7 @@ Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
 
 ## 6. Transição e navegação do menu (transição feita)
 
-- Feito: o menu deixou de ser uma tela (`#/menu`) e virou uma camada de tela cheia por cima da tela atual. Ao abrir, ele desliza da borda esquerda até cobrir tudo, e os itens entram em sequência, com o item da tela atual em destaque. Fecha com o X ou com Esc.
+- Feito: o menu deixou de ser uma tela (`#/menu`) e virou uma camada de tela cheia por cima da tela atual, seguindo o vídeo de referência: ao abrir, a tela de trás desfoca e clareia (efeito de vidro fosco) e os itens aparecem um a um; ao fechar, o efeito se desfaz. Fecha com o X ou com Esc.
 - Com isso, o bug do X (que voltava para a última aba) deixou de existir: fechar o menu volta para a mesma tela.
 - Ainda pendente: "Saved Events", "Invite", "Profile" e "Logout" não fazem nada, e "Events" não tem item no menu (nessa tela nenhum item fica destacado).
 

@@ -92,13 +92,7 @@ export default function App() {
       transition={transition}
       overlay={<FloatingMenu active={lastTab} hidden={menuOpen} navigate={navigate} />}
       menu={
-        <Menu
-          open={menuOpen}
-          active={route}
-          navigate={navigate}
-          onClose={() => setMenuOpen(false)}
-          balanceHidden={balanceHidden}
-        />
+        <Menu open={menuOpen} active={route} navigate={navigate} onClose={() => setMenuOpen(false)} />
       }
       menuOpen={menuOpen}
     >
