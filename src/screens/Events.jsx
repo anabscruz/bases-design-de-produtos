@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import Header from '../components/Header.jsx'
 import Attendees from '../components/Attendees.jsx'
 import PricePill from '../components/PricePill.jsx'
@@ -49,46 +48,11 @@ const ALL_EVENTS = [
   { id: 'afropunk', image: afropunk, name: 'Afropunk', address: '@ Salvador - BA', date: 'November 2nd - 2PM', price: '3,000' },
 ]
 
-/**
- * Clips the sheet at its resting line (--sheet-stop) so that, once it has
- * scrolled up to just below the header, its list scrolls "inside" it instead
- * of sliding over the header.
- */
-function useSheetClip(sheetRef) {
-  useEffect(() => {
-    const sheet = sheetRef.current
-    const viewport = sheet?.closest('.phone__viewport')
-    if (!sheet || !viewport) return undefined
-
-    const stop = parseFloat(getComputedStyle(sheet).getPropertyValue('--sheet-stop'))
-    let frame = 0
-    const update = () => {
-      frame = 0
-      const top = sheet.getBoundingClientRect().top - viewport.getBoundingClientRect().top
-      const hidden = Math.max(0, stop - top)
-      sheet.style.clipPath = `inset(${hidden}px 0 0 0 round 16px 16px 0 0)`
-    }
-    const onScroll = () => {
-      if (!frame) frame = requestAnimationFrame(update)
-    }
-
-    update()
-    viewport.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      viewport.removeEventListener('scroll', onScroll)
-      cancelAnimationFrame(frame)
-    }
-  }, [sheetRef])
-}
-
 export default function Events({ navigate, balanceHidden, onToggleBalance }) {
-  const sheetRef = useRef(null)
-  useSheetClip(sheetRef)
-
   return (
     <main className="screen events">
-      {/* Header + poster wall stay put while "All Events" scrolls over them */}
-      <div className="events__backdrop">
+      {/* Opaque header band: always on top, so nothing scrolls over the header */}
+      <div className="events__header-band">
         <div className="screen__inset">
           <Header
             balanceHidden={balanceHidden}
@@ -97,7 +61,10 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
             showBell
           />
         </div>
+      </div>
 
+      {/* Poster wall stays put while "All Events" scrolls over it */}
+      <div className="events__backdrop">
         <section className="events__top">
           <h2 className="section-title screen__inset">Top Events</h2>
           <div className="events__grid">
@@ -117,7 +84,7 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
         </section>
       </div>
 
-      <section className="events__sheet" ref={sheetRef}>
+      <section className="events__sheet">
         {/* Pinned at the sheet's resting line while the list scrolls under it */}
         <div className="events__sheet-head">
           <div className="events__handle" aria-hidden="true" />

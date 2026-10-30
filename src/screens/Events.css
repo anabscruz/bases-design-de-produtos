@@ -1,15 +1,53 @@
 /*
- * Header + poster wall. Sticky at its own starting offset (the screen's 79px top
- * padding), so it never moves while the "All Events" sheet scrolls up over it.
+ * Scroll layering, top to bottom:
+ *   1. header band — sticky, opaque, z 2: the sheet and its list always pass under it
+ *   2. "All Events" sheet — z 1: scrolls up over the posters and stops at --sheet-stop
+ *   3. poster wall — sticky, z 0: never moves
+ * Everything is plain CSS (sticky positioning), so it stays in sync with the scroll.
  */
+.screen.events {
+  --sheet-stop: 168px; /* 79 top padding + 73 header + 16 */
+  gap: 0;
+  padding-top: 0;
+}
+
+.events__header-band {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  width: 100%;
+  height: var(--sheet-stop);
+  padding-top: 79px;
+  background: var(--color-bg);
+}
+
+/* Concave corners under the band: they round the sheet's top once it stops */
+.events__header-band::before,
+.events__header-band::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.events__header-band::before {
+  left: 0;
+  background: radial-gradient(circle at 100% 100%, transparent 15.5px, var(--color-bg) 16px);
+}
+
+.events__header-band::after {
+  right: 0;
+  background: radial-gradient(circle at 0 100%, transparent 15.5px, var(--color-bg) 16px);
+}
+
 .events__backdrop {
   position: sticky;
-  top: 79px;
+  top: calc(var(--sheet-stop) + 16px);
   z-index: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
   width: 100%;
+  margin-top: 16px;
 }
 
 .events__top {
@@ -31,13 +69,11 @@
 }
 
 /*
- * "All Events" bottom sheet: overlaps the grid by 10px (the -32px cancels the
- * screen gap). It scrolls up until its top reaches --sheet-stop, 16px below the
- * header (79 + 73 + 16); from there it is clipped at that line (see useSheetClip)
- * and only its list keeps moving, under the pinned sheet head.
+ * "All Events" bottom sheet: full screen width (only inner padding), overlapping
+ * the grid by 10px. It scrolls up until its top reaches --sheet-stop, where its
+ * head pins; from there only the list moves, passing under the head and the band.
  */
 .events__sheet {
-  --sheet-stop: 168px;
   position: relative;
   z-index: 1;
   display: flex;
@@ -45,7 +81,7 @@
   gap: 16px;
   width: 100%;
   min-height: 766px;
-  margin-top: -42px;
+  margin-top: -10px;
   padding: 0 var(--screen-padding);
   border-radius: 16px 16px 0 0;
   background: #fff;
@@ -58,7 +94,10 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 4px 0 16px;
+  /* full-bleed: spans the whole sheet width, content keeps the inner padding */
+  margin: 0 calc(var(--screen-padding) * -1);
+  padding: 4px var(--screen-padding) 16px;
+  border-radius: 16px 16px 0 0;
   background: #fff;
 }
 
