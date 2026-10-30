@@ -1,3 +1,17 @@
+/*
+ * Header + poster wall. Sticky at its own starting offset (the screen's 79px top
+ * padding), so it never moves while the "All Events" sheet scrolls up over it.
+ */
+.events__backdrop {
+  position: sticky;
+  top: 79px;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
 .events__top {
   display: flex;
   flex-direction: column;
@@ -16,18 +30,20 @@
   width: 100%;
 }
 
-/* "All Events" bottom sheet overlaps the grid by 10px */
+/* "All Events" bottom sheet: overlaps the grid by 10px (the -32px cancels the screen gap) */
 .events__sheet {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: 100%;
   min-height: 766px;
-  margin-top: -10px;
+  margin-top: -42px;
   padding: 4px var(--screen-padding) 0;
   border-radius: 16px 16px 0 0;
   background: #fff;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .events__handle {
