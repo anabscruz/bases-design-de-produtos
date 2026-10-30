@@ -9,7 +9,8 @@ import './Header.css'
  * - "small": 44px avatar alone (Wallet)
  * With `onBack`, a back chevron takes the avatar's place (Ticket, Wallet); the
  * header keeps the avatar's height so the screen layout doesn't move.
- * `showBalance={false}` drops the balance pill (Ticket).
+ * `showBalance={false}` is for screens without any balance (Ticket): it drops
+ * the balance pill and the show/hide balance toggle.
  */
 export default function Header({
   avatarSize = 'large',
@@ -54,9 +55,11 @@ export default function Header({
         </button>
       ) : (
         <div className="header__actions">
-          <button type="button" onClick={onToggleBalance} aria-label={balanceHidden ? 'Mostrar saldo' : 'Ocultar saldo'} aria-pressed={balanceHidden}>
-            <Icon name={balanceHidden ? 'visibility' : 'visibility_off'} size={24} />
-          </button>
+          {showBalance && (
+            <button type="button" onClick={onToggleBalance} aria-label={balanceHidden ? 'Mostrar saldo' : 'Ocultar saldo'} aria-pressed={balanceHidden}>
+              <Icon name={balanceHidden ? 'visibility' : 'visibility_off'} size={24} />
+            </button>
+          )}
           {showBell && (
             <button type="button" aria-label="Notificações">
               <Icon name="notifications" size={24} />
