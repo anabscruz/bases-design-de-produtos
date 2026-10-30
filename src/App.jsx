@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import PhoneFrame from './components/PhoneFrame.jsx'
 import FloatingMenu from './components/FloatingMenu.jsx'
 import Home from './screens/Home.jsx'
@@ -27,23 +27,28 @@ function transitionBetween(from, to) {
 
 function initialState() {
   const route = readRoute()
-  return { route, lastTab: TAB_ORDER.includes(route) ? route : 'home', transition: 'none' }
+  return { route, lastTab: TAB_ORDER.includes(route) ? route : 'home', transition: 'none', backTo: null }
 }
 
 export default function App() {
-  const [{ route, lastTab, transition }, setNav] = useState(initialState)
+  const [{ route, lastTab, transition, backTo }, setNav] = useState(initialState)
   const [balanceHidden, setBalanceHidden] = useState(false)
+  const goingBack = useRef(false)
 
   useEffect(() => {
     const onHashChange = () => {
       const next = readRoute()
+      const isBack = goingBack.current
+      goingBack.current = false
       setNav((current) =>
         current.route === next
           ? current
           : {
               route: next,
               lastTab: TAB_ORDER.includes(next) ? next : current.lastTab,
-              transition: transitionBetween(current.route, next),
+              transition: isBack ? 'back' : transitionBetween(current.route, next),
+              // Screen the back button returns to; the menu is skipped over
+              backTo: current.route === 'menu' ? current.backTo : current.route,
             },
       )
     }
@@ -53,6 +58,13 @@ export default function App() {
 
   const navigate = (next) => {
     if (next !== route) window.location.hash = `/${next}`
+  }
+
+  const goBack = () => {
+    const target = backTo && backTo !== route ? backTo : 'home'
+    if (target === route) return
+    goingBack.current = true
+    navigate(target)
   }
 
   const Screen = SCREENS[route]
@@ -66,6 +78,7 @@ export default function App() {
       <Screen
         navigate={navigate}
         onClose={() => navigate(lastTab)}
+        onBack={goBack}
         balanceHidden={balanceHidden}
         onToggleBalance={() => setBalanceHidden((hidden) => !hidden)}
       />

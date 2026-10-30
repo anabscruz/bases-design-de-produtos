@@ -7,6 +7,8 @@ import './Header.css'
  * App header. Two avatar layouts exist in the design:
  * - "large": 73px avatar with the balance pill overlapping it (Home, Events, Menu)
  * - "small": 44px avatar alone (Wallet)
+ * With `onBack`, a back chevron takes the avatar's place (Ticket, Wallet); the
+ * header keeps the avatar's height so the screen layout doesn't move.
  */
 export default function Header({
   avatarSize = 'large',
@@ -16,10 +18,26 @@ export default function Header({
   onToggleBalance,
   onMenu,
   onClose,
+  onBack,
 }) {
+  const backButton = onBack && (
+    <button className="header__back" type="button" onClick={onBack} aria-label="Voltar">
+      <Icon name="chevron_left" size={40} />
+    </button>
+  )
+
   return (
-    <header className="header">
-      {avatarSize === 'large' ? (
+    <header className={`header header--${avatarSize}`}>
+      {onBack ? (
+        avatarSize === 'large' ? (
+          <div className="header__profile header__profile--back">
+            {backButton}
+            <BalancePill value={balance} hidden={balanceHidden} />
+          </div>
+        ) : (
+          backButton
+        )
+      ) : avatarSize === 'large' ? (
         <div className="header__profile">
           <img className="header__avatar" src={avatar} width="73" height="73" alt="Clinton Elvis" />
           <BalancePill value={balance} hidden={balanceHidden} />

@@ -19,7 +19,7 @@ const BALANCE = '356.90'
  * One layout for both Figma frames — "Wallet Cards Collapsed" and "Wallet Cards
  * Visible" — so tapping either card slides the stack open/closed with CSS transitions.
  */
-export default function Wallet({ navigate, balanceHidden, onToggleBalance }) {
+export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalance }) {
   const [cardsVisible, setCardsVisible] = useState(false)
   const toggleCards = () => setCardsVisible((visible) => !visible)
   // "Transactions" on the balance card filters the list down to wallet transactions
@@ -29,6 +29,7 @@ export default function Wallet({ navigate, balanceHidden, onToggleBalance }) {
     <main className={`screen screen--padded wallet${cardsVisible ? ' wallet--cards-visible' : ''}`}>
       <Header
         avatarSize="small"
+        onBack={onBack}
         balanceHidden={balanceHidden}
         onToggleBalance={onToggleBalance}
         onMenu={() => navigate('menu')}

@@ -38,10 +38,11 @@ function Field({ label, value, wide = false }) {
 }
 
 /** Figma "Ticket" (139:405): opened from the Home "Upcoming events" tickets. */
-export default function TicketDetails({ navigate, balanceHidden, onToggleBalance }) {
+export default function TicketDetails({ navigate, onBack, balanceHidden, onToggleBalance }) {
   return (
     <main className="screen screen--padded ticket-details">
       <Header
+        onBack={onBack}
         balanceHidden={balanceHidden}
         onToggleBalance={onToggleBalance}
         onMenu={() => navigate('menu')}
