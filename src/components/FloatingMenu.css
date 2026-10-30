@@ -115,16 +115,23 @@
 }
 
 /* Icons are masks so their colour can animate black → white */
+/* Black → white on the active tab: font icons via color, the SVG bolt via its mask fill */
 .floating-menu__icon {
+  color: #000;
+  transition:
+    color 200ms ease,
+    background-color 200ms ease;
+}
+
+.floating-menu__icon--svg {
   display: block;
-  background-color: #000;
+  background-color: currentColor;
   -webkit-mask: var(--icon) center / contain no-repeat;
   mask: var(--icon) center / contain no-repeat;
-  transition: background-color 200ms ease;
 }
 
 .floating-menu__tab.is-active .floating-menu__icon {
-  background-color: #fff;
+  color: #fff;
   transition-delay: 160ms;
 }
 

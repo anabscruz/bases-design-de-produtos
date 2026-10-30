@@ -23,6 +23,12 @@
   display: flex;
 }
 
+/* Pull the glyph flush with the right edge, like the design's 12px chevron */
+.home__chevron {
+  margin-right: -10px;
+  color: var(--color-icon);
+}
+
 .home__see-all:active {
   opacity: 0.6;
 }

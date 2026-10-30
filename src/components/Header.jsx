@@ -1,9 +1,6 @@
 import BalancePill from './BalancePill.jsx'
 import avatar from '../assets/images/avatar.png'
-import eyeOff from '../assets/icons/eye-off.svg'
-import bell from '../assets/icons/bell.svg'
-import menu from '../assets/icons/menu.svg'
-import close from '../assets/icons/close.svg'
+import Icon from './Icon.jsx'
 import './Header.css'
 
 /**
@@ -33,20 +30,20 @@ export default function Header({
 
       {onClose ? (
         <button className="header__close" type="button" onClick={onClose} aria-label="Fechar menu">
-          <img src={close} width="40" height="40" alt="" />
+          <Icon name="close" size={36} />
         </button>
       ) : (
         <div className="header__actions">
           <button type="button" onClick={onToggleBalance} aria-label={balanceHidden ? 'Mostrar saldo' : 'Ocultar saldo'} aria-pressed={balanceHidden}>
-            <img src={eyeOff} width="20" height="20" alt="" />
+            <Icon name={balanceHidden ? 'visibility' : 'visibility_off'} size={24} />
           </button>
           {showBell && (
             <button type="button" aria-label="Notificações">
-              <img src={bell} width="24" height="24" alt="" />
+              <Icon name="notifications" size={24} />
             </button>
           )}
           <button type="button" onClick={onMenu} aria-label="Abrir menu">
-            <img src={menu} width="34" height="34" alt="" />
+            <Icon name="menu" size={34} />
           </button>
         </div>
       )}

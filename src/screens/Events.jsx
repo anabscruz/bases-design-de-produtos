@@ -1,7 +1,7 @@
 import Header from '../components/Header.jsx'
 import Attendees from '../components/Attendees.jsx'
 import PricePill from '../components/PricePill.jsx'
-import filterIcon from '../assets/icons/filter.svg'
+import Icon from '../components/Icon.jsx'
 import lollapalooza from '../assets/images/poster-lollapalooza.jpg'
 import coachella from '../assets/images/poster-coachella.jpg'
 import rtm from '../assets/images/poster-rtm.jpg'
@@ -93,7 +93,7 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
             <div className="section-header">
               <h2 className="section-title">All Events</h2>
               <button type="button" className="events__filter" aria-label="Filtrar eventos">
-                <img src={filterIcon} width="26" height="22" alt="" />
+                <Icon name="tune" size={30} />
               </button>
             </div>
           </div>

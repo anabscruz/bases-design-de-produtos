@@ -27,6 +27,11 @@
   width: 100%;
 }
 
+/* Optical alignment: the glyph's left edge sits where the design's icon starts */
+.balance-card__bolt {
+  margin: -3px 0 -2px -7px;
+}
+
 .balance-card__value {
   font-size: 24px;
   line-height: 20px;

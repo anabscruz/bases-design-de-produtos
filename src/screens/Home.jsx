@@ -1,7 +1,7 @@
 import Header from '../components/Header.jsx'
 import Ticket from '../components/Ticket.jsx'
 import Attendees from '../components/Attendees.jsx'
-import chevronRight from '../assets/icons/chevron-right.svg'
+import Icon from '../components/Icon.jsx'
 import boleBlue from '../assets/images/poster-bole-blue.jpg'
 import partyPhoto from '../assets/images/party-photo.jpg'
 import '../components/Screen.css'
@@ -41,7 +41,7 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
         <h2 className="home__top-heading">
           <button type="button" className="section-header home__see-all" onClick={() => navigate('events')}>
             <span className="section-title home__top-title">Top Event</span>
-            <img src={chevronRight} width="12" height="32" alt="" />
+            <Icon name="chevron_right" size={32} className="home__chevron" />
             <span className="visually-hidden">: ver todos os eventos</span>
           </button>
         </h2>

@@ -1,15 +1,14 @@
 import { useLayoutEffect, useRef, useState } from 'react'
+import Icon from './Icon.jsx'
 import flash from '../assets/icons/nav-flash.svg'
-import wallet from '../assets/icons/nav-wallet.svg'
-import ticket from '../assets/icons/nav-ticket.svg'
-import bell from '../assets/icons/bell.svg'
 import './FloatingMenu.css'
 
+// Home keeps the brand bolt from Figma (an SVG mask); the rest are Material Symbols
 const TABS = [
-  { id: 'home', label: 'Início', icon: flash, width: 27, height: 25 },
-  { id: 'wallet', label: 'Carteira', icon: wallet, width: 23, height: 20 },
-  { id: 'events', label: 'Eventos', icon: ticket, width: 37, height: 21 },
-  { id: 'notifications', label: 'Notificações', icon: bell, width: 24, height: 24 },
+  { id: 'home', label: 'Início', svg: flash, width: 27, height: 25 },
+  { id: 'wallet', label: 'Carteira', symbol: 'account_balance_wallet', size: 26 },
+  { id: 'events', label: 'Eventos', symbol: 'confirmation_number', size: 30 },
+  { id: 'notifications', label: 'Notificações', symbol: 'notifications', size: 26 },
 ]
 
 const PILL_WIDTH = 48
@@ -65,10 +64,14 @@ export default function FloatingMenu({ active, hidden = false, navigate }) {
               aria-current={isActive ? 'page' : undefined}
               tabIndex={hidden ? -1 : undefined}
             >
-              <span
-                className="floating-menu__icon"
-                style={{ width: tab.width, height: tab.height, '--icon': `url("${tab.icon}")` }}
-              />
+              {tab.svg ? (
+                <span
+                  className="floating-menu__icon floating-menu__icon--svg"
+                  style={{ width: tab.width, height: tab.height, '--icon': `url("${tab.svg}")` }}
+                />
+              ) : (
+                <Icon name={tab.symbol} size={tab.size} className="floating-menu__icon" />
+              )}
             </button>
           )
         })}

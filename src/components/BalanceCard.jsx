@@ -1,5 +1,5 @@
 import Amount from './Amount.jsx'
-import flash from '../assets/icons/flash-white.svg'
+import Icon from './Icon.jsx'
 import './BalanceCard.css'
 
 export default function BalanceCard({ value, hidden, onCardClick, onTransactionsClick, transactionsActive = false }) {
@@ -15,7 +15,7 @@ export default function BalanceCard({ value, hidden, onCardClick, onTransactions
       onClick={handleClick}
     >
       <div className="balance-card__top">
-        <img src={flash} width="27" height="25" alt="" />
+        <Icon name="bolt" size={30} className="balance-card__bolt" />
         <p>Account Balance</p>
       </div>
       <p className="balance-card__value">

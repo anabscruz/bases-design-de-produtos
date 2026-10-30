@@ -1,11 +1,11 @@
 import Amount from './Amount.jsx'
-import coinSmall from '../assets/icons/coin-small.svg'
+import Icon from './Icon.jsx'
 import './PricePill.css'
 
 export default function PricePill({ value }) {
   return (
     <div className="price-pill">
-      <img src={coinSmall} width="17" height="15" alt="" />
+      <Icon name="paid" size={18} />
       <p>
         <Amount value={value} />
       </p>

@@ -9,6 +9,11 @@
   white-space: nowrap;
 }
 
+/* 26px glyph box, laid out as the design's 22px-tall coin */
+.balance-pill__coin {
+  margin: -2px 0;
+}
+
 .balance-pill__value {
   font-size: 16px;
   line-height: 20px;

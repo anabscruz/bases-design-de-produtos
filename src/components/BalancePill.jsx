@@ -1,11 +1,11 @@
 import Amount from './Amount.jsx'
-import coin from '../assets/icons/coin.svg'
+import Icon from './Icon.jsx'
 import './BalancePill.css'
 
 export default function BalancePill({ value, hidden }) {
   return (
     <div className="balance-pill">
-      <img src={coin} width="25" height="22" alt="" />
+      <Icon name="paid" size={26} className="balance-pill__coin" />
       <p className="balance-pill__value">
         <Amount value={value} hidden={hidden} />
       </p>

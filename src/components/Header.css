@@ -37,4 +37,5 @@
 .header__actions button,
 .header__close {
   display: flex;
+  color: var(--color-icon);
 }

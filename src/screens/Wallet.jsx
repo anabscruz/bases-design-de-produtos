@@ -3,7 +3,7 @@ import Header from '../components/Header.jsx'
 import CreditCard from '../components/CreditCard.jsx'
 import BalanceCard from '../components/BalanceCard.jsx'
 import TransactionItem from '../components/TransactionItem.jsx'
-import filterIcon from '../assets/icons/filter.svg'
+import Icon from '../components/Icon.jsx'
 import '../components/Screen.css'
 import './Wallet.css'
 
@@ -60,7 +60,7 @@ export default function Wallet({ navigate, balanceHidden, onToggleBalance }) {
         <div className="section-header">
           <h2 className="wallet__transactions-title">Transactions</h2>
           <button type="button" className="wallet__filter" aria-label="Filtrar transações" tabIndex={cardsVisible ? -1 : undefined}>
-            <img src={filterIcon} width="26" height="22" alt="" />
+            <Icon name="tune" size={30} />
           </button>
         </div>
         <ul className="wallet__list">
