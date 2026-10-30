@@ -54,8 +54,7 @@
   gap: 4px;
 }
 
-.header__actions button,
-.header__close {
+.header__actions button {
   display: flex;
   color: var(--color-icon);
 }

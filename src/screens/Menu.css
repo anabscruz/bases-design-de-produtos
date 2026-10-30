@@ -1,22 +1,73 @@
-.screen.menu {
-  height: 100%;
-  padding-bottom: 79px;
+.menu {
+  --menu-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  padding: var(--screen-padding-top) var(--screen-padding);
+  background: var(--color-bg);
 }
 
+/* Items stay in the left column the pushed screen leaves free, vertically centred */
 .menu__list {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  padding: 24px 0;
+  justify-content: center;
+  gap: 16px;
+  width: 50%;
 }
 
 .menu__item {
-  font-family: var(--font-inter);
-  font-weight: 700;
-  font-size: 24px;
-  line-height: normal;
+  font-size: 18px;
+  line-height: 1.2;
+  text-align: left;
   white-space: nowrap;
+  color: #9a9a9a;
+}
+
+.menu__item--active {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--color-icon);
+}
+
+.menu__item:active {
+  opacity: 0.6;
+}
+
+/* Everything slides in from the left, the items one after another */
+.menu__profile,
+.menu__item {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition:
+    opacity 250ms ease,
+    transform 300ms var(--menu-ease);
+}
+
+.menu--open .menu__profile,
+.menu--open .menu__item {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 400ms ease,
+    transform 600ms var(--menu-ease);
+}
+
+.menu--open .menu__profile {
+  transition-delay: 80ms;
+}
+
+.menu--open .menu__item {
+  transition-delay: calc(120ms + var(--i) * 40ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu__profile,
+  .menu__item {
+    transition: none !important;
+  }
 }

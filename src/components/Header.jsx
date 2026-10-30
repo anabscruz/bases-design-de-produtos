@@ -18,7 +18,6 @@ export default function Header({
   balanceHidden = false,
   onToggleBalance,
   onMenu,
-  onClose,
   onBack,
   showBalance = true,
 }) {
@@ -48,22 +47,16 @@ export default function Header({
         <img className="header__avatar header__avatar--small" src={avatar} width="44" height="44" alt="Clinton Elvis" />
       )}
 
-      {onClose ? (
-        <button className="header__close" type="button" onClick={onClose} aria-label="Fechar menu">
-          <Icon name="close" size={36} />
-        </button>
-      ) : (
-        <div className="header__actions">
-          {showBalance && (
-            <button type="button" onClick={onToggleBalance} aria-label={balanceHidden ? 'Mostrar saldo' : 'Ocultar saldo'} aria-pressed={balanceHidden}>
-              <Icon name={balanceHidden ? 'visibility' : 'visibility_off'} size={24} />
-            </button>
-          )}
-          <button type="button" onClick={onMenu} aria-label="Abrir menu">
-            <Icon name="menu" size={34} />
+      <div className="header__actions">
+        {showBalance && (
+          <button type="button" onClick={onToggleBalance} aria-label={balanceHidden ? 'Mostrar saldo' : 'Ocultar saldo'} aria-pressed={balanceHidden}>
+            <Icon name={balanceHidden ? 'visibility' : 'visibility_off'} size={24} />
           </button>
-        </div>
-      )}
+        )}
+        <button type="button" onClick={onMenu} aria-label="Abrir menu">
+          <Icon name="menu" size={34} />
+        </button>
+      </div>
     </header>
   )
 }

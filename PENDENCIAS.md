@@ -32,12 +32,11 @@ Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
 
 - Resolvido junto com a inclusão do ícone de Home: todas as abas agora têm a mesma largura (48px), com 6px entre elas.
 
-## 6. Transição e navegação do menu
+## 6. Transição e navegação do menu (transição feita)
 
-- Hoje a tela do menu entra com fade e a barra de navegação desce e some.
-- Bug encontrado: o X do menu volta para a última *aba* (`onClose={() => navigate(lastTab)}` em `src/App.jsx`), não para a tela anterior. Ex.: Ticket → menu → X leva para a Home, não de volta ao Ticket. Usar o mesmo `goBack` do botão de voltar resolveria.
-- "Saved Events", "Invite", "Profile" e "Logout" ainda não fazem nada.
-- Ideias de transição: menu deslizando como painel por cima da tela atual, itens entrando em sequência (stagger).
+- Feito: o menu deixou de ser uma tela (`#/menu`) e virou uma camada por baixo da tela atual. Ao abrir, a tela é empurrada para a direita, encolhe e arredonda os cantos, e o menu entra pela esquerda com o item da tela atual em destaque. Fecha tocando na tela empurrada ou com Esc.
+- Com isso, o bug do X (que voltava para a última aba) deixou de existir: fechar o menu volta para a mesma tela.
+- Ainda pendente: "Saved Events", "Invite", "Profile" e "Logout" não fazem nada, e "Events" não tem item no menu (nessa tela nenhum item fica destacado).
 
 ## 7. Tela de upcoming events
 

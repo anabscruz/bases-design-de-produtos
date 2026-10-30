@@ -7,7 +7,7 @@ import Menu from './screens/Menu.jsx'
 import Wallet from './screens/Wallet.jsx'
 import TicketDetails from './screens/TicketDetails.jsx'
 
-const SCREENS = { home: Home, events: Events, menu: Menu, wallet: Wallet, ticket: TicketDetails }
+const SCREENS = { home: Home, events: Events, wallet: Wallet, ticket: TicketDetails }
 
 // Tab order, used to slide the next screen in from the side of the tapped tab
 const TAB_ORDER = ['home', 'events', 'wallet', 'ticket']
@@ -18,7 +18,6 @@ function readRoute() {
 }
 
 function transitionBetween(from, to) {
-  if (from === 'menu' || to === 'menu') return 'fade'
   return TAB_ORDER.indexOf(to) >= TAB_ORDER.indexOf(from) ? 'forward' : 'back'
 }
 
@@ -30,22 +29,28 @@ function initialState() {
 export default function App() {
   const [{ route, lastTab, transition, backTo }, setNav] = useState(initialState)
   const [balanceHidden, setBalanceHidden] = useState(false)
+  // The menu isn't a route: it's a layer the current screen slides away from
+  const [menuOpen, setMenuOpen] = useState(false)
   const goingBack = useRef(false)
+  const leavingMenu = useRef(false)
 
   useEffect(() => {
     const onHashChange = () => {
       const next = readRoute()
       const isBack = goingBack.current
+      // Leaving through the menu, the screen sliding back is the transition
+      const fromMenu = leavingMenu.current
       goingBack.current = false
+      leavingMenu.current = false
       setNav((current) =>
         current.route === next
           ? current
           : {
               route: next,
               lastTab: TAB_ORDER.includes(next) ? next : current.lastTab,
-              transition: isBack ? 'back' : transitionBetween(current.route, next),
-              // Screen the back button returns to; the menu is skipped over
-              backTo: current.route === 'menu' ? current.backTo : current.route,
+              transition: fromMenu ? 'none' : isBack ? 'back' : transitionBetween(current.route, next),
+              // Screen the back button returns to
+              backTo: current.route,
             },
       )
     }
@@ -53,7 +58,22 @@ export default function App() {
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    const onKeyDown = (event) => event.key === 'Escape' && setMenuOpen(false)
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [menuOpen])
+
   const navigate = (next) => {
+    if (next === 'menu') {
+      setMenuOpen(true)
+      return
+    }
+    if (menuOpen) {
+      setMenuOpen(false)
+      leavingMenu.current = next !== route
+    }
     if (next !== route) window.location.hash = `/${next}`
   }
 
@@ -70,11 +90,13 @@ export default function App() {
     <PhoneFrame
       screenKey={route}
       transition={transition}
-      overlay={<FloatingMenu active={lastTab} hidden={route === 'menu'} navigate={navigate} />}
+      overlay={<FloatingMenu active={lastTab} hidden={menuOpen} navigate={navigate} />}
+      menu={<Menu open={menuOpen} active={route} navigate={navigate} balanceHidden={balanceHidden} />}
+      menuOpen={menuOpen}
+      onCloseMenu={() => setMenuOpen(false)}
     >
       <Screen
         navigate={navigate}
-        onClose={() => navigate(lastTab)}
         onBack={goBack}
         balanceHidden={balanceHidden}
         onToggleBalance={() => setBalanceHidden((hidden) => !hidden)}
