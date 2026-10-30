@@ -67,7 +67,6 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
             balanceHidden={balanceHidden}
             onToggleBalance={onToggleBalance}
             onMenu={() => navigate('menu')}
-            showBell
           />
         </div>
       </div>

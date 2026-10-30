@@ -11,8 +11,8 @@ Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
 ## 2. Tela de notificações
 
 - Também não há frame no Figma.
-- Hoje o sino aparece na barra de navegação e no cabeçalho de Events, mas não abre nada: em `src/components/FloatingMenu.jsx` a aba `notifications` não navega (`opensScreen`).
-- Ao criar a tela, ligar a aba da barra (a bolinha azul passa a ir até o sino) e o sino do Header.
+- Hoje o sino aparece só na barra de navegação e não abre nada: em `src/components/FloatingMenu.jsx` a aba `notifications` não navega (`opensScreen`).
+- Ao criar a tela, ligar a aba da barra (a bolinha azul passa a ir até o sino).
 
 ## 3. Melhorar a transição entre telas
 
@@ -47,10 +47,9 @@ Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
 - Hoje o ícone de ingresso da barra e o item "Tickets" do menu levam direto para a tela de ingresso (`#/ticket`). Se essa lista for criada, avaliar se eles devem abrir a lista em vez do ingresso.
 - Cada item da lista deve abrir a tela de ingresso (`#/ticket`), como os tickets da Home já fazem.
 
-## 8. Remover o ícone de notificação do header da tela de Events
+## 8. ~~Remover o ícone de notificação do header da tela de Events~~ (resolvido)
 
-- Basta tirar a prop `showBell` do `<Header>` em `src/screens/Events.jsx` (como já foi feito na carteira).
-- Depois disso, o sino fica só na barra de navegação. Hoje ele não abre nada lá (ver item 2).
+- Removido. O sino agora fica só na barra de navegação, onde ainda não abre nada (ver item 2).
 
 ## 9. Desenhar e implementar o filtro
 

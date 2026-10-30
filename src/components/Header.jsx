@@ -16,7 +16,6 @@ export default function Header({
   avatarSize = 'large',
   balance = '356.90',
   balanceHidden = false,
-  showBell = false,
   onToggleBalance,
   onMenu,
   onClose,
@@ -58,11 +57,6 @@ export default function Header({
           {showBalance && (
             <button type="button" onClick={onToggleBalance} aria-label={balanceHidden ? 'Mostrar saldo' : 'Ocultar saldo'} aria-pressed={balanceHidden}>
               <Icon name={balanceHidden ? 'visibility' : 'visibility_off'} size={24} />
-            </button>
-          )}
-          {showBell && (
-            <button type="button" aria-label="Notificações">
-              <Icon name="notifications" size={24} />
             </button>
           )}
           <button type="button" onClick={onMenu} aria-label="Abrir menu">
