@@ -11,6 +11,12 @@
   background: #fff;
   overflow: hidden;
   isolation: isolate;
+  text-align: left;
+  transition: transform 150ms ease;
+}
+
+.ticket:active {
+  transform: scale(0.97);
 }
 
 /* Figma "Noise" effect: monotone, black @ 25%, size 0.5, density 100% */
@@ -34,6 +40,11 @@
   padding: 11px 0;
   font-family: var(--font-poppins);
   line-height: 20px;
+}
+
+.ticket__title,
+.ticket__date {
+  display: block;
 }
 
 .ticket__title {

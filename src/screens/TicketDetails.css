@@ -1,0 +1,98 @@
+.screen.ticket-details {
+  background: #eee;
+}
+
+/* Room for the cards' upward shadow inside the scroll container */
+.ticket-details__cards {
+  gap: 12px;
+  padding-top: 8px;
+  margin-top: -8px;
+}
+
+.ticket-card {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 346px;
+  padding: 32px 24px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 -4px 8.8px -3px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.ticket-card__event {
+  margin: 0;
+  font-family: var(--font-poppins);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 0.9;
+  letter-spacing: -1.92px;
+  white-space: nowrap;
+}
+
+.ticket-card__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 16px;
+  margin: 0;
+  line-height: 0.9;
+  white-space: nowrap;
+}
+
+.ticket-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ticket-card__field--wide {
+  grid-column: span 2;
+}
+
+.ticket-card__field dt {
+  font-size: 14px;
+  color: var(--color-price);
+}
+
+.ticket-card__field dd {
+  margin: 0;
+  font-size: 16px;
+}
+
+.ticket-card__barcode {
+  padding-top: 32px;
+  /* Figma's dash pattern: 8px dashes every ~15.6px, starting with a half dash */
+  background: repeating-linear-gradient(to right, #000 0 8px, transparent 8px 15.6px) -4px 0 / 100% 1px no-repeat;
+}
+
+.ticket-card__barcode img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 326 / 136;
+}
+
+.ticket-details__rules {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.ticket-details__rules h2 {
+  margin: 0;
+  font-weight: 400;
+}
+
+.ticket-details__rules ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0.42px;
+  color: var(--color-text-tertiary);
+}

@@ -1,15 +1,15 @@
 import './Ticket.css'
 
-export default function Ticket({ title, date }) {
+export default function Ticket({ title, date, onOpen }) {
   return (
-    <article className="ticket">
-      <div className="ticket__info">
-        <p className="ticket__title">{title}</p>
-        <p className="ticket__date">{date}</p>
-      </div>
-      <button className="ticket__stub" type="button">
+    <button type="button" className="ticket" onClick={onOpen} aria-label={`${title}, ${date}: abrir ingresso`}>
+      <span className="ticket__info">
+        <span className="ticket__title">{title}</span>
+        <span className="ticket__date">{date}</span>
+      </span>
+      <span className="ticket__stub">
         <span>Use ticket</span>
-      </button>
-    </article>
+      </span>
+    </button>
   )
 }

@@ -31,7 +31,7 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
         <h2 className="home__upcoming-title">Upcoming events</h2>
         <div className="carousel home__tickets">
           {UPCOMING.map((event) => (
-            <Ticket key={event.id} title={event.title} date={event.date} />
+            <Ticket key={event.id} title={event.title} date={event.date} onOpen={() => navigate('ticket')} />
           ))}
         </div>
       </section>

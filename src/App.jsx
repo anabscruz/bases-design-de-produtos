@@ -5,8 +5,9 @@ import Home from './screens/Home.jsx'
 import Events from './screens/Events.jsx'
 import Menu from './screens/Menu.jsx'
 import Wallet from './screens/Wallet.jsx'
+import TicketDetails from './screens/TicketDetails.jsx'
 
-const SCREENS = { home: Home, events: Events, menu: Menu, wallet: Wallet }
+const SCREENS = { home: Home, events: Events, menu: Menu, wallet: Wallet, ticket: TicketDetails }
 
 // Tab order, used to slide the next screen in from the side of the tapped tab
 const TAB_ORDER = ['home', 'wallet', 'events']
@@ -18,6 +19,9 @@ function readRoute() {
 
 function transitionBetween(from, to) {
   if (from === 'menu' || to === 'menu') return 'fade'
+  // The ticket screen is a step deeper than the tabs: it enters forward, leaves back
+  if (to === 'ticket') return 'forward'
+  if (from === 'ticket') return 'back'
   return TAB_ORDER.indexOf(to) >= TAB_ORDER.indexOf(from) ? 'forward' : 'back'
 }
 
