@@ -8,7 +8,7 @@ import '../components/Screen.css'
 import './Wallet.css'
 
 const TRANSACTIONS = [
-  { id: 1, title: 'Transfer to Paul', date: 'October 28th • 1:34 PM', source: 'Wallet', amount: '500.00', type: 'debit' },
+  { id: 1, title: 'Afropunk bar', date: 'October 28th • 1:34 PM', source: 'Wallet', amount: '500.00', type: 'debit' },
   { id: 2, title: 'Transfer received', date: 'October 28th • 9 AM', source: 'Wallet', amount: '500.00', type: 'credit' },
   { id: 3, title: 'Bole Festival', date: 'October 28th • 11 PM', source: 'Nubank mastercard', amount: '3,000.00', type: 'debit' },
 ]
