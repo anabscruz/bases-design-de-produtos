@@ -5,7 +5,7 @@ import './Menu.css'
 const ITEMS = [
   { label: 'Home', route: 'home' },
   { label: 'Wallet', route: 'wallet' },
-  { label: 'Tickets', route: 'events' },
+  { label: 'Tickets', route: 'ticket' },
   { label: 'Saved Events' },
   { label: 'Invite' },
   { label: 'Profile' },

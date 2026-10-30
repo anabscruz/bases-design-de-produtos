@@ -28,10 +28,9 @@ Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
   - avatar menor (44px) com a seta ao lado;
   - mostrar a seta só quando Events foi aberto por "Top Event" na Home, e não pela barra (Events também é uma aba, então "voltar" pode não fazer sentido vindo da barra).
 
-## 5. Espaçamento desigual entre os ícones da barra
+## 5. ~~Espaçamento desigual entre os ícones da barra~~ (resolvido)
 
-- Causa: o `gap` é fixo (16px), mas os botões têm larguras diferentes. Raio e carteira têm 48px fixos; ingresso e sino só a largura do ícone (30px e 26px). Por isso o espaço *visual* entre os ícones varia.
-- Correção provável: todas as abas com a mesma largura (ex.: 48px) e ajustar o `gap` para manter a largura total da barra. A bolinha mede a posição de cada aba, então se adapta sozinha.
+- Resolvido junto com a inclusão do ícone de Home: todas as abas agora têm a mesma largura (48px), com 6px entre elas.
 
 ## 6. Transição e navegação do menu
 
@@ -44,7 +43,8 @@ Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
 
 - Verificar se existe frame no Figma; nos frames usados até agora não há essa tela.
 - Seria a lista completa dos próximos eventos/ingressos do usuário (hoje a Home mostra só dois tickets na seção "Upcoming events").
-- Pontos de entrada naturais: o título "Upcoming events" da Home (como já foi feito com "Top Event", com seta e título clicáveis) e o item "Tickets" do menu, que hoje leva para a tela de Events.
+- Ponto de entrada natural: o título "Upcoming events" da Home (como já foi feito com "Top Event", com seta e título clicáveis).
+- Hoje o ícone de ingresso da barra e o item "Tickets" do menu levam direto para a tela de ingresso (`#/ticket`). Se essa lista for criada, avaliar se eles devem abrir a lista em vez do ingresso.
 - Cada item da lista deve abrir a tela de ingresso (`#/ticket`), como os tickets da Home já fazem.
 
 ## 8. Remover o ícone de notificação do header da tela de Events

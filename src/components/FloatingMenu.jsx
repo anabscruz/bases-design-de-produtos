@@ -3,11 +3,13 @@ import Icon from './Icon.jsx'
 import flash from '../assets/icons/nav-flash.svg'
 import './FloatingMenu.css'
 
-// Home keeps the brand bolt from Figma (an SVG mask); the rest are Material Symbols
+// Tab ids are the routes they open. The Events tab keeps the brand bolt from
+// Figma (an SVG mask); the rest are Material Symbols.
 const TABS = [
-  { id: 'home', label: 'Início', svg: flash, width: 27, height: 25 },
+  { id: 'home', label: 'Início', symbol: 'home', size: 28 },
+  { id: 'events', label: 'Eventos', svg: flash, width: 27, height: 25 },
   { id: 'wallet', label: 'Carteira', symbol: 'account_balance_wallet', size: 26 },
-  { id: 'events', label: 'Eventos', symbol: 'confirmation_number', size: 30 },
+  { id: 'ticket', label: 'Ingressos', symbol: 'confirmation_number', size: 30 },
   { id: 'notifications', label: 'Notificações', symbol: 'notifications', size: 26 },
 ]
 

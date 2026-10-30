@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 6px;
   padding: 12px 20px;
   border-radius: 50px;
   background: rgba(243, 243, 243, 0.2);
@@ -101,6 +101,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Equal slots (the pill's width) keep the spacing between icons even */
+  width: 48px;
   height: 46px;
   transition: transform 150ms ease;
 }
@@ -109,12 +111,6 @@
   transform: scale(0.88);
 }
 
-.floating-menu__tab--home,
-.floating-menu__tab--wallet {
-  width: 48px;
-}
-
-/* Icons are masks so their colour can animate black → white */
 /* Black → white on the active tab: font icons via color, the SVG bolt via its mask fill */
 .floating-menu__icon {
   color: #000;
