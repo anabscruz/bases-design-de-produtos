@@ -85,47 +85,49 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
       </div>
 
       <section className="events__sheet">
-        {/* Pinned at the sheet's resting line while the list scrolls under it */}
-        <div className="events__sheet-head">
-          <div className="events__handle" aria-hidden="true" />
+        <div className="events__sheet-content">
+          {/* Pinned at the sheet's resting line while the list scrolls under it */}
+          <div className="events__sheet-header">
+            <div className="events__handle" aria-hidden="true" />
 
-          <div className="section-header">
-            <h2 className="section-title">All Events</h2>
-            <button type="button" className="events__filter" aria-label="Filtrar eventos">
-              <img src={filterIcon} width="26" height="22" alt="" />
-            </button>
+            <div className="section-header">
+              <h2 className="section-title">All Events</h2>
+              <button type="button" className="events__filter" aria-label="Filtrar eventos">
+                <img src={filterIcon} width="26" height="22" alt="" />
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div className="events__list">
-          {ALL_EVENTS.map((event) => (
-            <article className="event-item" key={event.id}>
-              <div className="poster poster--list">
-                <img className="poster__image" src={event.image} alt="" />
-                {event.caption && (
-                  <>
-                    <p className="poster__title">{event.name}</p>
-                    <p className="poster__meta">{event.caption.place}</p>
-                    <p className="poster__meta">{event.caption.date}</p>
-                  </>
-                )}
-              </div>
+          <div className="events__list">
+            {ALL_EVENTS.map((event) => (
+              <article className="event-item" key={event.id}>
+                <div className="poster poster--list">
+                  <img className="poster__image" src={event.image} alt="" />
+                  {event.caption && (
+                    <>
+                      <p className="poster__title">{event.name}</p>
+                      <p className="poster__meta">{event.caption.place}</p>
+                      <p className="poster__meta">{event.caption.date}</p>
+                    </>
+                  )}
+                </div>
 
-              <div className="event-item__details">
-                <h3 className="event-item__name">{event.name}</h3>
-                <div className="event-item__when">
-                  <p>{event.address}</p>
-                  <p>{event.date}</p>
+                <div className="event-item__details">
+                  <h3 className="event-item__name">{event.name}</h3>
+                  <div className="event-item__when">
+                    <p>{event.address}</p>
+                    <p>{event.date}</p>
+                  </div>
+                  <Attendees />
+                  <PricePill value={event.price} />
+                  <div className="event-item__ctas">
+                    <button type="button" className="outline-pill">Order</button>
+                    <button type="button" className="outline-pill">Save</button>
+                  </div>
                 </div>
-                <Attendees />
-                <PricePill value={event.price} />
-                <div className="event-item__ctas">
-                  <button type="button" className="outline-pill">Order</button>
-                  <button type="button" className="outline-pill">Save</button>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
       </section>
     </main>

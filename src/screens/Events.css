@@ -71,31 +71,32 @@
 /*
  * "All Events" bottom sheet: full screen width (only inner padding), overlapping
  * the grid by 10px. It scrolls up until its top reaches --sheet-stop, where its
- * head pins; from there only the list moves, passing under the head and the band.
+ * header pins; from there only the list moves, passing under the header and the band.
  */
 .events__sheet {
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   width: 100%;
   min-height: 766px;
   margin-top: -10px;
-  padding: 0 var(--screen-padding);
   border-radius: 16px 16px 0 0;
   background: #fff;
 }
 
-.events__sheet-head {
+/* Everything inside the sheet: its pinned header and the events list */
+.events__sheet-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.events__sheet-header {
   position: sticky;
   top: var(--sheet-stop);
   z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 32px;
-  /* full-bleed: spans the whole sheet width, content keeps the inner padding */
-  margin: 0 calc(var(--screen-padding) * -1);
   padding: 4px var(--screen-padding) 16px;
   border-radius: 16px 16px 0 0;
   background: #fff;
@@ -117,7 +118,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: 100%;
+  padding: 0 var(--screen-padding);
 }
 
 .event-item {
