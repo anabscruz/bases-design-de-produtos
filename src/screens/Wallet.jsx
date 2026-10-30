@@ -33,7 +33,6 @@ export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalanc
         balanceHidden={balanceHidden}
         onToggleBalance={onToggleBalance}
         onMenu={() => navigate('menu')}
-        showBell
       />
 
       <div className="greeting">
