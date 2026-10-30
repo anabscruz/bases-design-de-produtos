@@ -30,20 +30,36 @@
   width: 100%;
 }
 
-/* "All Events" bottom sheet: overlaps the grid by 10px (the -32px cancels the screen gap) */
+/*
+ * "All Events" bottom sheet: overlaps the grid by 10px (the -32px cancels the
+ * screen gap). It scrolls up until its top reaches --sheet-stop, 16px below the
+ * header (79 + 73 + 16); from there it is clipped at that line (see useSheetClip)
+ * and only its list keeps moving, under the pinned sheet head.
+ */
 .events__sheet {
+  --sheet-stop: 168px;
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
   width: 100%;
   min-height: 766px;
   margin-top: -42px;
-  padding: 4px var(--screen-padding) 0;
+  padding: 0 var(--screen-padding);
   border-radius: 16px 16px 0 0;
   background: #fff;
-  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.events__sheet-head {
+  position: sticky;
+  top: var(--sheet-stop);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 4px 0 16px;
+  background: #fff;
 }
 
 .events__handle {
