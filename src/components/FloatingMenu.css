@@ -46,48 +46,27 @@
 }
 
 /* --- Liquid active pill --- */
-.floating-menu__defs {
+.floating-menu__pill {
   position: absolute;
-  width: 0;
-  height: 0;
-}
-
-/* Bleeds 24px past the bar so the swelling lobe can bulge out of it */
-.floating-menu__goo {
-  position: absolute;
-  inset: -24px;
-  filter: url(#floating-menu-goo);
+  top: 12px;
+  height: 46px;
   pointer-events: none;
 }
 
-.floating-menu__pill,
-.floating-menu__lobe {
-  position: absolute;
-  top: 36px; /* 24px bleed + 12px bar padding */
-  height: 46px;
-}
-
 /* Leading edge: fast with a small overshoot. Trailing edge: waits, then catches up. */
-.floating-menu__goo--right .floating-menu__pill {
+.floating-menu__pill--right {
   transition:
     right 340ms cubic-bezier(0.3, 1.35, 0.5, 1),
     left 420ms cubic-bezier(0.7, 0, 0.3, 1) 130ms;
 }
 
-.floating-menu__goo--left .floating-menu__pill {
+.floating-menu__pill--left {
   transition:
     left 340ms cubic-bezier(0.3, 1.35, 0.5, 1),
     right 420ms cubic-bezier(0.7, 0, 0.3, 1) 130ms;
 }
 
-/* The lobe rides the trailing end, so it uses the trailing timing both ways */
-.floating-menu__lobe {
-  width: 48px;
-  transition: left 420ms cubic-bezier(0.7, 0, 0.3, 1) 130ms;
-}
-
-.floating-menu__pill-body,
-.floating-menu__lobe-body {
+.floating-menu__pill-body {
   display: block;
   width: 100%;
   height: 100%;
@@ -95,19 +74,10 @@
   background: var(--color-primary);
 }
 
-/* The stretched middle thins into a neck, then wobbles back when it lands */
-.floating-menu__goo--right .floating-menu__pill-body,
-.floating-menu__goo--left .floating-menu__pill-body {
+/* Thins out while stretched, then wobbles back when it lands */
+.floating-menu__pill--right .floating-menu__pill-body,
+.floating-menu__pill--left .floating-menu__pill-body {
   animation: pill-squish 620ms ease-out;
-}
-
-/*
- * The trailing lobe swells taller than the bar mid-move, then shrinks back.
- * Same delay and duration as its travel, so it never grows in place on the old tab.
- */
-.floating-menu__goo--right .floating-menu__lobe-body,
-.floating-menu__goo--left .floating-menu__lobe-body {
-  animation: lobe-swell 420ms ease-in-out 130ms both;
 }
 
 @keyframes pill-squish {
@@ -115,29 +85,13 @@
     transform: scaleY(1);
   }
   35% {
-    transform: scaleY(0.62);
+    transform: scaleY(0.78);
   }
   70% {
     transform: scaleY(1.06);
   }
   100% {
     transform: scaleY(1);
-  }
-}
-
-@keyframes lobe-swell {
-  0%,
-  15% {
-    transform: none;
-  }
-  50% {
-    transform: translateY(5px) scale(1.4);
-  }
-  85% {
-    transform: scale(0.95);
-  }
-  100% {
-    transform: none;
   }
 }
 
@@ -177,13 +131,11 @@
 @media (prefers-reduced-motion: reduce) {
   .floating-menu,
   .floating-menu__pill,
-  .floating-menu__lobe,
   .floating-menu__icon {
     transition: none !important;
   }
 
-  .floating-menu__pill-body,
-  .floating-menu__lobe-body {
+  .floating-menu__pill-body {
     animation: none !important;
   }
 }

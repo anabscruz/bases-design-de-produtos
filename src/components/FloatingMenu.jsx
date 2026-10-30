@@ -13,15 +13,11 @@ const TABS = [
 ]
 
 const PILL_WIDTH = 48
-// The goo layer overflows the bar on every side so the swelling lobe isn't clipped
-const GOO_BLEED = 24
 
 /**
  * Floating "glass" tab bar. The active pill behaves like liquid: its leading
  * edge shoots to the tapped tab while the trailing edge follows a moment later,
  * so it stretches across the bar, then contracts and settles with a squish.
- * A second circle (the "lobe") trails at the back edge and swells past the
- * bar's height mid-move; an SVG goo filter melts both into one liquid shape.
  */
 export default function FloatingMenu({ active, hidden = false, navigate }) {
   const barRef = useRef(null)
@@ -44,26 +40,14 @@ export default function FloatingMenu({ active, hidden = false, navigate }) {
 
   return (
     <nav className={`floating-menu${hidden ? ' floating-menu--hidden' : ''}`} aria-label="Navegação principal" aria-hidden={hidden}>
-      <svg className="floating-menu__defs" aria-hidden="true">
-        <filter id="floating-menu-goo" x="-20%" y="-50%" width="140%" height="200%">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="6" />
-          <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" />
-        </filter>
-      </svg>
-
       <div className="floating-menu__bar" ref={barRef}>
         {pill && (
-          <span className={`floating-menu__goo floating-menu__goo--${pill.direction}`} aria-hidden="true">
-            <span
-              className="floating-menu__pill"
-              style={{ left: pill.left + GOO_BLEED, right: pill.right + GOO_BLEED }}
-            >
-              <span className="floating-menu__pill-body" key={pill.moves} />
-            </span>
-            {/* The trailing end always arrives late, whichever way the pill moves */}
-            <span className="floating-menu__lobe" style={{ left: pill.left + GOO_BLEED }}>
-              <span className="floating-menu__lobe-body" key={pill.moves} />
-            </span>
+          <span
+            className={`floating-menu__pill floating-menu__pill--${pill.direction}`}
+            style={{ left: pill.left, right: pill.right }}
+            aria-hidden="true"
+          >
+            <span className="floating-menu__pill-body" key={pill.moves} />
           </span>
         )}
 
