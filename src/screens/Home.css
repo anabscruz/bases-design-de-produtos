@@ -16,10 +16,15 @@
 
 .home__top-title {
   flex: 1;
+  text-align: left;
 }
 
 .home__see-all {
   display: flex;
+}
+
+.home__see-all:active {
+  opacity: 0.6;
 }
 
 .home__tickets {

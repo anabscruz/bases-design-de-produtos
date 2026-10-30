@@ -37,12 +37,14 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
       </section>
 
       <section className="screen__section home__section">
-        <div className="section-header">
-          <h2 className="section-title home__top-title">Top Event</h2>
-          <button type="button" className="home__see-all" onClick={() => navigate('events')} aria-label="Ver todos os eventos">
+        {/* The whole row (title + chevron) opens the Events screen */}
+        <h2 className="home__top-heading">
+          <button type="button" className="section-header home__see-all" onClick={() => navigate('events')}>
+            <span className="section-title home__top-title">Top Event</span>
             <img src={chevronRight} width="12" height="32" alt="" />
+            <span className="visually-hidden">: ver todos os eventos</span>
           </button>
-        </div>
+        </h2>
 
         <div className="carousel home__posters">
           <article className="poster poster--featured">

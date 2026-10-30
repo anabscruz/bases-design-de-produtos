@@ -62,6 +62,16 @@ img {
   display: block;
 }
 
+/* Text for screen readers only */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* "N" with a strike-through is how the design spells the Naira sign (₦) */
 .naira {
   text-decoration: line-through;
