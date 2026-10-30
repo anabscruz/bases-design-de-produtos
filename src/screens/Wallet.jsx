@@ -3,7 +3,6 @@ import Header from '../components/Header.jsx'
 import CreditCard from '../components/CreditCard.jsx'
 import BalanceCard from '../components/BalanceCard.jsx'
 import TransactionItem from '../components/TransactionItem.jsx'
-import FloatingMenu from '../components/FloatingMenu.jsx'
 import filterIcon from '../assets/icons/filter.svg'
 import '../components/Screen.css'
 import './Wallet.css'
@@ -58,7 +57,6 @@ export default function Wallet({ navigate, balanceHidden, onToggleBalance }) {
           <ul className="wallet__list">{transactions}</ul>
         </section>
 
-        <FloatingMenu active="wallet" navigate={navigate} />
       </main>
     )
   }
@@ -83,7 +81,6 @@ export default function Wallet({ navigate, balanceHidden, onToggleBalance }) {
         <ul className="wallet__list">{transactions}</ul>
       </section>
 
-      <FloatingMenu active="wallet" navigate={navigate} />
     </main>
   )
 }

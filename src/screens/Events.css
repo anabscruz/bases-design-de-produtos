@@ -103,10 +103,6 @@
   white-space: nowrap;
 }
 
-.events .floating-menu__bar {
-  background: rgba(221, 221, 221, 0.2);
-}
-
 /* The sheet runs to the bottom of the screen; the tab bar floats over it */
 .screen.events {
   padding-bottom: 0;
@@ -114,8 +110,4 @@
 
 .events__sheet {
   padding-bottom: 140px;
-}
-
-.events .floating-menu {
-  margin-top: -153px;
 }

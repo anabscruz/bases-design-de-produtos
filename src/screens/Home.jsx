@@ -1,7 +1,6 @@
 import Header from '../components/Header.jsx'
 import Ticket from '../components/Ticket.jsx'
 import Attendees from '../components/Attendees.jsx'
-import FloatingMenu from '../components/FloatingMenu.jsx'
 import chevronRight from '../assets/icons/chevron-right.svg'
 import boleBlue from '../assets/images/poster-bole-blue.jpg'
 import partyPhoto from '../assets/images/party-photo.jpg'
@@ -69,7 +68,6 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
         </div>
       </section>
 
-      <FloatingMenu active="flash" navigate={navigate} />
     </main>
   )
 }

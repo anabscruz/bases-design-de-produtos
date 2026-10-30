@@ -31,6 +31,45 @@
   display: none;
 }
 
+/* Screen change: slides in from the side of the tapped tab */
+.phone__viewport--forward {
+  animation: screen-in-right 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.phone__viewport--back {
+  animation: screen-in-left 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.phone__viewport--fade {
+  animation: screen-fade 280ms ease;
+}
+
+@keyframes screen-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+
+@keyframes screen-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+}
+
+@keyframes screen-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone__viewport {
+    animation: none !important;
+  }
+}
+
 /* On a real phone the app takes the whole screen */
 @media (max-width: 500px) {
   .phone-stage {

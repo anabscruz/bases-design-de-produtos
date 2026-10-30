@@ -1,7 +1,6 @@
 import Header from '../components/Header.jsx'
 import Attendees from '../components/Attendees.jsx'
 import PricePill from '../components/PricePill.jsx'
-import FloatingMenu from '../components/FloatingMenu.jsx'
 import filterIcon from '../assets/icons/filter.svg'
 import lollapalooza from '../assets/images/poster-lollapalooza.jpg'
 import coachella from '../assets/images/poster-coachella.jpg'
@@ -123,7 +122,6 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
         </section>
       </div>
 
-      <FloatingMenu active="flash" navigate={navigate} />
     </main>
   )
 }

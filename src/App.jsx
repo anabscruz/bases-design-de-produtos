@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import PhoneFrame from './components/PhoneFrame.jsx'
+import FloatingMenu from './components/FloatingMenu.jsx'
 import Home from './screens/Home.jsx'
 import Events from './screens/Events.jsx'
 import Menu from './screens/Menu.jsx'
@@ -7,35 +8,60 @@ import Wallet from './screens/Wallet.jsx'
 
 const SCREENS = { home: Home, events: Events, menu: Menu, wallet: Wallet }
 
+// Tab order, used to slide the next screen in from the side of the tapped tab
+const TAB_ORDER = ['home', 'wallet', 'events']
+
 function readRoute() {
   const route = window.location.hash.replace(/^#\/?/, '')
   return SCREENS[route] ? route : 'home'
 }
 
+function transitionBetween(from, to) {
+  if (from === 'menu' || to === 'menu') return 'fade'
+  return TAB_ORDER.indexOf(to) >= TAB_ORDER.indexOf(from) ? 'forward' : 'back'
+}
+
+function initialState() {
+  const route = readRoute()
+  return { route, lastTab: TAB_ORDER.includes(route) ? route : 'home', transition: 'none' }
+}
+
 export default function App() {
-  const [route, setRoute] = useState(readRoute)
-  const [previous, setPrevious] = useState('home')
+  const [{ route, lastTab, transition }, setNav] = useState(initialState)
   const [balanceHidden, setBalanceHidden] = useState(false)
 
   useEffect(() => {
-    const onHashChange = () => setRoute(readRoute())
+    const onHashChange = () => {
+      const next = readRoute()
+      setNav((current) =>
+        current.route === next
+          ? current
+          : {
+              route: next,
+              lastTab: TAB_ORDER.includes(next) ? next : current.lastTab,
+              transition: transitionBetween(current.route, next),
+            },
+      )
+    }
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
   const navigate = (next) => {
-    if (next === route) return
-    if (next === 'menu') setPrevious(route)
-    window.location.hash = `/${next}`
+    if (next !== route) window.location.hash = `/${next}`
   }
 
   const Screen = SCREENS[route]
 
   return (
-    <PhoneFrame screenKey={route}>
+    <PhoneFrame
+      screenKey={route}
+      transition={transition}
+      overlay={<FloatingMenu active={lastTab} hidden={route === 'menu'} navigate={navigate} />}
+    >
       <Screen
         navigate={navigate}
-        onClose={() => navigate(previous)}
+        onClose={() => navigate(lastTab)}
         balanceHidden={balanceHidden}
         onToggleBalance={() => setBalanceHidden((hidden) => !hidden)}
       />
