@@ -101,10 +101,13 @@
   animation: pill-squish 620ms ease-out;
 }
 
-/* The trailing lobe swells taller than the bar mid-move, then shrinks back */
+/*
+ * The trailing lobe swells taller than the bar mid-move, then shrinks back.
+ * Same delay and duration as its travel, so it never grows in place on the old tab.
+ */
 .floating-menu__goo--right .floating-menu__lobe-body,
 .floating-menu__goo--left .floating-menu__lobe-body {
-  animation: lobe-swell 620ms cubic-bezier(0.4, 0, 0.3, 1);
+  animation: lobe-swell 420ms ease-in-out 130ms both;
 }
 
 @keyframes pill-squish {
@@ -123,13 +126,14 @@
 }
 
 @keyframes lobe-swell {
-  0% {
+  0%,
+  15% {
     transform: none;
   }
-  40% {
+  50% {
     transform: translateY(5px) scale(1.4);
   }
-  75% {
+  85% {
     transform: scale(0.95);
   }
   100% {
