@@ -58,3 +58,9 @@
   display: flex;
   color: var(--color-icon);
 }
+
+/* Over a dark photo (Event hero) */
+.header--light .header__back,
+.header--light .header__actions button {
+  color: #fff;
+}

@@ -22,8 +22,6 @@ const BALANCE = '356.90'
 export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalance }) {
   const [cardsVisible, setCardsVisible] = useState(false)
   const toggleCards = () => setCardsVisible((visible) => !visible)
-  // "Transactions" on the balance card filters the list down to wallet transactions
-  const [walletOnly, setWalletOnly] = useState(false)
 
   return (
     <main className={`screen screen--padded wallet${cardsVisible ? ' wallet--cards-visible' : ''}`}>
@@ -47,13 +45,7 @@ export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalanc
           </div>
         </div>
         <CreditCard expanded={cardsVisible} onClick={toggleCards} />
-        <BalanceCard
-          value={BALANCE}
-          hidden={balanceHidden}
-          onCardClick={toggleCards}
-          onTransactionsClick={() => setWalletOnly((only) => !only)}
-          transactionsActive={walletOnly}
-        />
+        <BalanceCard value={BALANCE} hidden={balanceHidden} onCardClick={toggleCards} />
       </section>
 
       <section className="wallet__transactions">
@@ -65,12 +57,7 @@ export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalanc
         </div>
         <ul className="wallet__list">
           {TRANSACTIONS.map((transaction) => (
-            <TransactionItem
-              key={transaction.id}
-              {...transaction}
-              hidden={balanceHidden}
-              collapsed={walletOnly && transaction.source !== 'Wallet'}
-            />
+            <TransactionItem key={transaction.id} {...transaction} hidden={balanceHidden} />
           ))}
         </ul>
       </section>

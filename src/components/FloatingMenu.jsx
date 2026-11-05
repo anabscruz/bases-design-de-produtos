@@ -54,14 +54,13 @@ export default function FloatingMenu({ active, hidden = false, navigate }) {
 
         {TABS.map((tab) => {
           const isActive = tab.id === active
-          const opensScreen = tab.id !== 'notifications'
           return (
             <button
               key={tab.id}
               ref={(node) => (tabRefs.current[tab.id] = node)}
               type="button"
               className={`floating-menu__tab floating-menu__tab--${tab.id}${isActive ? ' is-active' : ''}`}
-              onClick={opensScreen ? () => navigate(tab.id) : undefined}
+              onClick={() => navigate(tab.id)}
               aria-label={tab.label}
               aria-current={isActive ? 'page' : undefined}
               tabIndex={hidden ? -1 : undefined}

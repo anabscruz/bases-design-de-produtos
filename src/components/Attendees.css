@@ -50,3 +50,14 @@
   left: 142px;
   top: 7px;
 }
+
+/* Event details: 32px circles */
+.attendees--large .attendees__item {
+  width: 32px;
+  height: 32px;
+}
+
+.attendees--large .attendees__item img {
+  width: 30px;
+  height: 30px;
+}

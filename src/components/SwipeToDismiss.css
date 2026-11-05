@@ -1,0 +1,11 @@
+/* Horizontal drags belong to the swipe; vertical ones still scroll the page */
+.swipe-dismiss__item {
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+}
+
+.swipe-dismiss__item img {
+  -webkit-user-drag: none;
+}

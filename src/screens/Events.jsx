@@ -36,6 +36,9 @@ const TOP_EVENTS = [
   { id: 'virada', image: viradaCultural, name: 'Virada Cultural' },
 ]
 
+// Events with a details page (Figma only has RTM's)
+const HAS_DETAILS = new Set(['rtm'])
+
 const ALL_EVENTS = [
   {
     id: 'bole',
@@ -76,18 +79,28 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
         <section className="events__top">
           <h2 className="section-title screen__inset">Top Events</h2>
           <div className="events__grid">
-            {TOP_EVENTS.map((event) => (
-              <article className="poster poster--tile" key={event.id} aria-label={event.name}>
-                <img className="poster__image" src={event.image} alt="" />
-                {event.place && (
-                  <div className="poster__caption">
-                    <p className="poster__title">{event.name}</p>
-                    <p className="poster__meta">{event.place}</p>
-                    <p className="poster__meta">{event.info}</p>
-                  </div>
-                )}
-              </article>
-            ))}
+            {TOP_EVENTS.map((event) => {
+              const opensDetails = HAS_DETAILS.has(event.id)
+              const Tile = opensDetails ? 'button' : 'article'
+              return (
+                <Tile
+                  className="poster poster--tile"
+                  key={event.id}
+                  aria-label={event.name}
+                  type={opensDetails ? 'button' : undefined}
+                  onClick={opensDetails ? () => navigate('event') : undefined}
+                >
+                  <img className="poster__image" src={event.image} alt="" />
+                  {event.place && (
+                    <div className="poster__caption">
+                      <p className="poster__title">{event.name}</p>
+                      <p className="poster__meta">{event.place}</p>
+                      <p className="poster__meta">{event.info}</p>
+                    </div>
+                  )}
+                </Tile>
+              )
+            })}
           </div>
         </section>
       </div>
@@ -115,34 +128,45 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
 
           <div className="events__list">
             {events.length === 0 && <p className="events__empty">No events found for “{query.trim()}”</p>}
-            {events.map((event) => (
-              <article className="event-item" key={event.id}>
-                <div className="poster poster--list">
-                  <img className="poster__image" src={event.image} alt="" />
-                  {event.caption && (
-                    <>
-                      <p className="poster__title">{event.name}</p>
-                      <p className="poster__meta">{event.caption.place}</p>
-                      <p className="poster__meta">{event.caption.date}</p>
-                    </>
-                  )}
-                </div>
+            {events.map((event) => {
+              const openDetails = HAS_DETAILS.has(event.id) ? () => navigate('event') : undefined
+              const ListPoster = openDetails ? 'button' : 'div'
+              return (
+                <article className="event-item" key={event.id}>
+                  <ListPoster
+                    className="poster poster--list"
+                    type={openDetails ? 'button' : undefined}
+                    onClick={openDetails}
+                    aria-label={openDetails ? `Ver ${event.name}` : undefined}
+                  >
+                    <img className="poster__image" src={event.image} alt="" />
+                    {event.caption && (
+                      <>
+                        <p className="poster__title">{event.name}</p>
+                        <p className="poster__meta">{event.caption.place}</p>
+                        <p className="poster__meta">{event.caption.date}</p>
+                      </>
+                    )}
+                  </ListPoster>
 
-                <div className="event-item__details">
-                  <h3 className="event-item__name">{event.name}</h3>
-                  <div className="event-item__when">
-                    <p>{event.address}</p>
-                    <p>{event.date}</p>
+                  <div className="event-item__details">
+                    <h3 className="event-item__name">{event.name}</h3>
+                    <div className="event-item__when">
+                      <p>{event.address}</p>
+                      <p>{event.date}</p>
+                    </div>
+                    <Attendees />
+                    <PricePill value={event.price} />
+                    <div className="event-item__ctas">
+                      <button type="button" className="outline-pill" onClick={openDetails}>
+                        Order
+                      </button>
+                      <button type="button" className="outline-pill">Save</button>
+                    </div>
                   </div>
-                  <Attendees />
-                  <PricePill value={event.price} />
-                  <div className="event-item__ctas">
-                    <button type="button" className="outline-pill">Order</button>
-                    <button type="button" className="outline-pill">Save</button>
-                  </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              )
+            })}
           </div>
         </div>
       </section>

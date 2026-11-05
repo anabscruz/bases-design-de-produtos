@@ -11,6 +11,7 @@ import './Header.css'
  * header keeps the avatar's height so the screen layout doesn't move.
  * `showBalance={false}` is for screens without any balance (Ticket): it drops
  * the balance pill and the show/hide balance toggle.
+ * `tone="light"` draws the icons in white, for headers over a dark photo (Event).
  */
 export default function Header({
   avatarSize = 'large',
@@ -20,6 +21,7 @@ export default function Header({
   onMenu,
   onBack,
   showBalance = true,
+  tone = 'dark',
 }) {
   const backButton = onBack && (
     <button className="header__back" type="button" onClick={onBack} aria-label="Voltar">
@@ -28,7 +30,7 @@ export default function Header({
   )
 
   return (
-    <header className={`header header--${avatarSize}`}>
+    <header className={`header header--${avatarSize}${tone === 'light' ? ' header--light' : ''}`}>
       {onBack ? (
         avatarSize === 'large' && showBalance ? (
           <div className="header__profile header__profile--back">

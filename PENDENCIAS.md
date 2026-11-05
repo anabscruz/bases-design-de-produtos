@@ -2,17 +2,23 @@
 
 Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
 
-## 1. Tela de descrição do evento
+## 1. Tela de descrição do evento (implementada para o RTM)
 
-- Ainda não existe frame dessa tela no Figma: é preciso desenhar (ou indicar o frame) antes de implementar.
-- Pontos de entrada naturais: os pôsteres da grade "Top Events" e da lista "All Events" (Events), os pôsteres de "Top Event" (Home) e o botão "Order" da lista.
-- Seguir o padrão da tela de ticket: rota nova em `src/App.jsx` (`SCREENS`), entrando com slide "forward" e com botão de voltar no Header (`onBack`).
+- Feita a partir do frame "Página evento" (Figma 233:98): `src/screens/EventDetails.jsx`, rota `#/event`.
+- Abre pelo pôster do RTM na grade "Top Events", pelo pôster do RTM em "All Events" e pelo botão "Order" desse item. Os outros eventos ainda não abrem nada, porque só o RTM tem conteúdo no Figma (`HAS_DETAILS` em `src/screens/Events.jsx`).
+- Ainda pendente:
+  - textos de regras de "Meia Solidária", "Meia PCD" e "Inteira" são provisórios (o Figma só tem o de "Meia Entrada");
+  - o botão "Comprar" não leva a nenhum fluxo de compra;
+  - o header usa a seta de voltar no lugar do avatar (padrão do `onBack`), enquanto o Figma mostra o avatar (ver item 4);
+  - a imagem do topo (`event-rtm-hero.png`) tem 4 MB: vale exportar em JPG/WebP menor.
 
-## 2. Tela de notificações
+## 2. Tela de notificações (implementada)
 
-- Também não há frame no Figma.
-- Hoje o sino aparece só na barra de navegação e não abre nada: em `src/components/FloatingMenu.jsx` a aba `notifications` não navega (`opensScreen`).
-- Ao criar a tela, ligar a aba da barra (a bolinha azul passa a ir até o sino).
+- Feita a partir do frame "Notification" (Figma 239:1373): `src/screens/Notifications.jsx`, rota `#/notifications`, aberta pelo sino da barra (agora uma aba como as outras).
+- Ainda pendente:
+  - as notificações são fixas no código e o estado (lidas/removidas) se perde ao trocar de tela;
+  - "See event" de Afropunk e Coachella leva para a lista de Events, porque só o RTM tem página de evento;
+  - não há indicador de não lidas no sino.
 
 ## 3. Melhorar a transição entre telas
 
@@ -57,4 +63,4 @@ Lista para retomar os ajustes do projeto, com o contexto técnico de cada item.
   - "All Events", na tela de Events (`events__filter` em `src/screens/Events.jsx`);
   - "Transactions", na carteira (`wallet__filter` em `src/screens/Wallet.jsx`).
 - Definir no desenho: se é um mesmo componente para os dois, quais critérios cada um tem (ex.: data, local e preço nos eventos; origem e tipo nas transações) e o formato (bottom sheet, painel ou chips).
-- Na carteira já existe um filtro parecido: o botão "Transactions" do cartão de saldo mostra só as transações da "Wallet", com a animação de desfoque. Vale reaproveitar essa animação.
+- O link "Transactions" do cartão de saldo (que mostrava só as transações da "Wallet") foi removido por feedback de usuários: o comportamento não era o esperado. A animação de desfoque continua disponível no `TransactionItem` (prop `collapsed`) e pode ser reaproveitada no filtro.

@@ -6,11 +6,13 @@ import Events from './screens/Events.jsx'
 import Menu from './screens/Menu.jsx'
 import Wallet from './screens/Wallet.jsx'
 import TicketDetails from './screens/TicketDetails.jsx'
+import EventDetails from './screens/EventDetails.jsx'
+import Notifications from './screens/Notifications.jsx'
 
-const SCREENS = { home: Home, events: Events, wallet: Wallet, ticket: TicketDetails }
+const SCREENS = { home: Home, events: Events, wallet: Wallet, ticket: TicketDetails, event: EventDetails, notifications: Notifications }
 
 // Tab order, used to slide the next screen in from the side of the tapped tab
-const TAB_ORDER = ['home', 'events', 'wallet', 'ticket']
+const TAB_ORDER = ['home', 'events', 'wallet', 'ticket', 'notifications']
 
 function readRoute() {
   const route = window.location.hash.replace(/^#\/?/, '')
@@ -18,12 +20,17 @@ function readRoute() {
 }
 
 function transitionBetween(from, to) {
+  // Screens outside the tab bar (Event) are drilled into, so they come in forward
+  if (!TAB_ORDER.includes(to)) return 'forward'
+  if (!TAB_ORDER.includes(from)) return 'back'
   return TAB_ORDER.indexOf(to) >= TAB_ORDER.indexOf(from) ? 'forward' : 'back'
 }
 
 function initialState() {
   const route = readRoute()
-  return { route, lastTab: TAB_ORDER.includes(route) ? route : 'home', transition: 'none', backTo: null }
+  // The Event page belongs to the Events tab
+  const lastTab = TAB_ORDER.includes(route) ? route : route === 'event' ? 'events' : 'home'
+  return { route, lastTab, transition: 'none', backTo: null }
 }
 
 export default function App() {
