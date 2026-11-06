@@ -54,7 +54,6 @@
 .wallet__transactions {
   display: flex;
   flex-direction: column;
-  gap: 32px;
   width: 100%;
   padding-top: 24px;
   transition: padding-top var(--wallet-duration) var(--wallet-ease);
@@ -62,16 +61,6 @@
 
 .wallet--cards-visible .wallet__transactions {
   padding-top: 0;
-}
-
-.wallet__filter {
-  display: flex;
-  transition: opacity 250ms ease;
-}
-
-.wallet--cards-visible .wallet__filter {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .wallet__list {

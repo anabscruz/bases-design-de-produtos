@@ -8,8 +8,9 @@
   height: 209px;
   padding: 24px 16px 16px;
   border-radius: 12px;
-  background: var(--color-primary);
-  color: var(--color-on-primary);
+  /* Figma 293:2868: MOOV lime with black ink, in both themes */
+  background: var(--color-accent);
+  color: var(--palette-black);
   overflow: hidden;
   font-size: var(--fs-body-sm);
   line-height: 20px;

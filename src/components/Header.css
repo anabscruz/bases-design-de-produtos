@@ -22,6 +22,21 @@
   color: #000;
 }
 
+.header__home {
+  display: flex;
+  border-radius: 4px;
+  transition: transform 160ms ease;
+}
+
+.header__home:active {
+  transform: scale(0.96);
+}
+
+.header__home:focus-visible {
+  outline: 2px solid var(--palette-black);
+  outline-offset: 4px;
+}
+
 .header__logo {
   width: 128px;
   height: 30px;

@@ -261,25 +261,26 @@
   gap: 8px;
 }
 
+/* Figma 284:1013: small label over the price, no pill */
 .event-item__price {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 4px;
 }
 
 .event-item__price-label {
-  font-size: var(--fs-caption);
-  line-height: var(--lh-body-sm);
+  font-size: 10px;
+  line-height: 10px;
 }
 
-/* Yellow pill, same colour as the Home ticket stub; dark ink in both themes */
+/* Mono, lime on the dark background (black in light mode, where lime can't be read) */
 .event-item__price-value {
-  padding: 0 8px;
-  border-radius: 50px;
-  background: var(--color-ticket-stub);
-  color: #000;
-  font-size: var(--fs-body-sm);
-  line-height: var(--lh-body);
+  font-family: var(--font-mono);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  line-height: 16px;
+  color: var(--color-highlight);
   white-space: nowrap;
 }
 

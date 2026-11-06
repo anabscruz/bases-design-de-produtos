@@ -73,7 +73,10 @@ export default function Menu({ open, active, navigate, onClose }) {
   const logoRef = useLogoGrow(open)
   return (
     <aside className={`menu${open ? ' menu--open' : ''}`} aria-label="Menu" aria-hidden={!open} inert={!open}>
-      <img className="menu__logo" ref={logoRef} src={logo} width="256" height="60" alt="MOOV" />
+      {/* Same as the header: the logo goes home (and closes the menu) */}
+      <button type="button" className="menu__home" onClick={() => navigate('home')}>
+        <img className="menu__logo" ref={logoRef} src={logo} width="1660" height="386" alt="MOOV: ir para a Home" />
+      </button>
 
       <div className="menu__panel">
         <div className="menu__top">

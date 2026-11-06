@@ -3,7 +3,6 @@ import Header from '../components/Header.jsx'
 import CreditCard from '../components/CreditCard.jsx'
 import BalanceCard from '../components/BalanceCard.jsx'
 import TransactionItem from '../components/TransactionItem.jsx'
-import Icon from '../components/Icon.jsx'
 import '../components/Screen.css'
 import './Wallet.css'
 
@@ -19,14 +18,13 @@ const BALANCE = '356,90'
  * One layout for both Figma frames — "Wallet Cards Collapsed" and "Wallet Cards
  * Visible" — so tapping either card slides the stack open/closed with CSS transitions.
  */
-export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalance }) {
+export default function Wallet({ navigate, balanceHidden, onToggleBalance }) {
   const [cardsVisible, setCardsVisible] = useState(false)
   const toggleCards = () => setCardsVisible((visible) => !visible)
 
   return (
     <main className={`screen screen--padded wallet${cardsVisible ? ' wallet--cards-visible' : ''}`}>
       <Header
-        onBack={onBack}
         balanceHidden={balanceHidden}
         onToggleBalance={onToggleBalance}
         onMenu={() => navigate('menu')}
@@ -43,12 +41,8 @@ export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalanc
       </section>
 
       <section className="wallet__transactions">
-        <div className="section-header">
-          <h2 className="section-title">Transações</h2>
-          <button type="button" className="wallet__filter" aria-label="Filtrar transações" tabIndex={cardsVisible ? -1 : undefined}>
-            <Icon name="tune" size={30} />
-          </button>
-        </div>
+        {/* Figma 293:2881: the list starts right under the cards, no visible title */}
+        <h2 className="visually-hidden">Transações</h2>
         <ul className="wallet__list">
           {TRANSACTIONS.map((transaction) => (
             <TransactionItem key={transaction.id} {...transaction} hidden={balanceHidden} />

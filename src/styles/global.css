@@ -80,6 +80,8 @@
   --color-thumb-ring: var(--palette-black); /* keeps the lime slider thumb visible on white */
   --color-sheet-handle: #c8beb3;
   --color-placeholder: #a89e93;
+  /* Highlighted figures (list prices): lime on dark, black on light */
+  --color-highlight: var(--palette-black);
 
   /*
    * Type system: PP Neue Montreal for the interface text and titles, Poppins
@@ -167,7 +169,10 @@ body,
   --color-icon: #fff;
   --color-price: #8f8f8f;
   --color-home-indicator: #5a5a5a;
+  /* Incoming transactions: lime reads on the dark background (green stays in light mode) */
+  --color-positive: var(--palette-lime);
   --color-chip: var(--palette-lime);
+  --color-highlight: var(--palette-lime);
   --color-thumb-ring: transparent;
   --color-placeholder: #c8beb3;
 }

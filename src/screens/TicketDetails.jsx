@@ -57,7 +57,10 @@ export default function TicketDetails({ navigate, balanceHidden, onToggleBalance
           // Paper ticket: details card + barcode stub, white in both themes
           <article className="ticket-card" key={ticket.id}>
             <div className="ticket-card__main">
-              <h1 className="ticket-card__event">{ticket.event}</h1>
+              {/* Figma 292:2566: coloured band with the event name */}
+              <div className="ticket-card__head">
+                <h1 className="ticket-card__event">{ticket.event}</h1>
+              </div>
               <dl className="ticket-card__fields">
                 <Field label="Titular" value={ticket.holder} wide />
                 <Field label="Data" value={ticket.date} />

@@ -61,22 +61,15 @@
   gap: 10px;
 }
 
+/* Same type as the Home section titles (.home__title): Neue Montreal 64, regular */
 .event-hero__title {
   margin: 0;
-  font-family: var(--font-poppins);
-  font-weight: var(--fw-black);
-  font-size: var(--fs-display);
-  line-height: 1;
-  /* Solid 3D block: outlined lime face extruded 5px down-right */
+  font-family: var(--font-neue);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-tight);
+  letter-spacing: normal;
   color: var(--color-accent);
-  text-transform: uppercase;
-  -webkit-text-stroke: 1px var(--palette-black);
-  text-shadow:
-    1px 1px 0 var(--palette-black),
-    2px 2px 0 var(--palette-black),
-    3px 3px 0 var(--palette-black),
-    4px 4px 0 var(--palette-black),
-    5px 5px 0 var(--palette-black);
 }
 
 .event-hero__when {

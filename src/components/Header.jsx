@@ -32,7 +32,10 @@ export default function Header({
   return (
     <header className={`header${tone === 'light' ? ' header--light' : ''}`}>
       <div className="header__bar">
-        <img className="header__logo" src={logo} width="128" height="30" alt="MOOV" />
+        {/* The logo takes you home, like on any website */}
+        <a className="header__home" href="#/home">
+          <img className="header__logo" src={logo} width="128" height="30" alt="MOOV: ir para a Home" />
+        </a>
 
         <div className="header__actions">
           {/* Moon in light mode, sun in dark mode: the icon turns as it swaps */}
