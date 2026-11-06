@@ -23,18 +23,6 @@
   padding: 0 var(--screen-padding);
 }
 
-.greeting {
-  width: 191px;
-  font-size: var(--fs-headline);
-  line-height: var(--lh-headline);
-}
-
-.greeting p:first-child {
-  margin-bottom: 4px;
-  font-weight: var(--fw-light);
-  color: var(--color-text-tertiary);
-}
-
 /* One style for every section heading (Home, Events, Wallet, Ticket) */
 .section-title {
   margin: 0;

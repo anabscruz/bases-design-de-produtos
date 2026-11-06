@@ -26,17 +26,11 @@ export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalanc
   return (
     <main className={`screen screen--padded wallet${cardsVisible ? ' wallet--cards-visible' : ''}`}>
       <Header
-        avatarSize="small"
         onBack={onBack}
         balanceHidden={balanceHidden}
         onToggleBalance={onToggleBalance}
         onMenu={() => navigate('menu')}
       />
-
-      <div className="greeting">
-        <p>Olá,</p>
-        <p>Clinton Elvis</p>
-      </div>
 
       <section className="wallet__cards">
         <div className="wallet__add-method-slot" inert={!cardsVisible}>

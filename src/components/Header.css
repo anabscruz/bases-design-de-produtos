@@ -1,62 +1,90 @@
+/*
+ * Full-bleed header: it cancels the screen's top padding and side insets, so the
+ * yellow bar touches the top and both edges of the screen. Every screen places
+ * it as the first thing inside a container padded by those same tokens.
+ */
 .header {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% + var(--screen-padding) * 2);
+  margin: calc(var(--screen-padding-top) * -1) calc(var(--screen-padding) * -1) 0;
+}
+
+/* Yellow bar: logo + actions; its icons stay black in both themes */
+.header__bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  padding: 16px 20px;
+  border-radius: 0 0 12px 12px;
+  background: var(--color-accent);
+  color: #000;
 }
 
-.header--large {
-  min-height: 73px;
-}
-
-.header--small {
-  min-height: 44px;
-}
-
-.header__profile {
-  display: flex;
-  align-items: flex-end;
-}
-
-.header__avatar {
-  flex-shrink: 0;
-  width: 73px;
-  height: 73px;
-  margin-right: -12px;
-  border-radius: 50%;
-}
-
-.header__avatar--small {
-  width: 44px;
-  height: 44px;
-  margin-right: 0;
-}
-
-.header__profile .balance-pill {
-  position: relative;
+.header__logo {
+  width: 128px;
+  height: 30px;
+  object-fit: contain;
 }
 
 .header__actions {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-/* The chevron glyph sits flush with the content edge, where the avatar started */
-.header__back {
-  display: flex;
-  margin-left: -12px;
-  color: var(--color-icon);
-}
-
-.header__profile--back {
-  align-items: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .header__actions button {
   display: flex;
+  color: #000;
+}
+
+/* User row: avatar (+ greeting on Home) and the balance */
+.header__user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.header__profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.header__avatar {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+.header__greeting {
+  font-family: var(--font-neue);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-heading);
+  line-height: 25px;
+}
+
+/* The chevron glyph sits flush with the row's left edge */
+.header__back {
+  display: flex;
+  margin: 0 -8px 0 -8px;
   color: var(--color-icon);
+}
+
+/* Over a photo (Event hero): white user row */
+.header--light .header__user {
+  border-bottom-color: #fff;
+  color: #fff;
+}
+
+.header--light .header__back {
+  color: #fff;
 }
 
 /* Theme toggle: the new icon spins in when the theme changes */
@@ -75,10 +103,4 @@
   .header__theme.is-switching .icon {
     animation: none;
   }
-}
-
-/* Over a dark photo (Event hero) */
-.header--light .header__back,
-.header--light .header__actions button {
-  color: #fff;
 }

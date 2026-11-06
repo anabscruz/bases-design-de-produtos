@@ -35,15 +35,11 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
   return (
     <main className="screen screen--padded">
       <Header
+        greeting
         balanceHidden={balanceHidden}
         onToggleBalance={onToggleBalance}
         onMenu={() => navigate('menu')}
       />
-
-      <div className="greeting">
-        <p>Olá,</p>
-        <p>Clinton Elvis</p>
-      </div>
 
       <section className="screen__section home__section">
         {/* The whole row (title + arrow) opens the Events screen */}

@@ -33,8 +33,9 @@
   --color-home-indicator: #373232;
   /* Price tag paper: the event's price, kept apart from the purple balance */
   --color-tag: #efe9df;
-  /* Home ticket stub ("Usar ingresso") */
-  --color-ticket-stub: #edf489;
+  /* MOOV yellow: header bar, balance pill, ticket stub, list prices */
+  --color-accent: #edf489;
+  --color-ticket-stub: var(--color-accent);
 
   /*
    * Type system: DM Sans for the interface text, Poppins reserved for display
@@ -78,6 +79,7 @@
 
   --shadow-poster: 0 3.17px 19.04px rgba(189, 189, 189, 0.23);
   --screen-padding: 28px;
+  --header-height: 145px; /* yellow bar 66 + user row 79 (without the greeting) */
   --screen-padding-top: 24px;
   --screen-width: 402px;
   --screen-height: 874px;
