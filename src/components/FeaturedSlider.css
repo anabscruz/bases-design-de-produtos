@@ -91,7 +91,59 @@
 .featured-slider__band {
   position: absolute;
   inset: 0;
-  will-change: clip-path;
+  will-change: clip-path, transform;
+}
+
+/* 'glitch' transition: black base so the R, G and B layers add back up to the photo */
+.featured-slider__glitch {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.featured-slider__rgb {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  background: #000;
+}
+
+.featured-slider__channel {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* Displaced slices of either picture, drawn over the split layers */
+.featured-slider__block {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  will-change: transform, clip-path;
+}
+
+/* SVG that only holds the channel filters */
+.featured-slider__filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* 'tv' transition: static noise over the picture (SVG turbulence, tiled) + scanlines */
+.featured-slider__noise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  background-image:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0 1px, transparent 1px 3px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: auto, 200px 200px;
+  mix-blend-mode: hard-light;
 }
 
 /* Dots over the photo, clear of the sheet's 10px overlap */

@@ -88,7 +88,8 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
         <section className="events__top">
           <h2 className="visually-hidden">Em alta</h2>
           {/* Full-width featured slider with a staggered curtains wipe */}
-          <FeaturedSlider slides={FEATURED} />
+          {/* transition: "glitch" (digital screen glitch), "tv" (TV interference) or "wipe" (strip wipe, the default) */}
+          <FeaturedSlider slides={FEATURED} transition="glitch" />
         </section>
       </div>
 
