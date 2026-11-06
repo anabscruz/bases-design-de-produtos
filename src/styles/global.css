@@ -14,15 +14,19 @@
   --color-home-indicator: #373232;
   /* Price tag paper: the event's price, kept apart from the purple balance */
   --color-tag: #efe9df;
+  /* Home ticket stub ("Usar ingresso") */
+  --color-ticket-stub: #edf489;
 
   /*
-   * Type system: two families, five weights, seven sizes.
-   * DM Sans is the interface text; Poppins is reserved for display titles
-   * (event names, posters, tickets). Tracking is proportional: every positive
+   * Type system: DM Sans for the interface text, Poppins reserved for display
+   * titles (event names, posters, ticket page) and DM Mono only for the Home
+   * ticket's date and stub. Five weights, seven sizes. Tracking is proportional: every positive
    * value in the Figma file was 3% of its font size.
    */
   --font-dm: 'DM Sans', system-ui, sans-serif;
   --font-poppins: 'Poppins', system-ui, sans-serif;
+  /* Ticket date and stub (stands in for the design's PP Fraktion Mono) */
+  --font-mono: 'DM Mono', ui-monospace, monospace;
 
   --fs-caption: 12px;
   --fs-body-sm: 14px;

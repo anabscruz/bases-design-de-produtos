@@ -9,8 +9,8 @@ import '../components/Poster.css'
 import './Home.css'
 
 const UPCOMING = [
-  { id: 1, title: 'Show do Omah Lay', date: '20 mar' },
-  { id: 2, title: 'Show do Omah Lay', date: '20 mar' },
+  { id: 1, title: 'Show do Omah Lay', date: '20 mar', time: '21h' },
+  { id: 2, title: 'Show do Omah Lay', date: '20 mar', time: '21h' },
 ]
 
 export default function Home({ navigate, balanceHidden, onToggleBalance }) {
@@ -31,7 +31,7 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
         <h2 className="section-title">Próximos eventos</h2>
         <div className="carousel home__tickets">
           {UPCOMING.map((event) => (
-            <Ticket key={event.id} title={event.title} date={event.date} onOpen={() => navigate('ticket')} />
+            <Ticket key={event.id} title={event.title} date={event.date} time={event.time} onOpen={() => navigate('ticket')} />
           ))}
         </div>
       </section>

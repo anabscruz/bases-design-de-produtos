@@ -67,9 +67,16 @@
   font-weight: var(--fw-black);
   font-size: var(--fs-display);
   line-height: 1;
-  color: #fff;
+  /* Solid 3D block: outlined purple face extruded 5px down-right */
+  color: var(--color-primary);
   text-transform: uppercase;
-  text-shadow: 3px 3px 1px #000;
+  -webkit-text-stroke: 1px #171717;
+  text-shadow:
+    1px 1px 0 #171717,
+    2px 2px 0 #171717,
+    3px 3px 0 #171717,
+    4px 4px 0 #171717,
+    5px 5px 0 #171717;
 }
 
 .event-hero__when {
