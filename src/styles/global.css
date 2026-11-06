@@ -40,11 +40,11 @@
   --palette-cream: #eee8dc;
 
   color-scheme: light;
-  --color-bg: #fcfafa;
-  --color-bg-rgb: 252, 250, 250; /* for translucent fades of the background */
+  --color-bg: #eee;
+  --color-bg-rgb: 238, 238, 238; /* for translucent fades of the background */
   --color-stage: #e9e7ef; /* desktop backdrop around the phone */
   --color-surface: #fff; /* cards, sheets, buttons on the background */
-  --color-field: #ececec; /* search field */
+  --color-field: #fff; /* search field: white, so it reads on the #eee background */
   --color-line: var(--palette-black); /* outlines, dividers, dashed tear lines */
   --color-disabled-bg: #e3e3e3;
   --color-disabled-text: #b3b3b3;
