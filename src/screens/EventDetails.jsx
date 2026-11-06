@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import Header from '../components/Header.jsx'
 import Attendees from '../components/Attendees.jsx'
 import Icon from '../components/Icon.jsx'
-import PriceTag from '../components/PriceTag.jsx'
+import Price from '../components/Price.jsx'
 import SaveButton from '../components/SaveButton.jsx'
 import { attendeesLabel, getEvent } from '../data/events.js'
 import '../components/Screen.css'
@@ -86,7 +86,7 @@ function EventPage({ event, navigate, onBack, balanceHidden, onToggleBalance }) 
         <div className="event-hero__content">
           <h1 className="event-hero__title">{event.title}</h1>
           <p className="event-hero__when">
-            {event.place}
+            <span className="event-hero__place">{event.place}</span>
             <span aria-hidden="true">  ·  </span>
             <span className="visually-hidden">, </span>
             {event.dateLabel}
@@ -99,7 +99,7 @@ function EventPage({ event, navigate, onBack, balanceHidden, onToggleBalance }) 
             >
               Comprar
             </button>
-            <PriceTag value={event.priceFrom} label="A partir de" />
+            <Price value={event.priceFrom} label="A partir de" />
             <SaveButton
               className="event-hero__icon-button"
               size={26}
@@ -162,7 +162,7 @@ function EventPage({ event, navigate, onBack, balanceHidden, onToggleBalance }) 
                         {quantity}
                       </span>
                     )}
-                    <PriceTag value={option.price} />
+                    <Price value={option.price} />
                   </button>
 
                   {isOpen && (

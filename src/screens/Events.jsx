@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import Header from '../components/Header.jsx'
 import ExpandingSearch from '../components/ExpandingSearch.jsx'
 import Attendees from '../components/Attendees.jsx'
-import Amount from '../components/Amount.jsx'
+import Price from '../components/Price.jsx'
 import SaveButton from '../components/SaveButton.jsx'
 import Icon from '../components/Icon.jsx'
 import FeaturedSlider from '../components/FeaturedSlider.jsx'
@@ -305,12 +305,7 @@ export default function Events({ param, navigate, balanceHidden, onToggleBalance
                   </div>
 
                   <div className="event-item__footer">
-                    <div className="event-item__price">
-                      <p className="event-item__price-label">A partir de</p>
-                      <p className="event-item__price-value">
-                        <Amount value={event.priceFrom} />
-                      </p>
-                    </div>
+                    <Price className="event-item__price" value={event.priceFrom} label="A partir de" />
                     <div className="event-item__social">
                       <Attendees people={event.attendees} />
                       <button

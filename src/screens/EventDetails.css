@@ -79,6 +79,12 @@
   white-space: pre;
 }
 
+/* Place in mono (--font-mono: DM Mono, standing in for the design's PP Fraktion Mono) */
+.event-hero__place {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-regular);
+}
+
 .event-hero__ctas {
   display: flex;
   align-items: center;
@@ -153,17 +159,19 @@
   pointer-events: none;
 }
 
+/* Venue + address in mono, like the place in the hero (DM Mono, standing in for PP Fraktion Mono) */
 .event-map__address {
   display: flex;
   flex-direction: column;
   background: var(--color-bg);
   color: inherit;
+  font-family: var(--font-mono);
   line-height: var(--lh-body);
   text-decoration: none;
 }
 
 .event-map__venue {
-  font-weight: var(--fw-medium);
+  font-weight: var(--fw-regular);
   font-size: var(--fs-body-sm);
 }
 
@@ -181,15 +189,15 @@
   scroll-margin-top: 24px;
 }
 
+/* Same as the Home section titles (.home__title): Neue Montreal 64, regular */
 .ticket-options__title {
   margin: 0;
-  font-family: var(--font-poppins);
-  font-weight: var(--fw-black);
-  font-size: var(--fs-title);
-  line-height: 1;
-  color: #fff;
-  text-transform: uppercase;
-  -webkit-text-stroke: 1px var(--color-line);
+  font-family: var(--font-neue);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-tight);
+  letter-spacing: normal;
+  color: var(--color-text);
 }
 
 .ticket-options__list {
@@ -221,13 +229,14 @@
 }
 
 /* The name takes the free space, so the count tag always sits at the same
-   distance from the price chip (same width on every row) */
+   distance from the price (same width on every row) */
+/* Same as the event names in the Events list (.event-item__name): Neue Montreal Medium 24 */
 .ticket-option__name {
   flex: 1;
-  font-family: var(--font-poppins);
-  font-weight: var(--fw-bold);
-  font-size: var(--fs-heading);
-  line-height: 1;
+  font-family: var(--font-neue);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-headline);
+  line-height: var(--lh-headline);
 }
 
 .ticket-option__count {

@@ -241,12 +241,8 @@
   text-align: left;
 }
 
-.event-item__place {
-  font-family: var(--font-mono);
-  font-size: var(--fs-caption);
-  line-height: var(--lh-caption);
-}
-
+/* Place and date share one size, so the two lines read as a pair */
+.event-item__place,
 .event-item__date {
   font-family: var(--font-mono);
   font-size: var(--fs-body-sm);
@@ -261,27 +257,17 @@
   gap: 8px;
 }
 
-/* Figma 284:1013: small label over the price, no pill */
+/* Price: see components/Price.css */
 .event-item__price {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
+  flex-shrink: 1;
 }
 
-.event-item__price-label {
-  font-size: 10px;
-  line-height: 10px;
-}
-
-/* Mono, lime on the dark background (black in light mode, where lime can't be read) */
-.event-item__price-value {
-  font-family: var(--font-mono);
-  font-weight: var(--fw-medium);
-  font-size: var(--fs-body);
-  line-height: 16px;
-  color: var(--color-highlight);
-  white-space: nowrap;
+/* "A partir de" in the list: a little bigger, spaced out and grey */
+.event-item__price .price__label {
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 1px;
+  color: #9a9a9a;
 }
 
 .event-item__social {

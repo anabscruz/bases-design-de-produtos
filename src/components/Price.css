@@ -1,0 +1,24 @@
+/* Small label over the price, no pill (Figma 284:1013) */
+.price {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 0;
+}
+
+.price__label {
+  font-size: 10px;
+  line-height: 10px;
+}
+
+/* Mono (DM Mono, standing in for PP Fraktion Mono); lime on dark, black on light */
+.price__value {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  line-height: 16px;
+  color: var(--color-highlight);
+  white-space: nowrap;
+}
