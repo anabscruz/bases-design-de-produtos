@@ -1,3 +1,8 @@
+/* Figma: 24px between header, tickets and rules */
+.screen.ticket-details {
+  gap: 24px;
+}
+
 .ticket-details__cards {
   gap: 12px;
 }
@@ -12,23 +17,25 @@
   overflow: hidden;
 }
 
+/* Paper: white with black ink in both themes, like the price tag */
 .ticket-card__main {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 32px 24px;
-  border-radius: 12px;
-  background: var(--color-surface);
+  padding: 32px 20px;
+  border-radius: 8px;
+  background: var(--color-ticket-paper);
+  color: var(--color-ticket-ink);
 }
 
+/* Figma 291:2397: PP Neue Montreal 48, wraps onto two lines */
 .ticket-card__event {
   margin: 0;
-  font-family: var(--font-poppins);
-  font-weight: var(--fw-bold);
-  font-size: var(--fs-title);
+  font-family: var(--font-neue);
+  font-weight: var(--fw-regular);
+  font-size: 48px;
   line-height: 0.9;
-  letter-spacing: var(--tracking-tight);
-  white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
 .ticket-card__fields {
@@ -51,6 +58,7 @@
 }
 
 .ticket-card__field dt {
+  font-family: var(--font-neue);
   font-size: var(--fs-body-sm);
   color: var(--color-price);
 }
@@ -65,38 +73,49 @@
 /* Stub: separate rounded piece with the dashed tear line along its top */
 .ticket-card__barcode {
   display: flex;
-  height: 88px;
-  padding: 24px;
-  border-radius: 12px;
+  padding: 8px;
+  border-radius: 8px;
   /* Figma's dash pattern: 8px dashes every ~15.6px, starting with a half dash */
   background:
-    repeating-linear-gradient(to right, var(--color-line) 0 8px, transparent 8px 15.6px) -4px 0 / 100% 1px no-repeat,
-    var(--color-surface);
+    repeating-linear-gradient(to right, var(--color-ticket-ink) 0 8px, transparent 8px 15.6px) -4px 0 / 100% 1px no-repeat,
+    var(--color-ticket-paper);
 }
 
-/* A horizontal strip of the barcode, cropped like the design */
+/* Bars fill the stub (Figma 291:2418: 346 × 89, rounded 8) */
 .ticket-card__barcode img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 346 / 89;
   object-fit: cover;
+  border-radius: 8px;
 }
 
+/* Figma 291:2489: Neue Montreal title, rules 8px apart */
 .ticket-details__rules {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
+}
+
+.ticket-details__rules .section-title {
+  font-family: var(--font-neue);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-headline);
+  line-height: var(--lh-headline);
+  letter-spacing: 0;
 }
 
 
 .ticket-details__rules ul {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
+  font-family: var(--font-neue);
   font-size: var(--fs-body-sm);
-  line-height: var(--lh-body-sm);
+  line-height: 22px;
   letter-spacing: var(--tracking);
-  color: var(--color-text-tertiary);
+  color: var(--color-text-secondary);
 }

@@ -52,6 +52,9 @@
   /* MOOV lime: header bar, balance pill, ticket stub, list prices, event titles */
   --color-accent: var(--palette-lime);
   --color-ticket-stub: var(--color-accent);
+  /* Ticket page: printed paper, white with black ink in both themes */
+  --color-ticket-paper: #fff;
+  --color-ticket-ink: #000;
   /* Filter sheet: chip outlines and icons (lime only reads on the dark background) */
   --color-chip: var(--palette-black);
   --color-thumb-ring: var(--palette-black); /* keeps the lime slider thumb visible on white */

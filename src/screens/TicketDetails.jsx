@@ -39,16 +39,14 @@ function Field({ label, value, wide = false }) {
   )
 }
 
-/** Figma "Ticket" (139:405): opened from the Home "Upcoming events" tickets. */
-export default function TicketDetails({ navigate, onBack, balanceHidden, onToggleBalance }) {
+/** Figma "Ticket" (291:2389): opened from the Home "Upcoming events" tickets and the tab bar. */
+export default function TicketDetails({ navigate, balanceHidden, onToggleBalance }) {
   const cardsRef = useRef(null)
   useDragScroll(cardsRef)
 
   return (
     <main className="screen screen--padded ticket-details">
       <Header
-        onBack={onBack}
-        showBalance={false}
         balanceHidden={balanceHidden}
         onToggleBalance={onToggleBalance}
         onMenu={() => navigate('menu')}
@@ -56,7 +54,7 @@ export default function TicketDetails({ navigate, onBack, balanceHidden, onToggl
 
       <div className="carousel carousel--bleed ticket-details__cards" ref={cardsRef} tabIndex={0} aria-label="Ingressos">
         {TICKETS.map((ticket) => (
-          // Figma "Ingresso" (266:1802): details card + separate barcode stub
+          // Paper ticket: details card + barcode stub, white in both themes
           <article className="ticket-card" key={ticket.id}>
             <div className="ticket-card__main">
               <h1 className="ticket-card__event">{ticket.event}</h1>
