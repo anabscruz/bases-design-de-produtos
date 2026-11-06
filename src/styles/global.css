@@ -1,8 +1,28 @@
-/* PP Neue Montreal (Pangram Pangram): Home section titles */
+/* PP Neue Montreal (Pangram Pangram): the interface font */
 @font-face {
   font-family: 'PP Neue Montreal';
   src: url('../assets/fonts/PPNeueMontreal-Regular.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src:
+    url('../assets/fonts/PPNeueMontreal-Medium.woff2') format('woff2'),
+    url('../assets/fonts/PPNeueMontreal-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Neue Montreal';
+  src:
+    url('../assets/fonts/PPNeueMontreal-Bold.woff2') format('woff2'),
+    url('../assets/fonts/PPNeueMontreal-Bold.woff') format('woff');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -62,17 +82,16 @@
   --color-placeholder: #a89e93;
 
   /*
-   * Type system: DM Sans for the interface text, Poppins reserved for display
-   * titles (event names, posters, ticket page) and DM Mono only for the Home
-   * ticket's date and stub. Five weights, seven sizes. Tracking is proportional: every positive
+   * Type system: PP Neue Montreal for the interface text and titles, Poppins
+   * reserved for display titles (event names, posters, CTAs) and DM Mono for
+   * dates, places and the ticket stub. Five weights, seven sizes. Tracking is proportional: every positive
    * value in the Figma file was 3% of its font size.
    */
-  --font-dm: 'DM Sans', system-ui, sans-serif;
   --font-poppins: 'Poppins', system-ui, sans-serif;
   /* Ticket date and stub (stands in for the design's PP Fraktion Mono) */
   --font-mono: 'DM Mono', ui-monospace, monospace;
-  /* Home section titles only */
-  --font-neue: 'PP Neue Montreal', var(--font-dm);
+  /* Interface text (body default) and section titles */
+  --font-neue: 'PP Neue Montreal', system-ui, sans-serif;
 
   --fs-display-xl: 64px; /* Home section titles */
 
@@ -157,8 +176,7 @@ body {
   background: var(--color-stage);
   transition: background-color 300ms ease;
   color: var(--color-text);
-  font-family: var(--font-dm);
-  font-variation-settings: 'opsz' 14;
+  font-family: var(--font-neue);
   -webkit-font-smoothing: antialiased;
 }
 

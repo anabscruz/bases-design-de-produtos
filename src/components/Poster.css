@@ -52,6 +52,7 @@
   width: 175px;
   aspect-ratio: 365 / 487;
   border-radius: 0;
+  filter: none; /* flat on the wall, no drop shadow */
 }
 
 /* Events → All Events list */

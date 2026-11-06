@@ -103,7 +103,4 @@
   margin-right: calc(var(--screen-padding) * -1);
   padding-left: 0;
   padding-right: 0;
-  /* room for the poster drop shadow inside the scroll container */
-  padding-bottom: 20px;
-  margin-bottom: -20px;
 }

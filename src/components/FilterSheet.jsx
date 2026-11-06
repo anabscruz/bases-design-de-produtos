@@ -35,7 +35,10 @@ export const EMPTY_FILTERS = { location: '', price: [0, PRICE_MAX], types: [], q
  * with "em alta" already on (any quick filter id works: saved, trending, friends)
  */
 export function filtersFromParam(param) {
-  return QUICK.some((quick) => quick.id === param) ? { ...EMPTY_FILTERS, quick: [param] } : EMPTY_FILTERS
+  if (QUICK.some((quick) => quick.id === param)) return { ...EMPTY_FILTERS, quick: [param] }
+  // "#/events/festival" (Home's Festivais) or "#/events/show": event type
+  if (TYPES.some((type) => type.id === param)) return { ...EMPTY_FILTERS, types: [param] }
+  return EMPTY_FILTERS
 }
 
 /**

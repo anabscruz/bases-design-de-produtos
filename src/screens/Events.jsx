@@ -82,6 +82,73 @@ function useSearchRowMotion(open) {
   return { rowRef, snapshot }
 }
 
+/**
+ * Smooths the list when filters or the search change which events show.
+ * Events that come back grow open (height 0 → full) and fade in, pushing the
+ * rows below down gradually, like a drawer sliding out. When events only leave,
+ * the ones that stay glide up to their new place (FLIP).
+ * Positions are remembered after every change (offsetTop ignores running transforms).
+ */
+function useListMotion(ids) {
+  const listRef = useRef(null)
+  const lastTops = useRef(null)
+  const key = ids.join('|')
+
+  useLayoutEffect(() => {
+    const list = listRef.current
+    if (!list) return
+    const items = [...list.querySelectorAll('[data-event-id]')]
+    const before = lastTops.current
+    lastTops.current = new Map(items.map((item) => [item.dataset.eventId, item.offsetTop]))
+    if (!before || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const entering = items.filter((item) => !before.has(item.dataset.eventId))
+
+    entering.forEach((item, i) => {
+      const style = getComputedStyle(item)
+      const full = {
+        height: `${item.offsetHeight}px`,
+        paddingTop: style.paddingTop,
+        paddingBottom: style.paddingBottom,
+      }
+      const delay = i * 50
+      item.style.overflow = 'hidden'
+      // Grows open: the rows below are pushed down by the layout itself
+      item
+        .animate([{ height: '0px', paddingTop: '0px', paddingBottom: '0px' }, full], {
+          duration: SEARCH_DURATION,
+          delay,
+          easing: SEARCH_EASE,
+          fill: 'backwards',
+        })
+        .finished.then(
+          () => (item.style.overflow = ''),
+          () => (item.style.overflow = ''),
+        )
+      // Content fades in slightly behind the growth, so it never looks squashed
+      item.animate([{ opacity: 0 }, { opacity: 1 }], {
+        duration: 360,
+        delay: delay + 120,
+        easing: 'ease-out',
+        fill: 'backwards',
+      })
+    })
+
+    // Growing rows already move the others smoothly; only glide when nothing enters
+    if (entering.length) return
+    items.forEach((item) => {
+      const dy = before.get(item.dataset.eventId) - item.offsetTop
+      if (!dy) return
+      item.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }], {
+        duration: SEARCH_DURATION,
+        easing: SEARCH_EASE,
+      })
+    })
+  }, [key])
+
+  return listRef
+}
+
 function shareEvent(event) {
   const data = { title: event.title, text: `${event.title} · ${event.place} · ${event.dateLabel}`, url: window.location.href }
   if (navigator.share) navigator.share(data).catch(() => {})
@@ -114,6 +181,7 @@ export default function Events({ param, navigate, balanceHidden, onToggleBalance
   const filterEvents = (current) =>
     EVENTS.filter((event) => matchesSearch(event) && matchesFilters(event, current, saved))
   const events = filterEvents(filters)
+  const listRef = useListMotion(events.map((event) => event.id))
 
   return (
     <main className="screen events">
@@ -185,7 +253,7 @@ export default function Events({ param, navigate, balanceHidden, onToggleBalance
           </div>
         </div>
 
-        <div className="events__list">
+        <div className="events__list" ref={listRef}>
           {events.length === 0 && (
             <div className="events__empty">
               <p>
@@ -205,7 +273,7 @@ export default function Events({ param, navigate, balanceHidden, onToggleBalance
             // Every event has its page now: "#/event/<id>"
             const openDetails = () => navigate(eventPath(event.id))
             return (
-              <article className="event-item" key={event.id}>
+              <article className="event-item" key={event.id} data-event-id={event.id}>
                 <button
                   className="poster poster--list"
                   type="button"
