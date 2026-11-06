@@ -44,7 +44,7 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
       <section className="screen__section home__section">
         {/* The whole row (title + arrow) opens the Events screen */}
         <h2 className="home__top-heading">
-          <button type="button" className="section-header home__see-all" onClick={() => navigate('events')}>
+          <button type="button" className="section-header home__see-all" onClick={() => navigate('events/trending')}>
             <span className="section-title home__title home__top-title">Trending</span>
             {/* Drawn edge to edge (no glyph padding) so it can sit on the text baseline */}
             <svg className="home__arrow" width="32" height="32" viewBox="0 0 24 24" aria-hidden="true">

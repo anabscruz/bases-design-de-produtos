@@ -1,107 +1,53 @@
 /*
- * Scroll layering, top to bottom:
- *   1. header band — sticky, opaque, z 2: the sheet and its list always pass under it
- *   2. "All Events" sheet — z 1: scrolls up over the posters and stops at --sheet-stop
- *   3. poster wall — sticky, z 0: never moves
- * Everything is plain CSS (sticky positioning), so it stays in sync with the scroll.
+ * The Events screen scrolls as one page: header, featured slider, then
+ * "Todos os eventos" below it. Nothing is pinned and nothing overlaps.
  */
 .screen.events {
-  --sheet-stop: var(--header-height); /* flush under the header */
   gap: 0;
-  padding-top: 0;
-}
-
-.events__header-band {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  width: 100%;
-  height: var(--sheet-stop);
   padding-top: var(--screen-padding-top);
-  background: var(--color-bg);
-}
-
-.events__backdrop {
-  position: sticky;
-  top: var(--sheet-stop);
-  z-index: 0;
-  width: 100%;
 }
 
 .events__top {
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .events__top h2,
-.events__sheet h2 {
+.events__list-section h2 {
   margin: 0;
 }
 
-/*
- * "All Events" bottom sheet: full screen width (only inner padding), overlapping
- * the grid by 10px. It scrolls up until its top reaches --sheet-stop, where its
- * header pins; from there only the list moves, passing under the header and the band.
- */
-.events__sheet {
-  position: relative;
-  z-index: 1;
+.events__list-section {
   width: 100%;
-  min-height: 766px;
-  margin-top: -10px;
-  border-radius: 16px 16px 0 0;
-  background: var(--color-surface);
+  background: var(--color-bg);
 }
 
-/* Everything inside the sheet: its pinned header and the events list */
-.events__sheet-content {
+/* Applied filter tags + search/filter, sharing one row above the list */
+.events__list-header {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
   gap: 16px;
+  padding: 24px var(--screen-padding) 16px;
 }
 
-.events__sheet-header {
-  position: sticky;
-  top: var(--sheet-stop);
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding: 4px var(--screen-padding) 16px;
-  border-radius: 16px 16px 0 0;
-  background: var(--color-surface);
-}
-
-.events__handle {
-  width: 147.86px;
-  height: 5.52px;
-  margin: 9px auto;
-  border-radius: 110px;
-  background: var(--color-home-indicator);
-}
-
-/* Row that hosts the expanding search: title on the left, search + filter on the right */
-.events__section-header {
+/* Search + filter on the right of the row. While searching it takes the full
+   width (the field grows to the left) and pushes the tags to the next line */
+.events__controls {
   position: relative;
+  flex: 0 0 86px; /* search 40 + gap 16 + filter 30 */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 40px;
+  margin-left: auto;
   --search-right: 46px; /* filter icon (30px) + 16px gap */
 }
 
-.events__section-title {
-  transition:
-    opacity 250ms ease,
-    transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* The field grows over the title, which slides away and fades out */
-.events__section-header.is-searching .events__section-title {
-  opacity: 0;
-  transform: translateX(-16px);
-  visibility: hidden;
-  transition:
-    opacity 200ms ease,
-    transform 450ms cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s linear 450ms;
+.events__list-header.is-searching .events__controls {
+  flex-basis: 100%;
 }
 
 .events__filter {
@@ -131,6 +77,92 @@
 @keyframes events-filter-dot {
   from {
     transform: scale(0);
+  }
+}
+
+/* Applied filters, under the search row: same lime as the "on" chips in the filter sheet */
+.events__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  padding: 7px 0 0; /* centres the first line of 26px tags on the 40px controls */
+  list-style: none;
+}
+
+/* Under the open search: a full line of its own, flush with the field */
+.events__list-header.is-searching .events__tags {
+  order: 1;
+  flex-basis: 100%;
+  padding-top: 0;
+}
+
+.events__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 2px 0 10px;
+  border-radius: 50px;
+  background: var(--color-accent);
+  color: var(--palette-black);
+  font-family: var(--font-neue);
+  font-size: var(--fs-body);
+  line-height: 26px;
+  white-space: nowrap;
+  animation: events-tag-in 300ms cubic-bezier(0.3, 1.4, 0.5, 1);
+}
+
+@keyframes events-tag-in {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* Round x on the right; bigger hit area than it looks */
+.events__tag-remove {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.events__tag-remove::after {
+  content: '';
+  position: absolute;
+  inset: -8px -6px;
+}
+
+.events__tag-remove:hover {
+  background: rgba(22, 22, 22, 0.12);
+}
+
+.events__tag-remove:active {
+  transform: scale(0.85);
+}
+
+.events__tags-clear {
+  padding: 0 4px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-body-sm);
+  line-height: 26px;
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .events__tag {
+    animation: none;
   }
 }
 
@@ -273,11 +305,11 @@
   mask: var(--icon) center / contain no-repeat;
 }
 
-/* The sheet runs to the bottom of the screen; the tab bar floats over it */
+/* The list runs to the bottom of the screen; the tab bar floats over its end */
 .screen.events {
   padding-bottom: 0;
 }
 
-.events__sheet {
+.events__list-section {
   padding-bottom: 140px;
 }

@@ -30,6 +30,37 @@ const MY_CITY = 'São Paulo'
 
 export const EMPTY_FILTERS = { location: '', price: [0, PRICE_MAX], types: [], quick: [] }
 
+/**
+ * Filters a link can start the Events screen with: "#/events/trending" opens it
+ * with "em alta" already on (any quick filter id works: saved, trending, friends)
+ */
+export function filtersFromParam(param) {
+  return QUICK.some((quick) => quick.id === param) ? { ...EMPTY_FILTERS, quick: [param] } : EMPTY_FILTERS
+}
+
+/**
+ * One tag per applied filter, for the row under the search: `remove(filters)`
+ * returns the filters without that one
+ */
+export function appliedFilterTags(filters) {
+  const tags = []
+  const place = filters.location.trim()
+  if (place) tags.push({ key: 'location', label: place, remove: (f) => ({ ...f, location: '' }) })
+  const [min, max] = filters.price
+  if (min > 0 || max < PRICE_MAX) {
+    const label =
+      min === 0 ? `até R$ ${formatPrice(max)}` : max === PRICE_MAX ? `a partir de R$ ${formatPrice(min)}` : `R$ ${formatPrice(min)} – ${formatPrice(max)}`
+    tags.push({ key: 'price', label, remove: (f) => ({ ...f, price: EMPTY_FILTERS.price }) })
+  }
+  for (const type of TYPES.filter((option) => filters.types.includes(option.id))) {
+    tags.push({ key: `type-${type.id}`, label: type.label, remove: (f) => ({ ...f, types: f.types.filter((id) => id !== type.id) }) })
+  }
+  for (const quick of QUICK.filter((option) => filters.quick.includes(option.id))) {
+    tags.push({ key: `quick-${quick.id}`, label: quick.label, remove: (f) => ({ ...f, quick: f.quick.filter((id) => id !== quick.id) }) })
+  }
+  return tags
+}
+
 /** How many filters differ from the defaults (shown as a dot on the filter icon) */
 export function activeFilterCount(filters) {
   return (

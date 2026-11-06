@@ -146,10 +146,10 @@
   mix-blend-mode: hard-light;
 }
 
-/* Dots over the photo, clear of the sheet's 10px overlap */
+/* Dots over the bottom of the photo */
 .featured-slider__dots {
   position: absolute;
-  bottom: 26px;
+  bottom: 16px;
   left: 0;
   right: 0;
   z-index: 4;
