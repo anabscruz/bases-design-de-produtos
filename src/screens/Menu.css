@@ -1,18 +1,20 @@
 /*
- * Frosted full-screen menu. Open: the screen behind blurs and washes out
- * (backdrop-filter + light tint) over ~450ms, then the content fades in,
- * items one after another. Close: content fades out first, then the blur
- * clears, so the screen comes back into focus.
+ * Full-screen menu (Figma 293:2701), same motion as before. Open: the screen
+ * behind blurs and washes out to white over ~500ms, then the logo, the lime
+ * panel and the items fade in, items one after another. Close: content fades
+ * out first, then the blur clears, so the screen comes back into focus.
+ * Fixed colours (white, lime, black ink): the menu looks the same in both themes.
  */
 .menu {
   --menu-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --menu-ink: var(--palette-black);
   position: absolute;
   inset: 0;
   z-index: 30;
   display: flex;
   flex-direction: column;
-  padding: var(--screen-padding-top) var(--screen-padding);
-  background-color: rgba(var(--color-bg-rgb), 0);
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0);
   backdrop-filter: blur(0) saturate(1);
   visibility: hidden;
   transition:
@@ -22,7 +24,7 @@
 }
 
 .menu--open {
-  background-color: rgba(var(--color-bg-rgb), 0.55);
+  background-color: rgba(255, 255, 255, 1);
   backdrop-filter: blur(32px) saturate(1.3);
   visibility: visible;
   transition:
@@ -30,100 +32,93 @@
     background-color 500ms ease;
 }
 
+/* Giant logo, edge to edge; the panel tucks over its bottom */
+.menu__logo {
+  flex-shrink: 0;
+  width: calc(100% + 24px);
+  height: auto;
+  margin: -4px -12px 0;
+  /* Grows from the header's logo (Menu.jsx), so it scales from its top-left corner */
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.menu__panel {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: -16px;
+  border-radius: 16px 16px 0 0;
+  background: var(--palette-lime);
+  color: var(--menu-ink);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.menu__panel::-webkit-scrollbar {
+  display: none;
+}
+
 .menu__top {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 44px;
+  justify-content: flex-end;
+  padding: 12px 12px 0;
 }
 
-.menu__title {
-  font-size: var(--fs-body);
-  color: var(--color-text-tertiary);
-}
-
+/* 44px hit area around the 28px cross */
 .menu__close {
   display: flex;
-  color: var(--color-icon);
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--menu-ink);
 }
 
 .menu__list {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  margin-top: 88px;
 }
 
+/* One item per row, ruled underneath like a printed index */
 .menu__item {
-  font-size: var(--fs-headline);
-  line-height: var(--lh-headline);
+  width: 100%;
+  padding: 12px;
+  border-bottom: 1px solid var(--menu-ink);
+  font-family: var(--font-neue);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-display-xl);
+  line-height: 1;
+  letter-spacing: -0.01em;
   text-align: left;
   white-space: nowrap;
-  color: var(--color-icon);
+  color: var(--menu-ink);
 }
 
-/* The current screen's item gets a slightly heavier weight */
+.menu__item:last-child {
+  border-bottom: 0;
+}
+
+/* Current screen: a heavier rule under its row */
 .menu__item--active {
-  font-weight: var(--fw-bold);
+  border-bottom-width: 2px;
 }
 
+/* Pressed: the ink lifts a little */
 .menu__item:active {
   opacity: 0.6;
 }
 
-/* Dark mode switch, pinned to the bottom of the menu */
-.menu__theme {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  margin-top: auto;
-  margin-bottom: 16px;
-  color: var(--color-icon);
-  text-align: left;
+.menu__item:focus-visible,
+.menu__close:focus-visible {
+  outline: 2px solid var(--menu-ink);
+  outline-offset: -4px;
 }
 
-.menu__theme-label {
-  flex: 1;
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-}
-
-.switch {
-  position: relative;
-  flex-shrink: 0;
-  width: 48px;
-  height: 28px;
-  border-radius: 50px;
-  background: var(--color-disabled-bg);
-  transition: background-color 250ms ease;
-}
-
-.switch__thumb {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.menu__theme[aria-checked='true'] .switch {
-  background: var(--color-primary);
-}
-
-.menu__theme[aria-checked='true'] .switch__thumb {
-  transform: translateX(20px);
-}
-
-/* Content: hidden quickly on close, revealed after the blur on open */
-.menu__top,
-.menu__item,
-.menu__theme {
+/* Content: hidden quickly on close, revealed after the wash on open */
+.menu__panel,
+.menu__item {
   opacity: 0;
   transform: translateY(6px);
   transition:
@@ -131,9 +126,13 @@
     transform 150ms ease;
 }
 
-.menu--open .menu__top,
-.menu--open .menu__item,
-.menu--open .menu__theme {
+/* The panel rises from a little lower than the items, like a sheet of card */
+.menu__panel {
+  transform: translateY(24px);
+}
+
+.menu--open .menu__panel,
+.menu--open .menu__item {
   opacity: 1;
   transform: none;
   transition:
@@ -141,21 +140,19 @@
     transform 450ms var(--menu-ease);
 }
 
-.menu--open .menu__top {
+.menu--open .menu__panel {
   transition-delay: 320ms;
 }
 
-.menu--open .menu__item,
-.menu--open .menu__theme {
-  transition-delay: calc(360ms + var(--i) * 60ms);
+.menu--open .menu__item {
+  transition-delay: calc(400ms + var(--i) * 60ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .menu,
-  .menu__top,
-  .menu__item,
-  .menu__theme,
-  .switch__thumb {
+  .menu__logo,
+  .menu__panel,
+  .menu__item {
     transition: none !important;
   }
 }

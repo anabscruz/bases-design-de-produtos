@@ -137,8 +137,6 @@ export default function App() {
             active={route}
             navigate={navigate}
             onClose={() => setMenuOpen(false)}
-            darkMode={darkMode}
-            onToggleDarkMode={toggleDarkMode}
           />
         }
         menuOpen={menuOpen}

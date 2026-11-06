@@ -64,7 +64,7 @@
   --color-text-tertiary: #515151;
   --color-icon: var(--palette-black);
   --color-price: #979797;
-  --color-negative: #ff3535;
+  --color-negative: var(--palette-orange); /* outgoing transactions */
   --color-positive: #35a500;
   --color-home-indicator: #373232;
   /* Price tag paper: the event's price, kept apart from the lime balance pill */
