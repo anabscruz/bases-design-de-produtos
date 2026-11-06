@@ -5,7 +5,7 @@
   overflow: hidden;
   /* Fixed colours: it sits on photos, so it doesn't follow the theme */
   color: #fff;
-  background: #161616;
+  background: var(--palette-black);
   /* Vertical scroll stays with the page; horizontal swipes are handled in JS */
   touch-action: pan-y;
   user-select: none;

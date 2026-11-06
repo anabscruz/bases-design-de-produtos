@@ -1,0 +1,257 @@
+[
+  {
+    "id": "placebo",
+    "type": "show",
+    "title": "Placebo",
+    "tour": "30th Anniversary Tour",
+    "featured": true,
+    "dateTime": "2027-02-20T21:00:00-03:00",
+    "venue": "Espaço Unimed",
+    "city": "São Paulo",
+    "place": "Espaço Unimed - São Paulo",
+    "address": "Rua Tagipuru, 795 - Barra Funda, São Paulo - SP",
+    "description": [
+      "Trinta anos depois do primeiro disco, o Placebo volta ao Brasil com a turnê que celebra toda a sua trajetória. Brian Molko e Stefan Olsdal revisitam os clássicos que marcaram gerações, de “Pure Morning” a “Every You Every Me”, ao lado das faixas mais recentes.",
+      "Uma noite para quem cresceu com o som melancólico e elétrico da banda e para quem vai descobrir ao vivo por que ela continua tão atual."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 680,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 340,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      },
+      "meia-solidaria": {
+        "label": "Meia Solidária",
+        "amount": 380,
+        "rules": "Meia-entrada para quem doar 1kg de alimento não perecível na entrada do evento."
+      },
+      "meia-pcd": {
+        "label": "Meia PCD",
+        "amount": 340,
+        "rules": "Pessoas com deficiência e um acompanhante (apresentar documento que comprove a deficiência)."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Tom",
+        "photo": "attendee-1.png"
+      },
+      {
+        "name": "Jessica",
+        "photo": "notification-jessica.png"
+      },
+      {
+        "name": "Carl",
+        "photo": "notification-carl.png"
+      }
+    ],
+    "poster": "poster-home-placebo.png",
+    "artistPhoto": "events-top-placebo.png"
+  },
+  {
+    "id": "ben-howard",
+    "type": "show",
+    "title": "Ben Howard",
+    "tour": "South America Tour 2026",
+    "featured": true,
+    "dateTime": "2026-09-26T21:00:00-03:00",
+    "venue": "Audio",
+    "city": "São Paulo",
+    "place": "Audio - São Paulo",
+    "address": "Av. Francisco Matarazzo, 694 - Água Branca, São Paulo - SP",
+    "description": [
+      "O cantor e compositor inglês Ben Howard faz sua primeira turnê pela América do Sul. No palco, o folk dos primeiros discos se mistura às texturas experimentais dos trabalhos mais recentes, em um show intimista e cheio de camadas.",
+      "Uma noite para ouvir de perto canções como “Old Pine”, “Keep Your Head Up” e “I Forget Where We Were”."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 450,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 225,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      },
+      "meia-solidaria": {
+        "label": "Meia Solidária",
+        "amount": 250,
+        "rules": "Meia-entrada para quem doar 1kg de alimento não perecível na entrada do evento."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Kim",
+        "photo": "notification-kim.png"
+      },
+      {
+        "name": "Bia",
+        "photo": "attendee-2.png"
+      },
+      {
+        "name": "Rafa",
+        "photo": "attendee-3.png"
+      }
+    ],
+    "poster": "poster-ben-howard.jpg",
+    "artistPhoto": "events-top-ben-howard.png"
+  },
+  {
+    "id": "cabaret-voltaire",
+    "type": "show",
+    "title": "Cabaret Voltaire",
+    "tour": "Final Tour",
+    "featured": true,
+    "dateTime": "2027-03-06T21:00:00-03:00",
+    "venue": "Cine Joia",
+    "city": "São Paulo",
+    "place": "Cine Joia - São Paulo",
+    "address": "Praça Carlos Gomes, 82 - Liberdade, São Paulo - SP",
+    "description": [
+      "Pioneiros da música eletrônica e industrial, o Cabaret Voltaire saiu de Sheffield no fim dos anos 1970 para influenciar gerações, do pós-punk ao techno. A turnê de despedida passa por São Paulo para uma única noite.",
+      "Batidas hipnóticas, colagens de ruído e projeções em um show no palco intimista do Cine Joia: uma chance rara de ver ao vivo uma das bandas mais experimentais da história."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 320,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 160,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      },
+      "meia-solidaria": {
+        "label": "Meia Solidária",
+        "amount": 180,
+        "rules": "Meia-entrada para quem doar 1kg de alimento não perecível na entrada do evento."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Carl",
+        "photo": "notification-carl.png"
+      },
+      {
+        "name": "Tom",
+        "photo": "attendee-1.png"
+      },
+      {
+        "name": "Rafa",
+        "photo": "attendee-3.png"
+      }
+    ],
+    "poster": "poster-home-cabaret-voltaire.png",
+    "artistPhoto": "events-top-cabaret-voltaire.png"
+  },
+  {
+    "id": "rtm",
+    "type": "festival",
+    "title": "RTM 2026",
+    "dateTime": "2026-11-02T14:00:00-03:00",
+    "venue": "Parque de Exposições de Petrópolis",
+    "city": "Itaipava",
+    "place": "Itaipava - RJ",
+    "address": "Estr. União e Indústria, 10000 - Itaipava, Petrópolis - RJ",
+    "description": [
+      "O Rock the Mountain é um festival de música e arte que acontece em Itaipava, Petrópolis, no estado do Rio de Janeiro. A proposta é simples: oferecer uma experiência única e de alto astral para um público especial, tendo como cenário as charmosas montanhas da serra fluminense!",
+      "Em meio à natureza, o RTM reúne juventude, modernidade, sustentabilidade, liberdade, estilo, diversão, gastronomia e — claro — MUITA música, em um dia que promete ser inesquecível!"
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 590,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 295,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      },
+      "meia-solidaria": {
+        "label": "Meia Solidária",
+        "amount": 325,
+        "rules": "Meia-entrada para quem doar 1kg de alimento não perecível na entrada do festival."
+      },
+      "meia-pcd": {
+        "label": "Meia PCD",
+        "amount": 295,
+        "rules": "Pessoas com deficiência e um acompanhante (apresentar documento que comprove a deficiência)."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Tom",
+        "photo": "attendee-1.png"
+      },
+      {
+        "name": "Kim",
+        "photo": "notification-kim.png"
+      },
+      {
+        "name": "Jessica",
+        "photo": "notification-jessica.png"
+      },
+      {
+        "name": "Bia",
+        "photo": "attendee-2.png"
+      }
+    ],
+    "poster": "poster-rtm-list.jpg",
+    "artistPhoto": "event-rtm-hero.png"
+  },
+  {
+    "id": "afropunk",
+    "type": "festival",
+    "title": "Afropunk",
+    "dateTime": "2026-11-02T14:00:00-03:00",
+    "venue": "Parque de Exposições de Salvador",
+    "city": "Salvador",
+    "place": "Salvador - BA",
+    "address": "Av. Luís Viana Filho, s/n - Paralela, Salvador - BA",
+    "description": [
+      "O Afropunk Bahia celebra a cultura negra em todas as suas formas: música, moda, arte e ativismo. Nomes da música brasileira e internacional dividem o palco em um dia inteiro de shows, do afrobeat ao rap, do rock ao pagodão baiano.",
+      "Mais que um festival, um encontro para se expressar com liberdade — e dançar até o fim."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 380,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 190,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      },
+      "meia-solidaria": {
+        "label": "Meia Solidária",
+        "amount": 210,
+        "rules": "Meia-entrada para quem doar 1kg de alimento não perecível na entrada do festival."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Kim",
+        "photo": "notification-kim.png"
+      },
+      {
+        "name": "Rafa",
+        "photo": "attendee-3.png"
+      },
+      {
+        "name": "Carl",
+        "photo": "notification-carl.png"
+      }
+    ],
+    "poster": "poster-afropunk.jpg",
+    "artistPhoto": "poster-afropunk.jpg"
+  }
+]

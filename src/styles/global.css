@@ -9,33 +9,54 @@
 
 /* Design tokens extracted from the Figma file "Exercicio Design de produtos digitais" */
 :root {
+  /*
+   * Brand palette: the only five colours the interface is built from.
+   * Screens use the semantic tokens below, never these directly.
+   */
+  --palette-orange: #ff5e34;
+  --palette-lilac: #dc99fd;
+  --palette-lime: #e2f005;
+  --palette-black: #161616;
+  --palette-cream: #eee8dc;
+
   color-scheme: light;
   --color-bg: #fcfafa;
   --color-bg-rgb: 252, 250, 250; /* for translucent fades of the background */
   --color-stage: #e9e7ef; /* desktop backdrop around the phone */
   --color-surface: #fff; /* cards, sheets, buttons on the background */
   --color-field: #ececec; /* search field */
-  --color-line: #000; /* outlines, dividers, dashed tear lines */
+  --color-line: var(--palette-black); /* outlines, dividers, dashed tear lines */
   --color-disabled-bg: #e3e3e3;
   --color-disabled-text: #b3b3b3;
   --color-glass: rgba(243, 243, 243, 0.2); /* floating tab bar */
   --color-glass-highlight: rgba(255, 255, 255, 0.9);
-  --color-primary: #6675ff;
-  --color-primary-line: #939eff;
+  /* Lilac: CTAs (Comprar, Finalizar compra), active tab, balance card, chips. Dark text on it */
+  --color-primary: var(--palette-lilac);
+  --color-on-primary: var(--palette-black);
+  --color-primary-line: var(--palette-lilac);
+  /* Text links: lilac is too light to read on the light background, so black there */
+  --color-link: var(--palette-black);
+  /* Orange: saved heart (and other "love" highlights) */
+  --color-heart: var(--palette-orange);
   --color-nubank: #820ad1;
-  --color-text: #000;
+  --color-text: var(--palette-black);
   --color-text-secondary: #3c3c3c;
   --color-text-tertiary: #515151;
-  --color-icon: #1e1e1e;
+  --color-icon: var(--palette-black);
   --color-price: #979797;
   --color-negative: #ff3535;
   --color-positive: #35a500;
   --color-home-indicator: #373232;
-  /* Price tag paper: the event's price, kept apart from the purple balance */
-  --color-tag: #efe9df;
-  /* MOOV yellow: header bar, balance pill, ticket stub, list prices */
-  --color-accent: #edf489;
+  /* Price tag paper: the event's price, kept apart from the lime balance pill */
+  --color-tag: var(--palette-cream);
+  /* MOOV lime: header bar, balance pill, ticket stub, list prices, event titles */
+  --color-accent: var(--palette-lime);
   --color-ticket-stub: var(--color-accent);
+  /* Filter sheet: chip outlines and icons (lime only reads on the dark background) */
+  --color-chip: var(--palette-black);
+  --color-thumb-ring: var(--palette-black); /* keeps the lime slider thumb visible on white */
+  --color-sheet-handle: #c8beb3;
+  --color-placeholder: #a89e93;
 
   /*
    * Type system: DM Sans for the interface text, Poppins reserved for display
@@ -99,15 +120,17 @@ body,
 }
 
 /*
- * Dark mode: #161616 background, white text. The primary purple (#6675ff) stays
- * the same, so links, Comprar/Order and the balance keep their colour.
- * Fixed-colour pieces (price tag paper, yellow stub, posters, cards in brand
+ * Dark mode: #161616 background, white text. The primary lilac (#dc99fd) stays
+ * the same, so Comprar and the balance card keep their colour; text links turn lilac.
+ * Fixed-colour pieces (price tag paper, lime stub, posters, cards in brand
  * colours) are not themed.
  */
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --color-bg: #161616;
+  --color-bg: var(--palette-black);
   --color-bg-rgb: 22, 22, 22;
+  /* On the dark background lilac reads fine as a link colour */
+  --color-link: var(--palette-lilac);
   --color-stage: #0b0b0c;
   --color-surface: #222222;
   --color-field: #2b2b2b;
@@ -122,6 +145,9 @@ body,
   --color-icon: #fff;
   --color-price: #8f8f8f;
   --color-home-indicator: #5a5a5a;
+  --color-chip: var(--palette-lime);
+  --color-thumb-ring: transparent;
+  --color-placeholder: #c8beb3;
 }
 
 body {

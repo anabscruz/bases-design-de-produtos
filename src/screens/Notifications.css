@@ -10,7 +10,7 @@
 
 .filter-chip {
   padding: 8px 12px;
-  border: 1px solid var(--color-primary);
+  border: 1px solid var(--color-line);
   border-radius: 50px;
   font-weight: var(--fw-medium);
   font-size: var(--fs-body-sm);
@@ -21,8 +21,9 @@
 }
 
 .filter-chip.is-active {
+  border-color: var(--color-primary);
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
 }
 
 .notifications__list {
@@ -79,7 +80,9 @@
 }
 
 .notification__link {
-  color: var(--color-primary);
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
   font-weight: var(--fw-medium);
   font-size: var(--fs-body-sm);
 }
@@ -99,7 +102,9 @@
 
 .notifications__mark-all {
   align-self: center;
-  color: var(--color-primary);
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
   font-weight: var(--fw-medium);
   font-size: var(--fs-body-sm);
 }

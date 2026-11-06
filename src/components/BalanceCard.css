@@ -9,7 +9,7 @@
   padding: 24px 16px 16px;
   border-radius: 12px;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   overflow: hidden;
   font-size: var(--fs-body-sm);
   line-height: 20px;
@@ -45,6 +45,6 @@
 
 .balance-card__actions button {
   padding: 4px 8px;
-  border: 1px solid #fff;
+  border: 1px solid currentColor;
   border-radius: 50px;
 }

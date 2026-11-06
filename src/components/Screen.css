@@ -32,7 +32,7 @@
   letter-spacing: var(--tracking);
 }
 
-/* Primary action pill: the purple CTA ("Comprar" on Events and on the event page) */
+/* Primary action pill: the lilac CTA ("Comprar" on Events and on the event page) */
 .button-primary {
   display: inline-flex;
   align-items: center;
@@ -40,7 +40,7 @@
   padding: 4px 14px;
   border-radius: 50px;
   background: var(--color-primary);
-  color: #fff;
+  color: var(--color-on-primary);
   font-weight: var(--fw-bold);
   font-size: var(--fs-body-sm);
   line-height: var(--lh-control);

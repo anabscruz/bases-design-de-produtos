@@ -1,0 +1,387 @@
+/* Figma "Filtro" (284:1309). Sits on the phone, above the screen, under the tab bar */
+.filter-sheet-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  overflow: hidden;
+}
+
+.filter-sheet__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.filter-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-height: calc(100% - 11px);
+  padding: 0 0 140px; /* clears the floating tab bar */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  border-radius: 12px 12px 0 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  outline: none;
+  will-change: transform;
+}
+
+.filter-sheet::-webkit-scrollbar {
+  display: none;
+}
+
+/* Handle row: 40px above and below the bar, all of it draggable */
+.filter-sheet__grab {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  touch-action: none;
+  cursor: grab;
+}
+
+.filter-sheet__grab:active {
+  cursor: grabbing;
+}
+
+.filter-sheet__handle {
+  position: relative;
+  width: 147.86px;
+  height: 5.52px;
+  border-radius: 110px;
+  background: var(--color-sheet-handle);
+}
+
+/* Bigger hit area than the visible bar */
+.filter-sheet__handle::after {
+  content: '';
+  position: absolute;
+  inset: -16px -8px;
+}
+
+.filter-sheet__clear {
+  position: absolute;
+  right: 22px;
+  bottom: -8px;
+  padding: 4px 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Sections separated by 1px rules, top and bottom */
+.filter-sheet__sections {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-sheet__section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 22px;
+  border-top: 1px solid var(--color-line);
+}
+
+.filter-sheet__section:last-child {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.filter-sheet__title {
+  margin: 0;
+  font-family: var(--font-neue);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-headline);
+  line-height: var(--lh-headline);
+}
+
+/* Localização: search field + "my location" target */
+.filter-sheet__location {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.filter-sheet__field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 50px;
+  background: var(--color-field);
+  color: var(--color-icon);
+  cursor: text;
+}
+
+.filter-sheet__field:focus-within {
+  outline: 2px solid var(--color-chip);
+  outline-offset: 2px;
+}
+
+.filter-sheet__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: none;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+  line-height: var(--lh-control);
+}
+
+.filter-sheet__input::placeholder {
+  color: var(--color-placeholder);
+}
+
+.filter-sheet__locate {
+  display: flex;
+  color: var(--color-chip);
+  transition: transform 300ms cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+/* A little "ping" when it locks on */
+.filter-sheet__locate.is-on {
+  transform: scale(1.15);
+}
+
+/* Price: two thumbs on one track, value labels riding under each thumb */
+.price-range {
+  --thumb: 16px;
+  position: relative;
+  height: 52px;
+}
+
+.price-range__track {
+  position: absolute;
+  top: calc(var(--thumb) / 2 - 2px);
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 4px;
+  background: var(--color-price);
+}
+
+.price-range__fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--from) * 1%);
+  right: calc(100% - var(--to) * 1%);
+  border-radius: inherit;
+  background: var(--color-text);
+}
+
+.price-range__input {
+  position: absolute;
+  top: 0;
+  left: calc(var(--thumb) / -2);
+  width: calc(100% + var(--thumb));
+  height: var(--thumb);
+  margin: 0;
+  background: none;
+  pointer-events: none; /* only the thumbs take the pointer */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.price-range__input[data-on-top] {
+  z-index: 1;
+}
+
+.price-range__input::-webkit-slider-runnable-track {
+  height: var(--thumb);
+  background: none;
+}
+
+.price-range__input::-moz-range-track {
+  height: var(--thumb);
+  background: none;
+}
+
+.price-range__input::-webkit-slider-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  border: 1px solid var(--color-thumb-ring);
+  border-radius: 50%;
+  background: var(--color-accent);
+  pointer-events: auto;
+  cursor: grab;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: transform 200ms cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.price-range__input::-moz-range-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  box-sizing: border-box;
+  border: 1px solid var(--color-thumb-ring);
+  border-radius: 50%;
+  background: var(--color-accent);
+  pointer-events: auto;
+  cursor: grab;
+  transition: transform 200ms cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+/* Held thumb grows, like pressing a fader knob */
+.price-range__input:active::-webkit-slider-thumb {
+  transform: scale(1.35);
+  cursor: grabbing;
+}
+
+.price-range__input:active::-moz-range-thumb {
+  transform: scale(1.35);
+  cursor: grabbing;
+}
+
+.price-range__input:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--color-chip);
+  outline-offset: 2px;
+}
+
+.price-range__input:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--color-chip);
+  outline-offset: 2px;
+}
+
+.price-range__label {
+  position: absolute;
+  top: 22px;
+  left: calc(var(--at) * 1%);
+  transform: translateX(-50%);
+  font-family: var(--font-neue);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  white-space: nowrap;
+}
+
+/* Labels at the ends stay inside the sheet */
+.price-range__label:first-of-type {
+  transform: translateX(calc(-50% * var(--at) / 50));
+}
+
+.price-range__label:last-of-type {
+  transform: translateX(calc(-100% + 50% * (100 - var(--at)) / 50));
+}
+
+/* Chips: lime outline, filled lime when on */
+.filter-sheet__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filter-sheet__chip {
+  padding: 0 8px;
+  border: 1px solid var(--color-chip);
+  border-radius: 50px;
+  color: var(--color-chip);
+  font-family: var(--font-neue);
+  font-size: var(--fs-body);
+  line-height: 22px;
+  white-space: nowrap;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.filter-sheet__chip:active {
+  transform: scale(0.93);
+}
+
+.filter-sheet__chip.is-on {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--palette-black);
+}
+
+.filter-sheet__footer {
+  padding: 0 24px;
+}
+
+/* Figma "Order" (288:2297): pill CTA, Poppins ExtraBold, uppercase */
+.filter-sheet__apply {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 55px;
+  padding: 3px 24px;
+  border-radius: 50px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-poppins);
+  font-weight: var(--fw-black);
+  font-size: var(--fs-headline);
+  line-height: var(--lh-control);
+  letter-spacing: var(--tracking);
+  text-transform: uppercase;
+  box-shadow:
+    0 4px 0 -1px var(--color-bg),
+    0 4px 0 0 var(--color-primary);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    opacity 200ms ease;
+}
+
+.filter-sheet__apply:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 -1px var(--color-bg),
+    0 1px 0 0 var(--color-primary);
+}
+
+.filter-sheet__apply:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* Result count: pops every time it changes */
+.filter-sheet__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: 50px;
+  background: var(--color-on-primary);
+  color: var(--color-primary);
+  font-size: var(--fs-body-sm);
+  letter-spacing: 0;
+  animation: filter-count-pop 320ms cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+@keyframes filter-count-pop {
+  from {
+    transform: scale(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filter-sheet__count {
+    animation: none;
+  }
+
+  .filter-sheet__chip,
+  .filter-sheet__locate,
+  .price-range__input::-webkit-slider-thumb {
+    transition: none;
+  }
+}

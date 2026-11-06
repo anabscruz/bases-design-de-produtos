@@ -40,6 +40,7 @@ const GLITCH_BLOCK_SHIFT = 70 // px, widest block jump
 
 const AUTOPLAY = 5000
 const SWIPE = 40 // px
+const TAP = 8 // px: moved less than this, it's a tap
 
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const random = (min, max) => min + Math.random() * (max - min)
@@ -172,7 +173,8 @@ function glitchAnimations(container) {
   return animations
 }
 
-export default function FeaturedSlider({ slides, label = 'Destaques', transition = 'wipe' }) {
+// onOpen(slide): called on a tap (not a swipe) or Enter, e.g. to open the event page
+export default function FeaturedSlider({ slides, label = 'Destaques', transition = 'wipe', onOpen }) {
   const [active, setActive] = useState(0)
   const [incoming, setIncoming] = useState(null) // { index, direction } while a transition runs
   const [paused, setPaused] = useState(false)
@@ -240,11 +242,14 @@ export default function FeaturedSlider({ slides, label = 'Destaques', transition
     if (Math.abs(dx) > SWIPE && Math.abs(dx) > Math.abs(dy)) {
       if (dx < 0) next()
       else prev()
+    } else if (onOpen && !incoming && Math.hypot(dx, dy) < TAP) {
+      onOpen(slides[active])
     }
   }
   const onKeyDown = (e) => {
     if (e.key === 'ArrowRight') next()
     if (e.key === 'ArrowLeft') prev()
+    if (e.key === 'Enter' && onOpen && e.target === e.currentTarget) onOpen(slides[active])
   }
 
   const shown = incoming ? incoming.index : active

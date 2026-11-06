@@ -15,9 +15,12 @@ const SCREENS = { home: Home, events: Events, wallet: Wallet, ticket: TicketDeta
 // Tab order, used to slide the next screen in from the side of the tapped tab
 const TAB_ORDER = ['home', 'events', 'wallet', 'ticket', 'notifications']
 
+// "#/event/placebo" → { path: 'event/placebo', route: 'event', param: 'placebo' }
 function readRoute() {
-  const route = window.location.hash.replace(/^#\/?/, '')
-  return SCREENS[route] ? route : 'home'
+  const path = window.location.hash.replace(/^#\/?/, '')
+  const [route, ...rest] = path.split('/')
+  if (!SCREENS[route]) return { path: 'home', route: 'home', param: null }
+  return { path, route, param: rest.length ? decodeURIComponent(rest.join('/')) : null }
 }
 
 function transitionBetween(from, to) {
@@ -41,14 +44,15 @@ function initialTheme() {
 }
 
 function initialState() {
-  const route = readRoute()
+  const { path, route, param } = readRoute()
   // The Event page belongs to the Events tab
   const lastTab = TAB_ORDER.includes(route) ? route : route === 'event' ? 'events' : 'home'
-  return { route, lastTab, transition: 'none', backTo: null }
+  // Opened straight from a link, the Event page goes back to the list
+  return { path, route, param, lastTab, transition: 'none', backTo: route === 'event' ? 'events' : null }
 }
 
 export default function App() {
-  const [{ route, lastTab, transition, backTo }, setNav] = useState(initialState)
+  const [{ path, route, param, lastTab, transition, backTo }, setNav] = useState(initialState)
   const [balanceHidden, setBalanceHidden] = useState(false)
   const [theme, setTheme] = useState(initialTheme)
   // The menu isn't a route: it's a full-screen layer over the current screen
@@ -65,14 +69,14 @@ export default function App() {
       goingBack.current = false
       leavingMenu.current = false
       setNav((current) =>
-        current.route === next
+        current.path === next.path
           ? current
           : {
-              route: next,
-              lastTab: TAB_ORDER.includes(next) ? next : current.lastTab,
-              transition: fromMenu ? 'none' : isBack ? 'back' : transitionBetween(current.route, next),
+              ...next,
+              lastTab: TAB_ORDER.includes(next.route) ? next.route : current.lastTab,
+              transition: fromMenu ? 'none' : isBack ? 'back' : transitionBetween(current.route, next.route),
               // Screen the back button returns to
-              backTo: current.route,
+              backTo: current.path,
             },
       )
     }
@@ -97,6 +101,7 @@ export default function App() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [menuOpen])
 
+  // `next` is a screen ('events') or a screen with a parameter ('event/placebo')
   const navigate = (next) => {
     if (next === 'menu') {
       setMenuOpen(true)
@@ -104,14 +109,14 @@ export default function App() {
     }
     if (menuOpen) {
       setMenuOpen(false)
-      leavingMenu.current = next !== route
+      leavingMenu.current = next !== path
     }
-    if (next !== route) window.location.hash = `/${next}`
+    if (next !== path) window.location.hash = `/${next}`
   }
 
   const goBack = () => {
-    const target = backTo && backTo !== route ? backTo : 'home'
-    if (target === route) return
+    const target = backTo && backTo !== path ? backTo : 'home'
+    if (target === path) return
     goingBack.current = true
     navigate(target)
   }
@@ -123,7 +128,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
       <PhoneFrame
-        screenKey={route}
+        screenKey={path}
         transition={transition}
         overlay={<FloatingMenu active={lastTab} hidden={menuOpen} navigate={navigate} />}
         menu={
@@ -139,6 +144,7 @@ export default function App() {
         menuOpen={menuOpen}
       >
         <Screen
+          param={param}
           navigate={navigate}
           onBack={goBack}
           balanceHidden={balanceHidden}

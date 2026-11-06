@@ -14,7 +14,7 @@ const INITIAL_NOTIFICATIONS = [
     photo: kim,
     date: '2 de novembro de 2026 · 14h',
     message: 'Kim salvou o Afropunk nos favoritos',
-    route: 'events',
+    route: 'event/afropunk',
     read: false,
   },
   {
@@ -22,7 +22,7 @@ const INITIAL_NOTIFICATIONS = [
     photo: jessica,
     date: '2 de novembro de 2026 · 14h',
     message: 'Jessica vai ao RTM 2026',
-    route: 'event',
+    route: 'event/rtm',
     read: false,
   },
   {

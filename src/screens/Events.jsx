@@ -6,54 +6,27 @@ import Amount from '../components/Amount.jsx'
 import SaveButton from '../components/SaveButton.jsx'
 import Icon from '../components/Icon.jsx'
 import FeaturedSlider from '../components/FeaturedSlider.jsx'
-import rtmList from '../assets/images/poster-rtm-list.jpg'
-import afropunk from '../assets/images/poster-afropunk.jpg'
-import placeboTop from '../assets/images/events-top-placebo.png'
-import benHowardTop from '../assets/images/events-top-ben-howard.png'
-import placeboPoster from '../assets/images/poster-home-placebo.png'
-import benHoward from '../assets/images/poster-ben-howard.jpg'
+import FilterSheet, { EMPTY_FILTERS, activeFilterCount, matchesFilters } from '../components/FilterSheet.jsx'
+import { EVENTS, eventPath, formatDay } from '../data/events.js'
 import pasteTexture from '../assets/images/poster-paste-texture.jpg'
 import shareIcon from '../assets/icons/share-external.svg'
 import '../components/Screen.css'
 import '../components/Poster.css'
 import './Events.css'
 
-// Featured slider at the top of the screen
-const FEATURED = [
-  { id: 'placebo', image: placeboTop, title: 'Placebo 30th Anniversary Tour', subtitle: '20 de fevereiro - São Paulo' },
-  { id: 'ben-howard', image: benHowardTop, title: 'Ben Howard South America Tour 2026', subtitle: '26 de setembro - São Paulo' },
-]
-
-// Events with a details page (Figma only has RTM's)
-const HAS_DETAILS = new Set(['rtm'])
+// Featured slider: the events marked "featured" in src/data/events.json
+const FEATURED = EVENTS.filter((event) => event.featured).map((event) => ({
+  id: event.id,
+  image: event.artistPhotoUrl,
+  title: event.tour ? `${event.title} ${event.tour}` : event.title,
+  subtitle: `${formatDay(event.date)} - ${event.city}`,
+}))
 
 function shareEvent(event) {
-  const data = { title: event.name, text: `${event.name} · ${event.place} · ${event.date}`, url: window.location.href }
+  const data = { title: event.title, text: `${event.title} · ${event.place} · ${event.dateLabel}`, url: window.location.href }
   if (navigator.share) navigator.share(data).catch(() => {})
   else navigator.clipboard?.writeText(`${data.text} ${data.url}`).catch(() => {})
 }
-
-const ALL_EVENTS = [
-  // Same event as the featured photo above the sheet
-  {
-    id: 'placebo',
-    image: placeboPoster,
-    name: 'Placebo',
-    place: 'São Paulo - SP',
-    date: '20 de fevereiro',
-    price: '3.000',
-  },
-  {
-    id: 'ben-howard',
-    image: benHoward,
-    name: 'Ben Howard',
-    place: 'Audio - São Paulo',
-    date: '26 de setembro - 21h',
-    price: '3.000',
-  },
-  { id: 'rtm', image: rtmList, name: 'RTM 2026', place: 'Itaipava - RJ', date: '2 de novembro · 14h', price: '3.000' },
-  { id: 'afropunk', image: afropunk, name: 'Afropunk', place: 'Salvador - BA', date: '2 de novembro · 14h', price: '3.000' },
-]
 
 export default function Events({ navigate, balanceHidden, onToggleBalance }) {
   const [searchOpen, setSearchOpen] = useState(false)
@@ -65,10 +38,15 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
       if (!next.delete(id)) next.add(id)
       return next
     })
+  const [filtersOpen, setFiltersOpen] = useState(false)
+  const [filters, setFilters] = useState(EMPTY_FILTERS)
+  const filterCount = activeFilterCount(filters)
   const term = query.trim().toLowerCase()
-  const events = term
-    ? ALL_EVENTS.filter((event) => `${event.name} ${event.place}`.toLowerCase().includes(term))
-    : ALL_EVENTS
+  const matchesSearch = (event) =>
+    !term || [event.title, event.tour, event.place, event.venue, event.city].join(' ').toLowerCase().includes(term)
+  const filterEvents = (current) =>
+    EVENTS.filter((event) => matchesSearch(event) && matchesFilters(event, current, saved))
+  const events = filterEvents(filters)
 
   return (
     <main className="screen events">
@@ -89,7 +67,7 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
           <h2 className="visually-hidden">Em alta</h2>
           {/* Full-width featured slider with a staggered curtains wipe */}
           {/* transition: "glitch" (digital screen glitch), "tv" (TV interference) or "wipe" (strip wipe, the default) */}
-          <FeaturedSlider slides={FEATURED} transition="glitch" />
+          <FeaturedSlider slides={FEATURED} transition="glitch" onOpen={(slide) => navigate(eventPath(slide.id))} />
         </section>
       </div>
 
@@ -108,76 +86,84 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
                 onChange={setQuery}
                 label="Buscar eventos"
               />
-              <button type="button" className="events__filter" aria-label="Filtrar eventos">
+              <button
+                type="button"
+                className={`events__filter${filterCount ? ' is-active' : ''}`}
+                aria-label={filterCount ? `Filtrar eventos (${filterCount} filtros ativos)` : 'Filtrar eventos'}
+                aria-haspopup="dialog"
+                aria-expanded={filtersOpen}
+                onClick={() => setFiltersOpen(true)}
+              >
                 <Icon name="tune" size={30} />
               </button>
             </div>
           </div>
 
           <div className="events__list">
-            {events.length === 0 && <p className="events__empty">Nenhum evento encontrado para “{query.trim()}”</p>}
+            {events.length === 0 && (
+              <div className="events__empty">
+                <p>
+                  {term && !filterCount
+                    ? `Nenhum evento encontrado para “${query.trim()}”`
+                    : 'Nenhum evento com esses filtros'}
+                </p>
+                {filterCount > 0 && (
+                  <button type="button" className="events__clear" onClick={() => setFilters(EMPTY_FILTERS)}>
+                    Limpar filtros
+                  </button>
+                )}
+              </div>
+            )}
             {/* Figma "Frame 519" (278:321): pasted poster + details, social row at the bottom */}
             {events.map((event) => {
-              const openDetails = HAS_DETAILS.has(event.id) ? () => navigate('event') : undefined
-              const ListPoster = openDetails ? 'button' : 'div'
-              const EventName = openDetails ? 'button' : 'span'
+              // Every event has its page now: "#/event/<id>"
+              const openDetails = () => navigate(eventPath(event.id))
               return (
                 <article className="event-item" key={event.id}>
-                  <ListPoster
+                  <button
                     className="poster poster--list"
-                    type={openDetails ? 'button' : undefined}
+                    type="button"
                     onClick={openDetails}
-                    aria-label={openDetails ? `Ver ${event.name}` : undefined}
+                    aria-label={`Ver ${event.title}`}
                   >
-                    <img className="poster__image" src={event.image} alt="" />
-                    {event.caption && (
-                      <>
-                        <p className="poster__title">{event.name}</p>
-                        <p className="poster__meta">{event.caption.place}</p>
-                        <p className="poster__meta">{event.caption.date}</p>
-                      </>
-                    )}
+                    <img className="poster__image" src={event.posterUrl} alt="" />
                     {/* Wrinkled paper on top: the poster looks pasted on a wall */}
                     <img className="poster__paste" src={pasteTexture} alt="" />
-                  </ListPoster>
+                  </button>
 
                   <div className="event-item__details">
                     <div className="event-item__info">
                       <div className="event-item__title-row">
                         <h3 className="event-item__name">
-                          <EventName
-                            className="event-item__name-link"
-                            type={openDetails ? 'button' : undefined}
-                            onClick={openDetails}
-                          >
-                            {event.name}
-                          </EventName>
+                          <button className="event-item__name-link" type="button" onClick={openDetails}>
+                            {event.title}
+                          </button>
                         </h3>
                         <SaveButton
                           size={20}
                           saved={saved.has(event.id)}
                           onToggle={() => toggleSaved(event.id)}
-                          label={`Salvar ${event.name}`}
+                          label={`Salvar ${event.title}`}
                         />
                       </div>
                       <p className="event-item__place">{event.place}</p>
-                      <p className="event-item__date">{event.date}</p>
+                      <p className="event-item__date">{event.dateLabel}</p>
                     </div>
 
                     <div className="event-item__footer">
                       <div className="event-item__price">
                         <p className="event-item__price-label">A partir de</p>
                         <p className="event-item__price-value">
-                          <Amount value={event.price} />
+                          <Amount value={event.priceFrom} />
                         </p>
                       </div>
                       <div className="event-item__social">
-                        <Attendees />
+                        <Attendees people={event.attendees} />
                         <button
                           type="button"
                           className="event-item__share"
                           onClick={() => shareEvent(event)}
-                          aria-label={`Compartilhar ${event.name}`}
+                          aria-label={`Compartilhar ${event.title}`}
                         >
                           <span className="event-item__share-icon" style={{ '--icon': `url("${shareIcon}")` }} />
                         </button>
@@ -190,6 +176,15 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
           </div>
         </div>
       </section>
+
+      {filtersOpen && (
+        <FilterSheet
+          filters={filters}
+          onApply={setFilters}
+          onClose={() => setFiltersOpen(false)}
+          count={(draft) => filterEvents(draft).length}
+        />
+      )}
     </main>
   )
 }

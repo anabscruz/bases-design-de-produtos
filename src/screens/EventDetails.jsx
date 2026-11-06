@@ -4,58 +4,56 @@ import Attendees from '../components/Attendees.jsx'
 import Icon from '../components/Icon.jsx'
 import PriceTag from '../components/PriceTag.jsx'
 import SaveButton from '../components/SaveButton.jsx'
-import hero from '../assets/images/event-rtm-hero.png'
+import { attendeesLabel, getEvent } from '../data/events.js'
 import '../components/Screen.css'
 import './EventDetails.css'
 
-const EVENT = {
-  name: 'RTM 2026',
-  place: 'Itaipava - RJ',
-  date: '2 de novembro · 14h',
-  price: '3.000',
-  description: [
-    'O Rock the Mountain é um festival de música e arte que acontece em Itaipava, Petrópolis, no estado do Rio de Janeiro. A proposta é simples: oferecer uma experiência única e de alto astral para um público especial, tendo como cenário as charmosas montanhas da serra fluminense!',
-    'Em meio à natureza, o RTM reúne juventude, modernidade, sustentabilidade, liberdade, estilo, diversão, gastronomia e — claro — MUITA música, em um dia que promete ser inesquecível!',
-  ],
-  attendees: 'Tom, Kim e outras pessoas vão',
-  venue: 'Parque de Exposições de Petrópolis',
-  address: 'Estr. União e Indústria, 10000 - Itaipava, Petrópolis - RJ',
-}
-
-const TICKET_OPTIONS = [
-  {
-    id: 'meia-entrada',
-    name: 'Meia Entrada',
-    rules:
-      'Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial).',
-  },
-  {
-    id: 'meia-solidaria',
-    name: 'Meia Solidária',
-    rules: 'Meia-entrada para quem doar 1kg de alimento não perecível na entrada do festival.',
-  },
-  {
-    id: 'meia-pcd',
-    name: 'Meia PCD',
-    rules: 'Pessoas com deficiência e um acompanhante (apresentar documento que comprove a deficiência).',
-  },
-  { id: 'inteira', name: 'Inteira', rules: 'Ingresso sem desconto, válido para todo o público.' },
-]
-
 const MAX_PER_OPTION = 10
 
-const mapQuery = encodeURIComponent(`${EVENT.venue}, ${EVENT.address}`)
-const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
-// Google Maps embed (no API key needed with output=embed)
-const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&z=14&output=embed`
+// Google Maps: search link + embed (no API key needed with output=embed)
+function mapUrls(event) {
+  const query = encodeURIComponent(`${event.venue}, ${event.address}`)
+  return {
+    link: `https://www.google.com/maps/search/?api=1&query=${query}`,
+    embed: `https://maps.google.com/maps?q=${query}&z=14&output=embed`,
+  }
+}
 
-/** Figma "Página evento" (233:98): opened from the RTM posters on Events. */
-export default function EventDetails({ navigate, onBack, balanceHidden, onToggleBalance }) {
+// Unknown id in the URL: say so and offer the way back
+function EventNotFound({ navigate, onBack, balanceHidden, onToggleBalance }) {
+  return (
+    <main className="screen screen--padded event-details event-details--missing">
+      <Header onBack={onBack} balanceHidden={balanceHidden} onToggleBalance={onToggleBalance} onMenu={() => navigate('menu')} />
+      <div className="event-details__missing">
+        <h1 className="section-title">Evento não encontrado</h1>
+        <p>Esse evento pode ter sido removido ou o link está incorreto.</p>
+        <button type="button" className="button-primary" onClick={() => navigate('events')}>
+          Ver todos os eventos
+        </button>
+      </div>
+    </main>
+  )
+}
+
+/**
+ * Figma "Página evento" (233:98), filled from src/data/events.json.
+ * The event comes from the URL: "#/event/placebo" → param "placebo".
+ */
+export default function EventDetails({ param, ...props }) {
+  // "#/event" without an id keeps opening RTM, the event the Figma page was drawn for
+  const event = getEvent(param ?? 'rtm')
+  if (!event) return <EventNotFound {...props} />
+  // key: a different event starts with fresh choices (quantities, open option)
+  return <EventPage key={event.id} event={event} {...props} />
+}
+
+function EventPage({ event, navigate, onBack, balanceHidden, onToggleBalance }) {
   const ticketsRef = useRef(null)
   const [saved, setSaved] = useState(false)
-  const [expanded, setExpanded] = useState('meia-entrada')
-  const [quantities, setQuantities] = useState({ 'meia-entrada': 0, 'meia-solidaria': 2, 'meia-pcd': 0, inteira: 0 })
+  const [expanded, setExpanded] = useState(event.tickets[0]?.id ?? null)
+  const [quantities, setQuantities] = useState(() => Object.fromEntries(event.tickets.map((ticket) => [ticket.id, 0])))
   const total = Object.values(quantities).reduce((sum, quantity) => sum + quantity, 0)
+  const map = mapUrls(event)
 
   const changeQuantity = (id, delta) =>
     setQuantities((current) => ({
@@ -64,7 +62,7 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
     }))
 
   const share = () => {
-    const data = { title: EVENT.name, text: `${EVENT.name} · ${EVENT.place}`, url: window.location.href }
+    const data = { title: event.title, text: `${event.title} · ${event.place}`, url: window.location.href }
     if (navigator.share) navigator.share(data).catch(() => {})
     else navigator.clipboard?.writeText(data.url).catch(() => {})
   }
@@ -72,7 +70,7 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
   return (
     <main className="screen event-details">
       <section className="event-hero">
-        <img className="event-hero__image" src={hero} alt="" />
+        <img className="event-hero__image" src={event.artistPhotoUrl} alt="" />
         <div className="event-hero__shade" aria-hidden="true" />
 
         <div className="event-hero__header screen__inset">
@@ -86,12 +84,12 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
         </div>
 
         <div className="event-hero__content">
-          <h1 className="event-hero__title">{EVENT.name}</h1>
+          <h1 className="event-hero__title">{event.title}</h1>
           <p className="event-hero__when">
-            {EVENT.place}
+            {event.place}
             <span aria-hidden="true">  ·  </span>
             <span className="visually-hidden">, </span>
-            {EVENT.date}
+            {event.dateLabel}
           </p>
           <div className="event-hero__ctas">
             <button
@@ -101,7 +99,7 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
             >
               Comprar
             </button>
-            <PriceTag value={EVENT.price} />
+            <PriceTag value={event.priceFrom} label="A partir de" />
             <SaveButton
               className="event-hero__icon-button"
               size={26}
@@ -117,28 +115,28 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
 
       <div className="event-details__content">
         <div className="event-details__description">
-          {EVENT.description.map((paragraph) => (
+          {event.description.map((paragraph) => (
             <p key={paragraph.slice(0, 20)}>{paragraph}</p>
           ))}
         </div>
 
         <div className="event-details__attendees">
-          <Attendees className="attendees--large" />
-          <p>{EVENT.attendees}</p>
+          <Attendees className="attendees--large" people={event.attendees} />
+          <p>{attendeesLabel(event.attendees)}</p>
         </div>
 
         <div className="event-map">
           <div className="event-map__frame">
             <iframe
-              src={mapEmbedUrl}
-              title={`Mapa: ${EVENT.venue}`}
+              src={map.embed}
+              title={`Mapa: ${event.venue}`}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-          <a className="event-map__address" href={mapsUrl} target="_blank" rel="noreferrer">
-            <span className="event-map__venue">{EVENT.venue}</span>
-            <span className="event-map__street">{EVENT.address}</span>
+          <a className="event-map__address" href={map.link} target="_blank" rel="noreferrer">
+            <span className="event-map__venue">{event.venue}</span>
+            <span className="event-map__street">{event.address}</span>
           </a>
         </div>
 
@@ -146,7 +144,7 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
           <h2 className="ticket-options__title" id="ticket-options-title">Ingressos</h2>
 
           <ul className="ticket-options__list">
-            {TICKET_OPTIONS.map((option) => {
+            {event.tickets.map((option) => {
               const isOpen = expanded === option.id
               const quantity = quantities[option.id]
               return (
@@ -158,19 +156,19 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
                     aria-expanded={isOpen}
                     aria-controls={`ticket-option-${option.id}`}
                   >
-                    <span className="ticket-option__name">{option.name}</span>
+                    <span className="ticket-option__name">{option.label}</span>
                     {quantity > 0 && (
                       <span className="ticket-option__count" aria-label={`${quantity} selecionados`}>
                         {quantity}
                       </span>
                     )}
-                    <PriceTag value={EVENT.price} />
+                    <PriceTag value={option.price} />
                   </button>
 
                   {isOpen && (
                     <div className="ticket-option__body" id={`ticket-option-${option.id}`}>
                       <p className="ticket-option__rules">{option.rules}</p>
-                      <div className="stepper" role="group" aria-label={`Quantidade: ${option.name}`}>
+                      <div className="stepper" role="group" aria-label={`Quantidade: ${option.label}`}>
                         <button
                           type="button"
                           className="stepper__button"
