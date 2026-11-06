@@ -36,7 +36,7 @@
   width: 100%;
   padding: 9px 23px;
   border-radius: 12px;
-  background: #fff;
+  background: var(--color-surface);
   font-weight: var(--fw-light);
   font-size: var(--fs-body-sm);
   line-height: var(--lh-control);

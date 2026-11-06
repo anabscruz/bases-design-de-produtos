@@ -16,7 +16,7 @@ const ITEMS = [
  * frosted layer, then the title, close button and items fade in one after
  * another; closing runs it backwards. Escape also closes (handled in App).
  */
-export default function Menu({ open, active, navigate, onClose }) {
+export default function Menu({ open, active, navigate, onClose, darkMode = false, onToggleDarkMode }) {
   return (
     <aside className={`menu${open ? ' menu--open' : ''}`} aria-label="Menu" aria-hidden={!open} inert={!open}>
       <div className="menu__top">
@@ -43,6 +43,22 @@ export default function Menu({ open, active, navigate, onClose }) {
           )
         })}
       </nav>
+
+      {/* Light switch: the thumb slides and the whole app changes colour */}
+      <button
+        type="button"
+        role="switch"
+        className="menu__theme"
+        style={{ '--i': ITEMS.length }}
+        aria-checked={darkMode}
+        onClick={onToggleDarkMode}
+      >
+        <Icon name={darkMode ? 'dark_mode' : 'light_mode'} size={24} />
+        <span className="menu__theme-label">Modo escuro</span>
+        <span className="switch" aria-hidden="true">
+          <span className="switch__thumb" />
+        </span>
+      </button>
     </aside>
   )
 }

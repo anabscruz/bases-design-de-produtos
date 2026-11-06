@@ -8,6 +8,7 @@ import Wallet from './screens/Wallet.jsx'
 import TicketDetails from './screens/TicketDetails.jsx'
 import EventDetails from './screens/EventDetails.jsx'
 import Notifications from './screens/Notifications.jsx'
+import { ThemeContext } from './theme.js'
 
 const SCREENS = { home: Home, events: Events, wallet: Wallet, ticket: TicketDetails, event: EventDetails, notifications: Notifications }
 
@@ -26,6 +27,19 @@ function transitionBetween(from, to) {
   return TAB_ORDER.indexOf(to) >= TAB_ORDER.indexOf(from) ? 'forward' : 'back'
 }
 
+const THEME_KEY = 'theme'
+
+// Saved choice first, then the device setting
+function initialTheme() {
+  try {
+    const saved = window.localStorage.getItem(THEME_KEY)
+    if (saved === 'light' || saved === 'dark') return saved
+  } catch {
+    // storage unavailable (private mode, blocked site data)
+  }
+  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
 function initialState() {
   const route = readRoute()
   // The Event page belongs to the Events tab
@@ -36,6 +50,7 @@ function initialState() {
 export default function App() {
   const [{ route, lastTab, transition, backTo }, setNav] = useState(initialState)
   const [balanceHidden, setBalanceHidden] = useState(false)
+  const [theme, setTheme] = useState(initialTheme)
   // The menu isn't a route: it's a full-screen layer over the current screen
   const [menuOpen, setMenuOpen] = useState(false)
   const goingBack = useRef(false)
@@ -66,6 +81,16 @@ export default function App() {
   }, [])
 
   useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#161616' : '#fcfafa')
+    try {
+      window.localStorage.setItem(THEME_KEY, theme)
+    } catch {
+      // storage unavailable: the choice just won't survive a reload
+    }
+  }, [theme])
+
+  useEffect(() => {
     if (!menuOpen) return undefined
     const onKeyDown = (event) => event.key === 'Escape' && setMenuOpen(false)
     window.addEventListener('keydown', onKeyDown)
@@ -92,23 +117,34 @@ export default function App() {
   }
 
   const Screen = SCREENS[route]
+  const darkMode = theme === 'dark'
+  const toggleDarkMode = () => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))
 
   return (
-    <PhoneFrame
-      screenKey={route}
-      transition={transition}
-      overlay={<FloatingMenu active={lastTab} hidden={menuOpen} navigate={navigate} />}
-      menu={
-        <Menu open={menuOpen} active={route} navigate={navigate} onClose={() => setMenuOpen(false)} />
-      }
-      menuOpen={menuOpen}
-    >
-      <Screen
-        navigate={navigate}
-        onBack={goBack}
-        balanceHidden={balanceHidden}
-        onToggleBalance={() => setBalanceHidden((hidden) => !hidden)}
-      />
-    </PhoneFrame>
+    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+      <PhoneFrame
+        screenKey={route}
+        transition={transition}
+        overlay={<FloatingMenu active={lastTab} hidden={menuOpen} navigate={navigate} />}
+        menu={
+          <Menu
+            open={menuOpen}
+            active={route}
+            navigate={navigate}
+            onClose={() => setMenuOpen(false)}
+            darkMode={darkMode}
+            onToggleDarkMode={toggleDarkMode}
+          />
+        }
+        menuOpen={menuOpen}
+      >
+        <Screen
+          navigate={navigate}
+          onBack={goBack}
+          balanceHidden={balanceHidden}
+          onToggleBalance={() => setBalanceHidden((hidden) => !hidden)}
+        />
+      </PhoneFrame>
+    </ThemeContext.Provider>
   )
 }

@@ -39,7 +39,7 @@
   gap: 10px;
   padding: 12px;
   border-radius: 8px;
-  background: #fff;
+  background: var(--color-surface);
 }
 
 /* 64px circle with a white ring around the (pre-cropped) photo */
@@ -47,7 +47,7 @@
   flex-shrink: 0;
   width: 64px;
   height: 64px;
-  border: 1px solid #fff;
+  border: 1px solid var(--color-surface);
   border-radius: 100px;
   overflow: hidden;
 }

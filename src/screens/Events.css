@@ -79,7 +79,7 @@
   min-height: 766px;
   margin-top: -10px;
   border-radius: 16px 16px 0 0;
-  background: #fff;
+  background: var(--color-surface);
 }
 
 /* Everything inside the sheet: its pinned header and the events list */
@@ -98,7 +98,7 @@
   gap: 32px;
   padding: 4px var(--screen-padding) 16px;
   border-radius: 16px 16px 0 0;
-  background: #fff;
+  background: var(--color-surface);
 }
 
 .events__handle {

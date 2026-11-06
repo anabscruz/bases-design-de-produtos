@@ -59,6 +59,24 @@
   color: var(--color-icon);
 }
 
+/* Theme toggle: the new icon spins in when the theme changes */
+.header__theme.is-switching .icon {
+  animation: theme-icon-in 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes theme-icon-in {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__theme.is-switching .icon {
+    animation: none;
+  }
+}
+
 /* Over a dark photo (Event hero) */
 .header--light .header__back,
 .header--light .header__actions button {

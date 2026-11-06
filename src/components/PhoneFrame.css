@@ -26,6 +26,7 @@
   z-index: 1;
   overflow: hidden;
   background: var(--color-bg);
+  transition: background-color 300ms ease;
 }
 
 .phone__viewport {

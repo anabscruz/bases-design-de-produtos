@@ -56,18 +56,21 @@ export default function TicketDetails({ navigate, onBack, balanceHidden, onToggl
 
       <div className="carousel carousel--bleed ticket-details__cards" ref={cardsRef} tabIndex={0} aria-label="Ingressos">
         {TICKETS.map((ticket) => (
+          // Figma "Ingresso" (266:1802): details card + separate barcode stub
           <article className="ticket-card" key={ticket.id}>
-            <h1 className="ticket-card__event">{ticket.event}</h1>
-            <dl className="ticket-card__fields">
-              <Field label="Titular" value={ticket.holder} wide />
-              <Field label="Data" value={ticket.date} />
-              <Field label="Horário" value={ticket.time} />
-              <Field label="Tipo de ingresso" value={ticket.type} />
-              <Field label="Nº do pedido" value={ticket.orderId} />
-              <Field label="Local" value={ticket.location} wide />
-            </dl>
+            <div className="ticket-card__main">
+              <h1 className="ticket-card__event">{ticket.event}</h1>
+              <dl className="ticket-card__fields">
+                <Field label="Titular" value={ticket.holder} wide />
+                <Field label="Data" value={ticket.date} />
+                <Field label="Horário" value={ticket.time} />
+                <Field label="Tipo de ingresso" value={ticket.type} />
+                <Field label="Nº do pedido" value={ticket.orderId} />
+                <Field label="Local" value={ticket.location} wide />
+              </dl>
+            </div>
             <div className="ticket-card__barcode">
-              <img src={barcode} width="298" height="124" alt={`Código de barras do pedido ${ticket.orderId}`} />
+              <img src={barcode} width="298" height="40" alt={`Código de barras do pedido ${ticket.orderId}`} />
             </div>
           </article>
         ))}

@@ -12,7 +12,7 @@
   height: 40px;
   margin-top: -20px;
   border-radius: 20px;
-  background-color: rgba(236, 236, 236, 0);
+  background-color: transparent;
   transition:
     width 450ms var(--search-ease),
     background-color 300ms ease;
@@ -20,7 +20,7 @@
 
 .expanding-search--open {
   width: calc(100% - var(--search-right, 0px));
-  background-color: #ececec;
+  background-color: var(--color-field);
 }
 
 .expanding-search__toggle {
