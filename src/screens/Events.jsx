@@ -5,15 +5,24 @@ import Attendees from '../components/Attendees.jsx'
 import Amount from '../components/Amount.jsx'
 import SaveButton from '../components/SaveButton.jsx'
 import Icon from '../components/Icon.jsx'
+import FeaturedSlider from '../components/FeaturedSlider.jsx'
 import rtmList from '../assets/images/poster-rtm-list.jpg'
 import afropunk from '../assets/images/poster-afropunk.jpg'
 import placeboTop from '../assets/images/events-top-placebo.png'
+import benHowardTop from '../assets/images/events-top-ben-howard.png'
+import placeboPoster from '../assets/images/poster-home-placebo.png'
 import benHoward from '../assets/images/poster-ben-howard.jpg'
 import pasteTexture from '../assets/images/poster-paste-texture.jpg'
 import shareIcon from '../assets/icons/share-external.svg'
 import '../components/Screen.css'
 import '../components/Poster.css'
 import './Events.css'
+
+// Featured slider at the top of the screen
+const FEATURED = [
+  { id: 'placebo', image: placeboTop, title: 'Placebo 30th Anniversary Tour', subtitle: '20 de fevereiro - São Paulo' },
+  { id: 'ben-howard', image: benHowardTop, title: 'Ben Howard South America Tour 2026', subtitle: '26 de setembro - São Paulo' },
+]
 
 // Events with a details page (Figma only has RTM's)
 const HAS_DETAILS = new Set(['rtm'])
@@ -25,6 +34,15 @@ function shareEvent(event) {
 }
 
 const ALL_EVENTS = [
+  // Same event as the featured photo above the sheet
+  {
+    id: 'placebo',
+    image: placeboPoster,
+    name: 'Placebo',
+    place: 'São Paulo - SP',
+    date: '20 de fevereiro',
+    price: '3.000',
+  },
   {
     id: 'ben-howard',
     image: benHoward,
@@ -69,14 +87,8 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
       <div className="events__backdrop">
         <section className="events__top">
           <h2 className="visually-hidden">Em alta</h2>
-          {/* Featured event: photo with a dark fade from the top so the title reads */}
-          <div className="events__top-media">
-            <img className="events__top-image" src={placeboTop} alt="" />
-            <div className="events__top-caption">
-              <h3 className="events__top-title">Placebo 30th Anniversary Tour</h3>
-              <p className="events__top-subtitle">20 de fevereiro - São Paulo</p>
-            </div>
-          </div>
+          {/* Full-width featured slider with a staggered curtains wipe */}
+          <FeaturedSlider slides={FEATURED} />
         </section>
       </div>
 
