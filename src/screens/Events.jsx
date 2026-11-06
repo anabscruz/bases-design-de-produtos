@@ -5,40 +5,15 @@ import Attendees from '../components/Attendees.jsx'
 import Amount from '../components/Amount.jsx'
 import SaveButton from '../components/SaveButton.jsx'
 import Icon from '../components/Icon.jsx'
-import lollapalooza from '../assets/images/poster-lollapalooza.jpg'
-import coachella from '../assets/images/poster-coachella.jpg'
-import rtm from '../assets/images/poster-rtm.jpg'
 import rtmList from '../assets/images/poster-rtm-list.jpg'
-import artrio from '../assets/images/poster-artrio.jpg'
 import afropunk from '../assets/images/poster-afropunk.jpg'
-import boleBlue from '../assets/images/poster-bole-blue.jpg'
-import bolePink from '../assets/images/poster-bole-pink.jpg'
-import gramado from '../assets/images/poster-gramado.jpg'
-import festivalDoRio from '../assets/images/poster-festival-do-rio.jpg'
-import parintins from '../assets/images/poster-parintins.jpg'
-import viradaCultural from '../assets/images/poster-virada-cultural.jpg'
-import partyPhoto from '../assets/images/party-photo-grid.jpg'
+import placeboTop from '../assets/images/events-top-placebo.png'
 import benHoward from '../assets/images/poster-ben-howard.jpg'
 import pasteTexture from '../assets/images/poster-paste-texture.jpg'
 import shareIcon from '../assets/icons/share-external.svg'
 import '../components/Screen.css'
 import '../components/Poster.css'
 import './Events.css'
-
-const TOP_EVENTS = [
-  { id: 'lollapalooza', image: lollapalooza, name: 'Lollapalooza' },
-  { id: 'coachella', image: coachella, name: 'Coachella' },
-  { id: 'rtm', image: rtm, name: 'RTM 2026' },
-  { id: 'artrio', image: artrio, name: 'ArtRio 26' },
-  { id: 'afropunk', image: afropunk, name: 'Afropunk' },
-  { id: 'bole', image: boleBlue, name: 'Bole Festival 2022', place: 'Port Harcourt', info: '2 nov' },
-  { id: 'gramado', image: gramado, name: 'Festival de Cinema de Gramado' },
-  { id: 'bole-pink', image: bolePink, name: 'Bole Festival 2022', place: 'Port Harcourt', info: 'R$ 3.000' },
-  { id: 'festival-do-rio', image: festivalDoRio, name: 'Festival do Rio' },
-  { id: 'parintins', image: parintins, name: 'Festival de Parintins' },
-  { id: 'party', image: partyPhoto, name: 'Bole Festival' },
-  { id: 'virada', image: viradaCultural, name: 'Virada Cultural' },
-]
 
 // Events with a details page (Figma only has RTM's)
 const HAS_DETAILS = new Set(['rtm'])
@@ -93,30 +68,14 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
       {/* Poster wall stays put while "All Events" scrolls over it */}
       <div className="events__backdrop">
         <section className="events__top">
-          <h2 className="section-title screen__inset">Em alta</h2>
-          <div className="events__grid">
-            {TOP_EVENTS.map((event) => {
-              const opensDetails = HAS_DETAILS.has(event.id)
-              const Tile = opensDetails ? 'button' : 'article'
-              return (
-                <Tile
-                  className="poster poster--tile"
-                  key={event.id}
-                  aria-label={event.name}
-                  type={opensDetails ? 'button' : undefined}
-                  onClick={opensDetails ? () => navigate('event') : undefined}
-                >
-                  <img className="poster__image" src={event.image} alt="" />
-                  {event.place && (
-                    <div className="poster__caption">
-                      <p className="poster__title">{event.name}</p>
-                      <p className="poster__meta">{event.place}</p>
-                      <p className="poster__meta">{event.info}</p>
-                    </div>
-                  )}
-                </Tile>
-              )
-            })}
+          <h2 className="visually-hidden">Em alta</h2>
+          {/* Featured event: photo with a dark fade from the top so the title reads */}
+          <div className="events__top-media">
+            <img className="events__top-image" src={placeboTop} alt="" />
+            <div className="events__top-caption">
+              <h3 className="events__top-title">Placebo 30th Anniversary Tour</h3>
+              <p className="events__top-subtitle">20 de fevereiro - São Paulo</p>
+            </div>
           </div>
         </section>
       </div>

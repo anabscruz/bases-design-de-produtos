@@ -54,18 +54,6 @@
   border-radius: 0;
 }
 
-/* Events → Top Events grid tile */
-.poster--tile {
-  height: 140px;
-  padding: 16px 0 12px;
-  justify-content: flex-start;
-}
-
-.poster--tile .poster__title {
-  font-size: var(--fs-body);
-  letter-spacing: var(--tracking-tight);
-}
-
 /* Events → All Events list */
 .poster--list {
   width: 117px;

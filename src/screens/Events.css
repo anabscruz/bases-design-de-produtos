@@ -6,7 +6,7 @@
  * Everything is plain CSS (sticky positioning), so it stays in sync with the scroll.
  */
 .screen.events {
-  --sheet-stop: calc(var(--header-height) + 16px); /* header + 16 */
+  --sheet-stop: var(--header-height); /* flush under the header */
   gap: 0;
   padding-top: 0;
 }
@@ -21,33 +21,11 @@
   background: var(--color-bg);
 }
 
-/* Concave corners under the band: they round the sheet's top once it stops */
-.events__header-band::before,
-.events__header-band::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  width: 16px;
-  height: 16px;
-  pointer-events: none;
-}
-
-.events__header-band::before {
-  left: 0;
-  background: radial-gradient(circle at 100% 100%, transparent 15.5px, var(--color-bg) 16px);
-}
-
-.events__header-band::after {
-  right: 0;
-  background: radial-gradient(circle at 0 100%, transparent 15.5px, var(--color-bg) 16px);
-}
-
 .events__backdrop {
   position: sticky;
-  top: calc(var(--sheet-stop) + 16px);
+  top: var(--sheet-stop);
   z-index: 0;
   width: 100%;
-  margin-top: 16px;
 }
 
 .events__top {
@@ -61,10 +39,65 @@
   margin: 0;
 }
 
-.events__grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+/* Top area: one photo filling the whole width and height (same 420px the poster grid had) */
+.events__top-media {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  /* Fixed colours: it sits on a photo, so it doesn't follow the theme */
+  color: #fff;
+}
+
+.events__top-image {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Dark shade from the top, fading out by the middle of the photo */
+.events__top-media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.55) 30%,
+    rgba(0, 0, 0, 0) 60%
+  );
+  pointer-events: none;
+}
+
+.events__top-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px var(--screen-padding);
+}
+
+.events__top-caption h3 {
+  margin: 0;
+}
+
+.events__top-title {
+  font-family: var(--font-neue);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-display);
+  line-height: var(--lh-tight);
+  color: var(--color-accent);
+}
+
+.events__top-subtitle {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
 }
 
 /*
