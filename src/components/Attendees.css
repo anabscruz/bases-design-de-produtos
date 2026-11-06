@@ -23,34 +23,6 @@
   border-radius: 50%;
 }
 
-/* Home "Top Event" poster: avatars are scattered at fixed offsets */
-.attendees--scattered {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 32px;
-}
-
-.attendees--scattered .attendees__item {
-  position: absolute;
-  margin: 0;
-}
-
-.attendees--scattered .attendees__item:nth-child(1) {
-  left: 90px;
-  top: 6px;
-}
-
-.attendees--scattered .attendees__item:nth-child(2) {
-  left: 114px;
-  top: -3px;
-}
-
-.attendees--scattered .attendees__item:nth-child(3) {
-  left: 142px;
-  top: 7px;
-}
-
 /* Event details: 32px circles */
 .attendees--large .attendees__item {
   width: 32px;

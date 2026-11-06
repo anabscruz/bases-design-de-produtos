@@ -8,18 +8,31 @@
   margin: 0;
 }
 
+/* Home section titles: big Neue Montreal display type */
+.home__title {
+  font-family: var(--font-neue);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-tight);
+  letter-spacing: normal;
+}
+
 .home__top-title {
-  flex: 1;
   text-align: left;
 }
 
+/* Arrow right after the word, as in the reference print */
 .home__see-all {
   display: flex;
+  justify-content: flex-start;
+  /* The SVG's bottom edge lands on the text baseline */
+  align-items: baseline;
+  gap: 8px;
 }
 
-/* Pull the glyph flush with the right edge, like the design's 12px chevron */
-.home__chevron {
-  margin-right: -10px;
+/* North-east arrow: "go out to" the full Events list */
+.home__arrow {
+  flex-shrink: 0;
   color: var(--color-icon);
 }
 
@@ -31,8 +44,15 @@
   gap: 10px;
 }
 
+/* Posters side by side with no gap, like a wall of pasted bills */
 .home__posters {
-  gap: 16px;
+  gap: 0;
+  /* Full bleed: the first poster starts flush with the screen's left edge */
+  width: calc(100% + var(--screen-padding) * 2);
+  margin-left: calc(var(--screen-padding) * -1);
+  margin-right: calc(var(--screen-padding) * -1);
+  padding-left: 0;
+  padding-right: 0;
   /* room for the poster drop shadow inside the scroll container */
   padding-bottom: 20px;
   margin-bottom: -20px;

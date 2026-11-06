@@ -1,9 +1,8 @@
 import Header from '../components/Header.jsx'
 import Ticket from '../components/Ticket.jsx'
-import Attendees from '../components/Attendees.jsx'
-import Icon from '../components/Icon.jsx'
-import boleBlue from '../assets/images/poster-bole-blue.jpg'
-import partyPhoto from '../assets/images/party-photo.jpg'
+import benHoward from '../assets/images/poster-home-ben-howard.png'
+import placebo from '../assets/images/poster-home-placebo.png'
+import cabaretVoltaire from '../assets/images/poster-home-cabaret-voltaire.png'
 import '../components/Screen.css'
 import '../components/Poster.css'
 import './Home.css'
@@ -11,6 +10,25 @@ import './Home.css'
 const UPCOMING = [
   { id: 1, title: 'Show do Omah Lay', date: '20 mar', time: '21h' },
   { id: 2, title: 'Show do Omah Lay', date: '20 mar', time: '21h' },
+]
+
+// "Em alta" posters: the artwork already carries the event's name, place and date
+const TOP_POSTERS = [
+  {
+    id: 'ben-howard',
+    image: benHoward,
+    alt: 'Ben Howard, South America Tour 2026: Audio, São Paulo, 26/09',
+  },
+  {
+    id: 'placebo',
+    image: placebo,
+    alt: 'Placebo, 30th Anniversary Tour: São Paulo 20/02/27, Brasília 23/02/27, Curitiba 26/02/27, Porto Alegre 28/02/27',
+  },
+  {
+    id: 'cabaret-voltaire',
+    image: cabaretVoltaire,
+    alt: 'Cabaret Voltaire, Final Tour: sábado, 06/03/2027, Cine Joia, São Paulo',
+  },
 ]
 
 export default function Home({ navigate, balanceHidden, onToggleBalance }) {
@@ -28,45 +46,39 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
       </div>
 
       <section className="screen__section home__section">
-        <h2 className="section-title">Próximos eventos</h2>
-        <div className="carousel home__tickets">
-          {UPCOMING.map((event) => (
-            <Ticket key={event.id} title={event.title} date={event.date} time={event.time} onOpen={() => navigate('ticket')} />
-          ))}
-        </div>
-      </section>
-
-      <section className="screen__section home__section">
-        {/* The whole row (title + chevron) opens the Events screen */}
+        {/* The whole row (title + arrow) opens the Events screen */}
         <h2 className="home__top-heading">
           <button type="button" className="section-header home__see-all" onClick={() => navigate('events')}>
-            <span className="section-title home__top-title">Em alta</span>
-            <Icon name="chevron_right" size={32} className="home__chevron" />
+            <span className="section-title home__title home__top-title">Trending</span>
+            {/* Drawn edge to edge (no glyph padding) so it can sit on the text baseline */}
+            <svg className="home__arrow" width="32" height="32" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M1.6 22.4 22.4 1.6M6 1.6h16.4V18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="3.2"
+                strokeLinejoin="miter"
+              />
+            </svg>
             <span className="visually-hidden">: ver todos os eventos</span>
           </button>
         </h2>
 
         <div className="carousel home__posters">
-          <article className="poster poster--featured">
-            <img className="poster__image" src={boleBlue} alt="" />
-            <Attendees className="attendees--scattered" />
-            <div className="poster__caption">
-              <p className="poster__title">Bole Festival 2022</p>
-              <p className="poster__meta">Port Harcourt</p>
-              <p className="poster__meta">R$ 3.000</p>
-            </div>
-          </article>
+          {TOP_POSTERS.map((poster) => (
+            <article className="poster poster--featured" key={poster.id}>
+              <img className="poster__image" src={poster.image} alt={poster.alt} />
+            </article>
+          ))}
+        </div>
+      </section>
 
-          <article className="poster poster--featured poster--photo">
-            <img className="poster__image" src={partyPhoto} alt="" />
-            <p className="poster__photo-title">
-              BoleFestival
-              <br />
-              2022
-            </p>
-            <p className="poster__photo-meta" style={{ top: 192.5 }}>Port Harcourt</p>
-            <p className="poster__photo-meta" style={{ top: 222 }}>R$ 3.000</p>
-          </article>
+      <section className="screen__section home__section">
+        <h2 className="section-title home__title">Seus ingressos</h2>
+        <div className="carousel home__tickets">
+          {UPCOMING.map((event) => (
+            <Ticket key={event.id} title={event.title} date={event.date} time={event.time} onOpen={() => navigate('ticket')} />
+          ))}
         </div>
       </section>
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Header from '../components/Header.jsx'
 import ExpandingSearch from '../components/ExpandingSearch.jsx'
 import Attendees from '../components/Attendees.jsx'
-import PriceTag from '../components/PriceTag.jsx'
+import Amount from '../components/Amount.jsx'
 import SaveButton from '../components/SaveButton.jsx'
 import Icon from '../components/Icon.jsx'
 import lollapalooza from '../assets/images/poster-lollapalooza.jpg'
@@ -18,6 +18,9 @@ import festivalDoRio from '../assets/images/poster-festival-do-rio.jpg'
 import parintins from '../assets/images/poster-parintins.jpg'
 import viradaCultural from '../assets/images/poster-virada-cultural.jpg'
 import partyPhoto from '../assets/images/party-photo-grid.jpg'
+import benHoward from '../assets/images/poster-ben-howard.jpg'
+import pasteTexture from '../assets/images/poster-paste-texture.jpg'
+import shareIcon from '../assets/icons/share-external.svg'
 import '../components/Screen.css'
 import '../components/Poster.css'
 import './Events.css'
@@ -40,18 +43,23 @@ const TOP_EVENTS = [
 // Events with a details page (Figma only has RTM's)
 const HAS_DETAILS = new Set(['rtm'])
 
+function shareEvent(event) {
+  const data = { title: event.name, text: `${event.name} · ${event.place} · ${event.date}`, url: window.location.href }
+  if (navigator.share) navigator.share(data).catch(() => {})
+  else navigator.clipboard?.writeText(`${data.text} ${data.url}`).catch(() => {})
+}
+
 const ALL_EVENTS = [
   {
-    id: 'bole',
-    image: boleBlue,
-    name: 'Bole Festival 2026',
-    caption: { place: 'Port Harcourt', date: '28/10' },
-    address: '@ Port Harcourt',
-    date: '28 de outubro · 21h',
+    id: 'ben-howard',
+    image: benHoward,
+    name: 'Ben Howard',
+    place: 'Audio - São Paulo',
+    date: '26 de setembro - 21h',
     price: '3.000',
   },
-  { id: 'rtm', image: rtmList, name: 'RTM 2026', address: '@ Itaipava - RJ', date: '2 de novembro · 14h', price: '3.000' },
-  { id: 'afropunk', image: afropunk, name: 'Afropunk', address: '@ Salvador - BA', date: '2 de novembro · 14h', price: '3.000' },
+  { id: 'rtm', image: rtmList, name: 'RTM 2026', place: 'Itaipava - RJ', date: '2 de novembro · 14h', price: '3.000' },
+  { id: 'afropunk', image: afropunk, name: 'Afropunk', place: 'Salvador - BA', date: '2 de novembro · 14h', price: '3.000' },
 ]
 
 export default function Events({ navigate, balanceHidden, onToggleBalance }) {
@@ -66,7 +74,7 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
     })
   const term = query.trim().toLowerCase()
   const events = term
-    ? ALL_EVENTS.filter((event) => `${event.name} ${event.address}`.toLowerCase().includes(term))
+    ? ALL_EVENTS.filter((event) => `${event.name} ${event.place}`.toLowerCase().includes(term))
     : ALL_EVENTS
 
   return (
@@ -136,9 +144,11 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
 
           <div className="events__list">
             {events.length === 0 && <p className="events__empty">Nenhum evento encontrado para “{query.trim()}”</p>}
+            {/* Figma "Frame 519" (278:321): pasted poster + details, social row at the bottom */}
             {events.map((event) => {
               const openDetails = HAS_DETAILS.has(event.id) ? () => navigate('event') : undefined
               const ListPoster = openDetails ? 'button' : 'div'
+              const EventName = openDetails ? 'button' : 'span'
               return (
                 <article className="event-item" key={event.id}>
                   <ListPoster
@@ -155,26 +165,51 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
                         <p className="poster__meta">{event.caption.date}</p>
                       </>
                     )}
+                    {/* Wrinkled paper on top: the poster looks pasted on a wall */}
+                    <img className="poster__paste" src={pasteTexture} alt="" />
                   </ListPoster>
 
                   <div className="event-item__details">
-                    <h3 className="event-item__name">{event.name}</h3>
-                    <div className="event-item__when">
-                      <p>{event.address}</p>
-                      <p>{event.date}</p>
+                    <div className="event-item__info">
+                      <div className="event-item__title-row">
+                        <h3 className="event-item__name">
+                          <EventName
+                            className="event-item__name-link"
+                            type={openDetails ? 'button' : undefined}
+                            onClick={openDetails}
+                          >
+                            {event.name}
+                          </EventName>
+                        </h3>
+                        <SaveButton
+                          size={20}
+                          saved={saved.has(event.id)}
+                          onToggle={() => toggleSaved(event.id)}
+                          label={`Salvar ${event.name}`}
+                        />
+                      </div>
+                      <p className="event-item__place">{event.place}</p>
+                      <p className="event-item__date">{event.date}</p>
                     </div>
-                    <Attendees />
-                    <PriceTag value={event.price} />
-                    {/* Comprar is the primary action (filled purple); saving is a secondary heart toggle */}
-                    <div className="event-item__ctas">
-                      <button type="button" className="button-primary" onClick={openDetails}>
-                        Comprar
-                      </button>
-                      <SaveButton
-                        saved={saved.has(event.id)}
-                        onToggle={() => toggleSaved(event.id)}
-                        label={`Salvar ${event.name}`}
-                      />
+
+                    <div className="event-item__footer">
+                      <div className="event-item__price">
+                        <p className="event-item__price-label">A partir de</p>
+                        <p className="event-item__price-value">
+                          <Amount value={event.price} />
+                        </p>
+                      </div>
+                      <div className="event-item__social">
+                        <Attendees />
+                        <button
+                          type="button"
+                          className="event-item__share"
+                          onClick={() => shareEvent(event)}
+                          aria-label={`Compartilhar ${event.name}`}
+                        >
+                          <span className="event-item__share-icon" style={{ '--icon': `url("${shareIcon}")` }} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </article>
