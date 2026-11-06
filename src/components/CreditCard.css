@@ -16,7 +16,7 @@
   background: var(--color-nubank);
   color: #fff;
   overflow: hidden;
-  font-weight: 300;
+  font-weight: var(--fw-light);
   line-height: 20px;
   text-align: left;
   white-space: nowrap;
@@ -64,18 +64,18 @@
 }
 
 .credit-card__number {
-  font-size: 14px;
-  letter-spacing: 0.42px;
+  font-size: var(--fs-body-sm);
+  letter-spacing: var(--tracking);
 }
 
 .credit-card__name {
-  font-size: 16px;
-  letter-spacing: 0.48px;
+  font-size: var(--fs-body);
+  letter-spacing: var(--tracking);
 }
 
 .credit-card__small {
-  font-size: 12px;
-  letter-spacing: 0.36px;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking);
 }
 
 /* Number on the top strip (collapsed) ↔ number under the name (expanded) */

@@ -10,8 +10,8 @@ const TICKETS = [
     id: 1,
     event: 'Lollapalooza 2027',
     holder: 'Clinton Elvis',
-    date: 'Mar 19, 2027',
-    time: '2PM',
+    date: '19 mar. 2027',
+    time: '14h',
     type: 'Lounge',
     orderId: '872847829',
     location: 'Autódromo de Interlagos - SP',
@@ -20,15 +20,15 @@ const TICKETS = [
     id: 2,
     event: 'Lollapalooza 2027',
     holder: 'Clinton Elvis',
-    date: 'Mar 19, 2027',
-    time: '2PM',
+    date: '19 mar. 2027',
+    time: '14h',
     type: 'Lounge',
     orderId: '872847829',
     location: 'Autódromo de Interlagos - SP',
   },
 ]
 
-const RULES = ['ID document required', 'Objects not allowed in the festival: can, umbrella, gun']
+const RULES = ['Obrigatório apresentar documento com foto', 'Objetos proibidos no festival: latas, guarda-chuvas e armas']
 
 function Field({ label, value, wide = false }) {
   return (
@@ -59,12 +59,12 @@ export default function TicketDetails({ navigate, onBack, balanceHidden, onToggl
           <article className="ticket-card" key={ticket.id}>
             <h1 className="ticket-card__event">{ticket.event}</h1>
             <dl className="ticket-card__fields">
-              <Field label="Ticket holder" value={ticket.holder} wide />
-              <Field label="Date" value={ticket.date} />
-              <Field label="Time" value={ticket.time} />
-              <Field label="Ticket type" value={ticket.type} />
-              <Field label="Order ID" value={ticket.orderId} />
-              <Field label="Location" value={ticket.location} wide />
+              <Field label="Titular" value={ticket.holder} wide />
+              <Field label="Data" value={ticket.date} />
+              <Field label="Horário" value={ticket.time} />
+              <Field label="Tipo de ingresso" value={ticket.type} />
+              <Field label="Nº do pedido" value={ticket.orderId} />
+              <Field label="Local" value={ticket.location} wide />
             </dl>
             <div className="ticket-card__barcode">
               <img src={barcode} width="298" height="124" alt={`Código de barras do pedido ${ticket.orderId}`} />
@@ -74,7 +74,7 @@ export default function TicketDetails({ navigate, onBack, balanceHidden, onToggl
       </div>
 
       <section className="screen__section ticket-details__rules">
-        <h2 className="section-title">Rules</h2>
+        <h2 className="section-title">Regras</h2>
         <ul>
           {RULES.map((rule) => (
             <li key={rule}>{rule}</li>

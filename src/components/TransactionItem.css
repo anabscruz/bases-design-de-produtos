@@ -75,24 +75,24 @@
 }
 
 .transaction__title {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
 }
 
 .transaction__date {
-  font-size: 16px;
+  font-size: var(--fs-body);
   color: var(--color-text-secondary);
 }
 
 .transaction__source {
-  font-size: 16px;
+  font-size: var(--fs-body);
   color: var(--color-text-tertiary);
 }
 
 .transaction__amount {
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 20px;
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-heading);
 }
 
 .transaction__amount--debit {

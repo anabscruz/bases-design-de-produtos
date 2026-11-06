@@ -15,6 +15,6 @@
 }
 
 .balance-pill__value {
-  font-size: 16px;
+  font-size: var(--fs-body);
   line-height: 20px;
 }

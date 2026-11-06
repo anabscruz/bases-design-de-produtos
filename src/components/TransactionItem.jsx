@@ -15,7 +15,7 @@ export default function TransactionItem({ title, date, source, amount, type, hid
             </div>
           </div>
           <p className={`transaction__amount transaction__amount--${type}`}>
-            <Amount prefix={type === 'credit' ? '+ ' : '- '} value={` ${amount}`} separator="" hidden={hidden} />
+            <Amount prefix={type === 'credit' ? '+ ' : '- '} value={amount} hidden={hidden} />
           </p>
         </div>
       </div>

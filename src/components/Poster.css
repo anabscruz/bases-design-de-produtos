@@ -34,16 +34,16 @@
 
 .poster__title {
   font-family: var(--font-poppins);
-  font-weight: 800;
-  font-size: 24px;
+  font-weight: var(--fw-black);
+  font-size: var(--fs-headline);
   line-height: 1;
-  letter-spacing: -0.96px;
+  letter-spacing: var(--tracking-tight);
   text-transform: uppercase;
 }
 
 .poster__meta {
-  font-size: 12px;
-  letter-spacing: 0.36px;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking);
   white-space: nowrap;
 }
 
@@ -70,19 +70,19 @@
   top: 152px;
   width: 157.43px;
   font-family: var(--font-poppins);
-  font-weight: 800;
-  font-size: 16px;
+  font-weight: var(--fw-black);
+  font-size: var(--fs-body);
   line-height: 20px;
-  letter-spacing: 0.48px;
+  letter-spacing: var(--tracking);
 }
 
 .poster--photo .poster__photo-meta {
   position: absolute;
   left: 12px;
   width: 125px;
-  font-family: var(--font-karla);
-  font-size: 12px;
-  letter-spacing: 0.36px;
+  font-family: var(--font-dm);
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking);
 }
 
 /* Events → Top Events grid tile */
@@ -93,8 +93,8 @@
 }
 
 .poster--tile .poster__title {
-  font-size: 16px;
-  letter-spacing: -0.64px;
+  font-size: var(--fs-body);
+  letter-spacing: var(--tracking-tight);
 }
 
 /* Events → All Events list */

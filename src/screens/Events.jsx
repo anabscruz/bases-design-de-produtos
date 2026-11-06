@@ -2,7 +2,8 @@ import { useState } from 'react'
 import Header from '../components/Header.jsx'
 import ExpandingSearch from '../components/ExpandingSearch.jsx'
 import Attendees from '../components/Attendees.jsx'
-import PricePill from '../components/PricePill.jsx'
+import PriceTag from '../components/PriceTag.jsx'
+import SaveButton from '../components/SaveButton.jsx'
 import Icon from '../components/Icon.jsx'
 import lollapalooza from '../assets/images/poster-lollapalooza.jpg'
 import coachella from '../assets/images/poster-coachella.jpg'
@@ -27,9 +28,9 @@ const TOP_EVENTS = [
   { id: 'rtm', image: rtm, name: 'RTM 2026' },
   { id: 'artrio', image: artrio, name: 'ArtRio 26' },
   { id: 'afropunk', image: afropunk, name: 'Afropunk' },
-  { id: 'bole', image: boleBlue, name: 'Bole Festival 2022', place: 'Part Harcourt', info: 'Nov 2nd' },
+  { id: 'bole', image: boleBlue, name: 'Bole Festival 2022', place: 'Port Harcourt', info: '2 nov' },
   { id: 'gramado', image: gramado, name: 'Festival de Cinema de Gramado' },
-  { id: 'bole-pink', image: bolePink, name: 'Bole Festival 2022', place: 'Part Harcourt', info: 'N3,000' },
+  { id: 'bole-pink', image: bolePink, name: 'Bole Festival 2022', place: 'Port Harcourt', info: 'R$ 3.000' },
   { id: 'festival-do-rio', image: festivalDoRio, name: 'Festival do Rio' },
   { id: 'parintins', image: parintins, name: 'Festival de Parintins' },
   { id: 'party', image: partyPhoto, name: 'Bole Festival' },
@@ -44,18 +45,25 @@ const ALL_EVENTS = [
     id: 'bole',
     image: boleBlue,
     name: 'Bole Festival 2026',
-    caption: { place: 'Part Harcourt', date: '10/28' },
-    address: '@ Part Harcourt',
-    date: 'October 28th - 9PM',
-    price: '3,000',
+    caption: { place: 'Port Harcourt', date: '28/10' },
+    address: '@ Port Harcourt',
+    date: '28 de outubro · 21h',
+    price: '3.000',
   },
-  { id: 'rtm', image: rtmList, name: 'RTM 2026', address: '@ Itaipava - RJ', date: 'November 2nd - 2PM', price: '3,000' },
-  { id: 'afropunk', image: afropunk, name: 'Afropunk', address: '@ Salvador - BA', date: 'November 2nd - 2PM', price: '3,000' },
+  { id: 'rtm', image: rtmList, name: 'RTM 2026', address: '@ Itaipava - RJ', date: '2 de novembro · 14h', price: '3.000' },
+  { id: 'afropunk', image: afropunk, name: 'Afropunk', address: '@ Salvador - BA', date: '2 de novembro · 14h', price: '3.000' },
 ]
 
 export default function Events({ navigate, balanceHidden, onToggleBalance }) {
   const [searchOpen, setSearchOpen] = useState(false)
   const [query, setQuery] = useState('')
+  const [saved, setSaved] = useState(() => new Set())
+  const toggleSaved = (id) =>
+    setSaved((current) => {
+      const next = new Set(current)
+      if (!next.delete(id)) next.add(id)
+      return next
+    })
   const term = query.trim().toLowerCase()
   const events = term
     ? ALL_EVENTS.filter((event) => `${event.name} ${event.address}`.toLowerCase().includes(term))
@@ -77,7 +85,7 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
       {/* Poster wall stays put while "All Events" scrolls over it */}
       <div className="events__backdrop">
         <section className="events__top">
-          <h2 className="section-title screen__inset">Top Events</h2>
+          <h2 className="section-title screen__inset">Em alta</h2>
           <div className="events__grid">
             {TOP_EVENTS.map((event) => {
               const opensDetails = HAS_DETAILS.has(event.id)
@@ -112,7 +120,7 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
             <div className="events__handle" aria-hidden="true" />
 
             <div className={`section-header events__section-header${searchOpen ? ' is-searching' : ''}`}>
-              <h2 className="section-title events__section-title">All Events</h2>
+              <h2 className="section-title events__section-title">Todos os eventos</h2>
               <ExpandingSearch
                 open={searchOpen}
                 onOpenChange={setSearchOpen}
@@ -127,7 +135,7 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
           </div>
 
           <div className="events__list">
-            {events.length === 0 && <p className="events__empty">No events found for “{query.trim()}”</p>}
+            {events.length === 0 && <p className="events__empty">Nenhum evento encontrado para “{query.trim()}”</p>}
             {events.map((event) => {
               const openDetails = HAS_DETAILS.has(event.id) ? () => navigate('event') : undefined
               const ListPoster = openDetails ? 'button' : 'div'
@@ -156,12 +164,17 @@ export default function Events({ navigate, balanceHidden, onToggleBalance }) {
                       <p>{event.date}</p>
                     </div>
                     <Attendees />
-                    <PricePill value={event.price} />
+                    <PriceTag value={event.price} />
+                    {/* Comprar is the primary action (filled purple); saving is a secondary heart toggle */}
                     <div className="event-item__ctas">
-                      <button type="button" className="outline-pill" onClick={openDetails}>
-                        Order
+                      <button type="button" className="button-primary" onClick={openDetails}>
+                        Comprar
                       </button>
-                      <button type="button" className="outline-pill">Save</button>
+                      <SaveButton
+                        saved={saved.has(event.id)}
+                        onToggle={() => toggleSaved(event.id)}
+                        label={`Salvar ${event.name}`}
+                      />
                     </div>
                   </div>
                 </article>

@@ -59,7 +59,6 @@
 .events__top h2,
 .events__sheet h2 {
   margin: 0;
-  font-weight: 400;
 }
 
 .events__grid {
@@ -140,7 +139,7 @@
 
 .events__empty {
   padding: 24px 0;
-  font-size: 14px;
+  font-size: var(--fs-body-sm);
   color: var(--color-text-tertiary);
 }
 
@@ -172,37 +171,25 @@
   margin: 0;
   max-width: 187px;
   font-family: var(--font-poppins);
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 20px;
-  letter-spacing: 0.72px;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-headline);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
 }
 
 .event-item__when {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: 12px;
-  letter-spacing: 0.36px;
+  font-size: var(--fs-caption);
+  letter-spacing: var(--tracking);
   white-space: nowrap;
 }
 
 .event-item__ctas {
   display: flex;
-  gap: 8px;
-}
-
-.outline-pill {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 3px 10px;
-  border: 1px solid #000;
-  border-radius: 50px;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.42px;
-  white-space: nowrap;
+  gap: 12px;
 }
 
 /* The sheet runs to the bottom of the screen; the tab bar floats over it */

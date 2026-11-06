@@ -9,7 +9,7 @@ import './ExpandingSearch.css'
  * the parent hides whatever the field grows over (e.g. the section title).
  * It closes on Escape, or when it loses focus while empty.
  */
-export default function ExpandingSearch({ open, onOpenChange, value, onChange, placeholder = 'search', label }) {
+export default function ExpandingSearch({ open, onOpenChange, value, onChange, placeholder = 'buscar', label }) {
   const inputRef = useRef(null)
 
   useEffect(() => {

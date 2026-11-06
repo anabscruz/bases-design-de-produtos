@@ -29,7 +29,7 @@ export default function CreditCard({ expanded, onClick }) {
 
       <div className="credit-card__brand">
         <img src={mastercard} width="47" height="33" alt="Mastercard" />
-        <p className="credit-card__small">International</p>
+        <p className="credit-card__small">Internacional</p>
       </div>
     </button>
   )

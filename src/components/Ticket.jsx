@@ -8,7 +8,7 @@ export default function Ticket({ title, date, onOpen }) {
         <span className="ticket__date">{date}</span>
       </span>
       <span className="ticket__stub">
-        <span>Use ticket</span>
+        <span>Usar ingresso</span>
       </span>
     </button>
   )

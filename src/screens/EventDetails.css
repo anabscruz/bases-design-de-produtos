@@ -64,8 +64,8 @@
 .event-hero__title {
   margin: 0;
   font-family: var(--font-poppins);
-  font-weight: 800;
-  font-size: 40px;
+  font-weight: var(--fw-black);
+  font-size: var(--fs-display);
   line-height: 1;
   color: #fff;
   text-transform: uppercase;
@@ -73,8 +73,8 @@
 }
 
 .event-hero__when {
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body-sm);
   color: rgba(0, 0, 0, 0.7);
   white-space: pre;
 }
@@ -90,64 +90,6 @@
   color: #1d1b20;
 }
 
-.event-hero__icon-button.is-saved {
-  color: var(--color-primary);
-}
-
-.event-hero__icon-button.is-saved .icon {
-  font-variation-settings:
-    'FILL' 1,
-    'wght' 300,
-    'GRAD' 0,
-    'opsz' var(--icon-opsz, 24);
-}
-
-/* "Order" pill + price, outlined in the primary colour */
-.order-button {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 3px 8px 3px 3px;
-  border: 1.5px solid var(--color-primary);
-  border-radius: 50px;
-}
-
-.order-button__label {
-  padding: 3px 11px;
-  border-radius: 50px;
-  background: var(--color-primary);
-  color: #fff;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: 0.45px;
-}
-
-/* Price in coins or cash */
-.price-chip {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  padding: 3px 0;
-  color: var(--color-primary);
-  white-space: nowrap;
-}
-
-.price-chip__coin {
-  margin: -2px 0;
-}
-
-.price-chip__value {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-}
-
-.price-chip__or {
-  font-size: 11px;
-  color: rgba(102, 117, 255, 0.7);
-}
-
 /* ---------- Content ---------- */
 .event-details__content {
   display: flex;
@@ -158,7 +100,8 @@
 }
 
 .event-details__description {
-  font-size: 14px;
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
 }
 
 .event-details__description p + p {
@@ -170,10 +113,10 @@
   align-items: center;
   gap: 10px;
   color: var(--color-text-tertiary);
-  font-weight: 300;
-  font-size: 13px;
-  line-height: 20px;
-  letter-spacing: 0.39px;
+  font-weight: var(--fw-light);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  letter-spacing: var(--tracking);
 }
 
 /* Map card: embedded Google Maps; the address opens the venue in Maps */
@@ -215,18 +158,18 @@
   flex-direction: column;
   background: var(--color-bg);
   color: inherit;
-  line-height: 1.78;
+  line-height: var(--lh-body);
   text-decoration: none;
 }
 
 .event-map__venue {
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body-sm);
 }
 
 .event-map__street {
   color: var(--color-text-tertiary);
-  font-size: 12px;
+  font-size: var(--fs-caption);
 }
 
 /* ---------- Ticket options ---------- */
@@ -241,8 +184,8 @@
 .ticket-options__title {
   margin: 0;
   font-family: var(--font-poppins);
-  font-weight: 800;
-  font-size: 32px;
+  font-weight: var(--fw-black);
+  font-size: var(--fs-title);
   line-height: 1;
   color: #fff;
   text-transform: uppercase;
@@ -282,8 +225,8 @@
 .ticket-option__name {
   flex: 1;
   font-family: var(--font-poppins);
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-heading);
   line-height: 1;
 }
 
@@ -296,9 +239,9 @@
   background: var(--color-primary);
   color: #fff;
   font-family: var(--font-poppins);
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 1;
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  line-height: var(--lh-tight);
 }
 
 .ticket-option__body {
@@ -309,9 +252,9 @@
 }
 
 .ticket-option__rules {
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 1.4;
+  font-weight: var(--fw-light);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
 }
 
 .stepper {
@@ -344,9 +287,9 @@
   border: 1px solid #000;
   border-radius: 4px;
   font-family: var(--font-poppins);
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 1;
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  line-height: var(--lh-tight);
   text-align: center;
 }
 
@@ -361,12 +304,10 @@
   border-radius: 50px;
   background: var(--color-primary);
   color: #fff;
-  font-family: var(--font-poppins);
-  font-weight: 800;
-  font-size: 24px;
-  line-height: 20px;
-  letter-spacing: 0.72px;
-  text-transform: uppercase;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-heading);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--tracking);
   box-shadow:
     0 4px 0 -1px var(--color-bg),
     0 4px 0 0 var(--color-primary);

@@ -2,13 +2,13 @@ import Icon from '../components/Icon.jsx'
 import './Menu.css'
 
 const ITEMS = [
-  { label: 'Home', route: 'home' },
-  { label: 'Wallet', route: 'wallet' },
-  { label: 'Tickets', route: 'ticket' },
-  { label: 'Saved Events' },
-  { label: 'Invite' },
-  { label: 'Profile' },
-  { label: 'Logout' },
+  { label: 'Início', route: 'home' },
+  { label: 'Carteira', route: 'wallet' },
+  { label: 'Ingressos', route: 'ticket' },
+  { label: 'Eventos salvos' },
+  { label: 'Convidar' },
+  { label: 'Perfil' },
+  { label: 'Sair' },
 ]
 
 /**

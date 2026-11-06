@@ -12,8 +12,8 @@
   padding: 8px 12px;
   border: 1px solid var(--color-primary);
   border-radius: 50px;
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body-sm);
   white-space: nowrap;
   transition:
     background-color 160ms ease,
@@ -69,19 +69,19 @@
 
 .notification__date {
   color: var(--color-text-tertiary);
-  font-weight: 300;
-  font-size: 12px;
+  font-weight: var(--fw-light);
+  font-size: var(--fs-caption);
 }
 
 .notification__message {
-  font-size: 16px;
-  line-height: 20px;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
 }
 
 .notification__link {
   color: var(--color-primary);
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body-sm);
 }
 
 .notification__close {
@@ -93,13 +93,13 @@
 .notifications__empty {
   padding: 24px 0;
   color: var(--color-text-tertiary);
-  font-size: 14px;
+  font-size: var(--fs-body-sm);
   text-align: center;
 }
 
 .notifications__mark-all {
   align-self: center;
   color: var(--color-primary);
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body-sm);
 }

@@ -1,0 +1,35 @@
+.save-button {
+  display: flex;
+  color: var(--color-icon);
+}
+
+.save-button.is-saved {
+  color: var(--color-primary);
+}
+
+.save-button.is-saved .icon {
+  font-variation-settings:
+    'FILL' 1,
+    'wght' 300,
+    'GRAD' 0,
+    'opsz' var(--icon-opsz, 24);
+  animation: save-pop 360ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes save-pop {
+  0% {
+    transform: scale(0.7);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .save-button.is-saved .icon {
+    animation: none;
+  }
+}

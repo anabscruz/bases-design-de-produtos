@@ -37,10 +37,10 @@
   padding: 9px 23px;
   border-radius: 12px;
   background: #fff;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 20px;
-  letter-spacing: 0.45px;
+  font-weight: var(--fw-light);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-control);
+  letter-spacing: var(--tracking);
 }
 
 .wallet--cards-visible .wallet__add-method-slot {
@@ -62,14 +62,6 @@
 
 .wallet--cards-visible .wallet__transactions {
   padding-top: 0;
-}
-
-.wallet__transactions-title {
-  margin: 0;
-  font-weight: 300;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.48px;
 }
 
 .wallet__filter {

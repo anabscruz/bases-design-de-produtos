@@ -1,7 +1,3 @@
-.screen.ticket-details {
-  background: #eee;
-}
-
 /* Room for the cards' upward shadow inside the scroll container */
 .ticket-details__cards {
   gap: 12px;
@@ -25,10 +21,10 @@
 .ticket-card__event {
   margin: 0;
   font-family: var(--font-poppins);
-  font-weight: 700;
-  font-size: 32px;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-title);
   line-height: 0.9;
-  letter-spacing: -1.92px;
+  letter-spacing: var(--tracking-tight);
   white-space: nowrap;
 }
 
@@ -52,13 +48,13 @@
 }
 
 .ticket-card__field dt {
-  font-size: 14px;
+  font-size: var(--fs-body-sm);
   color: var(--color-price);
 }
 
 .ticket-card__field dd {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--fs-body);
 }
 
 .ticket-card__barcode {
@@ -79,10 +75,6 @@
   gap: 32px;
 }
 
-.ticket-details__rules h2 {
-  margin: 0;
-  font-weight: 400;
-}
 
 .ticket-details__rules ul {
   display: flex;
@@ -91,8 +83,8 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 14px;
-  line-height: 22px;
-  letter-spacing: 0.42px;
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-body-sm);
+  letter-spacing: var(--tracking);
   color: var(--color-text-tertiary);
 }

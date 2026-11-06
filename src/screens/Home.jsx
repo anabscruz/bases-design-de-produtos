@@ -9,8 +9,8 @@ import '../components/Poster.css'
 import './Home.css'
 
 const UPCOMING = [
-  { id: 1, title: 'Omah Lay Rave show', date: 'Mar 20' },
-  { id: 2, title: 'Omah Lay Rave show', date: 'Mar 20' },
+  { id: 1, title: 'Show do Omah Lay', date: '20 mar' },
+  { id: 2, title: 'Show do Omah Lay', date: '20 mar' },
 ]
 
 export default function Home({ navigate, balanceHidden, onToggleBalance }) {
@@ -23,12 +23,12 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
       />
 
       <div className="greeting">
-        <p>Hello,</p>
+        <p>Olá,</p>
         <p>Clinton Elvis</p>
       </div>
 
       <section className="screen__section home__section">
-        <h2 className="home__upcoming-title">Upcoming events</h2>
+        <h2 className="section-title">Próximos eventos</h2>
         <div className="carousel home__tickets">
           {UPCOMING.map((event) => (
             <Ticket key={event.id} title={event.title} date={event.date} onOpen={() => navigate('ticket')} />
@@ -40,7 +40,7 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
         {/* The whole row (title + chevron) opens the Events screen */}
         <h2 className="home__top-heading">
           <button type="button" className="section-header home__see-all" onClick={() => navigate('events')}>
-            <span className="section-title home__top-title">Top Event</span>
+            <span className="section-title home__top-title">Em alta</span>
             <Icon name="chevron_right" size={32} className="home__chevron" />
             <span className="visually-hidden">: ver todos os eventos</span>
           </button>
@@ -52,8 +52,8 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
             <Attendees className="attendees--scattered" />
             <div className="poster__caption">
               <p className="poster__title">Bole Festival 2022</p>
-              <p className="poster__meta">Part Harcourt</p>
-              <p className="poster__meta">N3,000</p>
+              <p className="poster__meta">Port Harcourt</p>
+              <p className="poster__meta">R$ 3.000</p>
             </div>
           </article>
 
@@ -65,7 +65,7 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
               2022
             </p>
             <p className="poster__photo-meta" style={{ top: 192.5 }}>Port Harcourt</p>
-            <p className="poster__photo-meta" style={{ top: 222 }}>N3,000</p>
+            <p className="poster__photo-meta" style={{ top: 222 }}>R$ 3.000</p>
           </article>
         </div>
       </section>

@@ -1,8 +1,8 @@
-// Renders values like "N 356.90" where the struck-through "N" stands for the Naira sign.
-export default function Amount({ prefix = '', value, separator = ' ', hidden = false }) {
+// Renders values in reais, like "R$ 356,90" (values are already formatted pt-BR).
+export default function Amount({ prefix = '', value, hidden = false }) {
   return (
     <>
-      <span className="naira">{`${prefix}N${separator}`}</span>
+      <span>{`${prefix}R$\u00a0`}</span>
       <span>{hidden ? '•••••' : value}</span>
     </>
   )

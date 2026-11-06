@@ -2,6 +2,8 @@ import { useRef, useState } from 'react'
 import Header from '../components/Header.jsx'
 import Attendees from '../components/Attendees.jsx'
 import Icon from '../components/Icon.jsx'
+import PriceTag from '../components/PriceTag.jsx'
+import SaveButton from '../components/SaveButton.jsx'
 import hero from '../assets/images/event-rtm-hero.png'
 import '../components/Screen.css'
 import './EventDetails.css'
@@ -9,14 +11,14 @@ import './EventDetails.css'
 const EVENT = {
   name: 'RTM 2026',
   place: 'Itaipava - RJ',
-  date: 'November 2nd - 2PM',
-  price: { coins: '3,000', cash: '$500' },
+  date: '2 de novembro · 14h',
+  price: '3.000',
   description: [
-    'Rock the Mountain is a music and art festival held in Itaipava, Petrópolis, in the state of Rio de Janeiro. The concept is simple: to offer a unique, high-vibe experience for a special crowd, set against the backdrop of the charming mountains of Rio de Janeiro state!',
-    'Amidst nature, RTM brings together youth, modernity, sustainability, freedom, style, fun, gastronomy, and—of course—PLENTY of music, for a day that promises to be unforgettable!',
+    'O Rock the Mountain é um festival de música e arte que acontece em Itaipava, Petrópolis, no estado do Rio de Janeiro. A proposta é simples: oferecer uma experiência única e de alto astral para um público especial, tendo como cenário as charmosas montanhas da serra fluminense!',
+    'Em meio à natureza, o RTM reúne juventude, modernidade, sustentabilidade, liberdade, estilo, diversão, gastronomia e — claro — MUITA música, em um dia que promete ser inesquecível!',
   ],
-  attendees: 'Tom, Kim and others will attend',
-  venue: 'Parque de exposições de petrópolis',
+  attendees: 'Tom, Kim e outras pessoas vão',
+  venue: 'Parque de Exposições de Petrópolis',
   address: 'Estr. União e Indústria, 10000 - Itaipava, Petrópolis - RJ',
 }
 
@@ -46,18 +48,6 @@ const mapQuery = encodeURIComponent(`${EVENT.venue}, ${EVENT.address}`)
 const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`
 // Google Maps embed (no API key needed with output=embed)
 const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&z=14&output=embed`
-
-/** "3,000 or $500" chip: the price in coins or in cash. */
-function PriceChip({ coins, cash }) {
-  return (
-    <p className="price-chip">
-      <Icon name="paid" size={18} className="price-chip__coin" />
-      <span className="price-chip__value">{coins}</span>
-      <span className="price-chip__or">or</span>
-      <span className="price-chip__value">{cash}</span>
-    </p>
-  )
-}
 
 /** Figma "Página evento" (233:98): opened from the RTM posters on Events. */
 export default function EventDetails({ navigate, onBack, balanceHidden, onToggleBalance }) {
@@ -106,21 +96,18 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
           <div className="event-hero__ctas">
             <button
               type="button"
-              className="order-button"
+              className="button-primary"
               onClick={() => ticketsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
             >
-              <span className="order-button__label">Order</span>
-              <PriceChip {...EVENT.price} />
+              Comprar
             </button>
-            <button
-              type="button"
-              className={`event-hero__icon-button${saved ? ' is-saved' : ''}`}
-              onClick={() => setSaved((value) => !value)}
-              aria-pressed={saved}
-              aria-label="Salvar evento"
-            >
-              <Icon name="favorite" size={26} />
-            </button>
+            <PriceTag value={EVENT.price} />
+            <SaveButton
+              className="event-hero__icon-button"
+              size={26}
+              saved={saved}
+              onToggle={() => setSaved((value) => !value)}
+            />
             <button type="button" className="event-hero__icon-button" onClick={share} aria-label="Compartilhar evento">
               <Icon name="share" size={24} />
             </button>
@@ -156,7 +143,7 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
         </div>
 
         <section className="ticket-options" ref={ticketsRef} aria-labelledby="ticket-options-title">
-          <h2 className="ticket-options__title" id="ticket-options-title">Ticket options</h2>
+          <h2 className="ticket-options__title" id="ticket-options-title">Ingressos</h2>
 
           <ul className="ticket-options__list">
             {TICKET_OPTIONS.map((option) => {
@@ -177,7 +164,7 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
                         {quantity}
                       </span>
                     )}
-                    <PriceChip {...EVENT.price} />
+                    <PriceTag value={EVENT.price} />
                   </button>
 
                   {isOpen && (
@@ -214,7 +201,7 @@ export default function EventDetails({ navigate, onBack, balanceHidden, onToggle
           </ul>
 
           <button type="button" className="buy-button" disabled={total === 0}>
-            Comprar
+            Finalizar compra
             {total > 0 && <span className="visually-hidden">{` ${total} ingressos`}</span>}
           </button>
         </section>

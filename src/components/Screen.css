@@ -25,18 +25,44 @@
 
 .greeting {
   width: 191px;
-  font-size: 24px;
-  line-height: 20px;
+  font-size: var(--fs-headline);
+  line-height: var(--lh-headline);
 }
 
 .greeting p:first-child {
-  margin-bottom: 14px;
+  margin-bottom: 4px;
+  font-weight: var(--fw-light);
+  color: var(--color-text-tertiary);
 }
 
+/* One style for every section heading (Home, Events, Wallet, Ticket) */
 .section-title {
-  font-size: 20px;
-  line-height: 20px;
-  letter-spacing: 0.6px;
+  margin: 0;
+  font-size: var(--fs-heading);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-heading);
+  letter-spacing: var(--tracking);
+}
+
+/* Primary action pill: the purple CTA ("Comprar" on Events and on the event page) */
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 14px;
+  border-radius: 50px;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-control);
+  letter-spacing: var(--tracking);
+  white-space: nowrap;
+  transition: transform 120ms ease;
+}
+
+.button-primary:active {
+  transform: scale(0.95);
 }
 
 .section-header {

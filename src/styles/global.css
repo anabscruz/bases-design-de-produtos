@@ -12,11 +12,42 @@
   --color-negative: #ff3535;
   --color-positive: #35a500;
   --color-home-indicator: #373232;
+  /* Price tag paper: the event's price, kept apart from the purple balance */
+  --color-tag: #efe9df;
 
+  /*
+   * Type system: two families, five weights, seven sizes.
+   * DM Sans is the interface text; Poppins is reserved for display titles
+   * (event names, posters, tickets). Tracking is proportional: every positive
+   * value in the Figma file was 3% of its font size.
+   */
   --font-dm: 'DM Sans', system-ui, sans-serif;
   --font-poppins: 'Poppins', system-ui, sans-serif;
-  --font-inter: 'Inter', system-ui, sans-serif;
-  --font-karla: 'Karla', system-ui, sans-serif;
+
+  --fs-caption: 12px;
+  --fs-body-sm: 14px;
+  --fs-body: 16px;
+  --fs-heading: 20px;
+  --fs-headline: 24px;
+  --fs-title: 32px;
+  --fs-display: 40px;
+
+  --lh-caption: 16px;
+  --lh-body-sm: 20px;
+  --lh-body: 24px;
+  --lh-heading: 24px;
+  --lh-headline: 28px;
+  --lh-tight: 1; /* Poppins display titles */
+  --lh-control: 20px; /* pills and buttons: keeps their height compact */
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-black: 800; /* Poppins display only */
+
+  --tracking: 0.03em;
+  --tracking-tight: -0.04em;
 
   --shadow-poster: 0 3.17px 19.04px rgba(189, 189, 189, 0.23);
   --screen-padding: 28px;
@@ -71,9 +102,4 @@ img {
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
-}
-
-/* "N" with a strike-through is how the design spells the Naira sign (₦) */
-.naira {
-  text-decoration: line-through;
 }

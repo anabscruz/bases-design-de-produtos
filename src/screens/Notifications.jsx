@@ -12,32 +12,32 @@ const INITIAL_NOTIFICATIONS = [
   {
     id: 1,
     photo: kim,
-    date: 'november 2, 2026 - 2pm',
-    message: 'Kim saved Afropunk to her list',
+    date: '2 de novembro de 2026 · 14h',
+    message: 'Kim salvou o Afropunk nos favoritos',
     route: 'events',
     read: false,
   },
   {
     id: 2,
     photo: jessica,
-    date: 'november 2, 2026 - 2pm',
-    message: 'Jessica will attend to RTM 2026',
+    date: '2 de novembro de 2026 · 14h',
+    message: 'Jessica vai ao RTM 2026',
     route: 'event',
     read: false,
   },
   {
     id: 3,
     photo: carl,
-    date: 'november 2, 2026 - 2pm',
-    message: 'Carl thinks you’d like Coachella',
+    date: '2 de novembro de 2026 · 14h',
+    message: 'Carl acha que você vai curtir o Coachella',
     route: 'events',
     read: false,
   },
 ]
 
 const FILTERS = [
-  { id: 'unread', label: 'unread' },
-  { id: 'read', label: 'read' },
+  { id: 'unread', label: 'não lidas' },
+  { id: 'read', label: 'lidas' },
 ]
 
 /** Figma "Notification" (239:1373): opened from the bell in the tab bar. */
@@ -88,7 +88,7 @@ export default function Notifications({ navigate, balanceHidden, onToggleBalance
       <ul className="screen__inset notifications__list">
         {visible.length === 0 && (
           <li className="notifications__empty">
-            {filter === 'unread' ? 'You’re all caught up' : 'No read notifications yet'}
+            {filter === 'unread' ? 'Tudo em dia por aqui' : 'Nenhuma notificação lida ainda'}
           </li>
         )}
         {/* Swipe a card sideways (or tap the X) to remove it */}
@@ -109,7 +109,7 @@ export default function Notifications({ navigate, balanceHidden, onToggleBalance
                   <p className="notification__date">{notification.date}</p>
                   <p className="notification__message">{notification.message}</p>
                   <button type="button" className="notification__link" onClick={() => openEvent(notification)}>
-                    See event ›
+                    Ver evento ›
                   </button>
                 </div>
 
@@ -129,7 +129,7 @@ export default function Notifications({ navigate, balanceHidden, onToggleBalance
 
       {filter === 'unread' && hasUnread && (
         <button type="button" className="notifications__mark-all" onClick={markAllAsRead}>
-          Mark all as read
+          Marcar todas como lidas
         </button>
       )}
     </main>

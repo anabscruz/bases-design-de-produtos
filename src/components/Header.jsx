@@ -15,7 +15,7 @@ import './Header.css'
  */
 export default function Header({
   avatarSize = 'large',
-  balance = '356.90',
+  balance = '356,90',
   balanceHidden = false,
   onToggleBalance,
   onMenu,

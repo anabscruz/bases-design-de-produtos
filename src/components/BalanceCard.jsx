@@ -11,20 +11,20 @@ export default function BalanceCard({ value, hidden, onCardClick }) {
   return (
     <section
       className={`balance-card${onCardClick ? ' balance-card--clickable' : ''}`}
-      aria-label="Account balance"
+      aria-label="Saldo da conta"
       onClick={handleClick}
     >
       <div className="balance-card__top">
         <Icon name="bolt" size={30} className="balance-card__bolt" />
-        <p>Account Balance</p>
+        <p>Saldo da conta</p>
       </div>
       <p className="balance-card__value">
-        <Amount value={value} separator="" hidden={hidden} />
+        <Amount value={value} hidden={hidden} />
       </p>
       <div className="balance-card__actions">
-        <button type="button">Deposit</button>
-        <button type="button">Transfer</button>
-        <button type="button">Pay</button>
+        <button type="button">Depositar</button>
+        <button type="button">Transferir</button>
+        <button type="button">Pagar</button>
       </div>
     </section>
   )

@@ -8,12 +8,12 @@ import '../components/Screen.css'
 import './Wallet.css'
 
 const TRANSACTIONS = [
-  { id: 1, title: 'Afropunk bar', date: 'October 28th • 1:34 PM', source: 'Wallet', amount: '500.00', type: 'debit' },
-  { id: 2, title: 'Transfer received', date: 'October 28th • 9 AM', source: 'Wallet', amount: '500.00', type: 'credit' },
-  { id: 3, title: 'Bole Festival', date: 'October 28th • 11 PM', source: 'Nubank mastercard', amount: '3,000.00', type: 'debit' },
+  { id: 1, title: 'Bar do Afropunk', date: '28 de outubro • 13h34', source: 'Carteira', amount: '500,00', type: 'debit' },
+  { id: 2, title: 'Transferência recebida', date: '28 de outubro • 9h', source: 'Carteira', amount: '500,00', type: 'credit' },
+  { id: 3, title: 'Bole Festival', date: '28 de outubro • 23h', source: 'Nubank Mastercard', amount: '3.000,00', type: 'debit' },
 ]
 
-const BALANCE = '356.90'
+const BALANCE = '356,90'
 
 /**
  * One layout for both Figma frames — "Wallet Cards Collapsed" and "Wallet Cards
@@ -34,14 +34,14 @@ export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalanc
       />
 
       <div className="greeting">
-        <p>Hello,</p>
+        <p>Olá,</p>
         <p>Clinton Elvis</p>
       </div>
 
       <section className="wallet__cards">
         <div className="wallet__add-method-slot" inert={!cardsVisible}>
           <div className="wallet__add-method-clip">
-            <button type="button" className="wallet__add-method">Add payment method</button>
+            <button type="button" className="wallet__add-method">Adicionar forma de pagamento</button>
           </div>
         </div>
         <CreditCard expanded={cardsVisible} onClick={toggleCards} />
@@ -50,7 +50,7 @@ export default function Wallet({ navigate, onBack, balanceHidden, onToggleBalanc
 
       <section className="wallet__transactions">
         <div className="section-header">
-          <h2 className="wallet__transactions-title">Transactions</h2>
+          <h2 className="section-title">Transações</h2>
           <button type="button" className="wallet__filter" aria-label="Filtrar transações" tabIndex={cardsVisible ? -1 : undefined}>
             <Icon name="tune" size={30} />
           </button>
