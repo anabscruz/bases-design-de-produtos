@@ -70,7 +70,22 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
       </section>
 
       <section className="screen__section home__section">
-        <h2 className="section-title home__title">Seus ingressos</h2>
+        {/* Marquee: the title repeats and keeps sliding left on one line.
+            Two identical groups make the loop seamless (the track moves by -50%). */}
+        <h2 className="section-title home__title home__marquee">
+          <span className="visually-hidden">Seus ingressos</span>
+          <span className="home__marquee-track" aria-hidden="true">
+            {[0, 1].map((group) => (
+              <span className="home__marquee-group" key={group}>
+                {[0, 1, 2].map((item) => (
+                  <span className="home__marquee-item" key={item}>
+                    Seus ingressos
+                  </span>
+                ))}
+              </span>
+            ))}
+          </span>
+        </h2>
         <div className="carousel home__tickets">
           {UPCOMING.map((event) => (
             <Ticket key={event.id} title={event.title} date={event.date} time={event.time} onOpen={() => navigate('ticket')} />

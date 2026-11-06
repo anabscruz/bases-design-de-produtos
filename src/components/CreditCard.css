@@ -1,6 +1,7 @@
 /*
- * Collapsed ("Wallet Cards Collapsed"): 329px wide, 42px of it peeking above the
- * balance card. Expanded ("Wallet Cards Visible"): 342 × 198, 12px above it.
+ * Collapsed ("Wallet Cards Collapsed"): 13px narrower than the stack, 42px of it
+ * peeking above the balance card. Expanded ("Wallet Cards Visible"): full width × 198,
+ * 12px above it.
  */
 .credit-card {
   position: relative;
@@ -8,7 +9,7 @@
   align-items: flex-end;
   justify-content: flex-end;
   gap: 15px;
-  width: 329px;
+  width: calc(100% - 13px);
   height: 198px;
   margin-bottom: -156px;
   padding: 16px 23px 24px;
@@ -27,7 +28,7 @@
 }
 
 .credit-card--expanded {
-  width: 342px;
+  width: 100%;
   margin-bottom: 12px;
   padding-top: 24px;
 }

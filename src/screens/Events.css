@@ -104,7 +104,7 @@
 .events__handle {
   width: 147.86px;
   height: 5.52px;
-  margin: 9px 0 9px 111px;
+  margin: 9px auto;
   border-radius: 110px;
   background: var(--color-home-indicator);
 }
