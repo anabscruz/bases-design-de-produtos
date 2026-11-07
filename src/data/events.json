@@ -294,8 +294,8 @@
         "photo": "notification-kim.png"
       }
     ],
-    "poster": "poster-historias-latino-americanas.jpg",
-    "artistPhoto": "poster-historias-latino-americanas.jpg"
+    "poster": "poster-historias-latino-americanas.png",
+    "artistPhoto": "event-historias-latino-americanas-hero.jpg"
   },
   {
     "id": "jesus-soto",
@@ -333,8 +333,8 @@
         "photo": "attendee-1.png"
       }
     ],
-    "poster": "poster-jesus-soto.jpg",
-    "artistPhoto": "poster-jesus-soto.jpg"
+    "poster": "poster-jesus-soto.png",
+    "artistPhoto": "event-jesus-soto-hero.jpg"
   },
   {
     "id": "diabo-veste-prada",
