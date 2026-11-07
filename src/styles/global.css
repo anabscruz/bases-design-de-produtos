@@ -82,6 +82,8 @@
   --color-placeholder: #a89e93;
   /* Highlighted figures (list prices): lime on dark, black on light */
   --color-highlight: var(--palette-black);
+  /* Order total (event page): lilac on dark, black on light */
+  --color-total: var(--palette-black);
 
   /*
    * Type system: PP Neue Montreal for the interface text and titles, Poppins
@@ -173,6 +175,7 @@ body,
   --color-positive: var(--palette-lime);
   --color-chip: var(--palette-lime);
   --color-highlight: var(--palette-lime);
+  --color-total: var(--palette-lilac);
   --color-thumb-ring: transparent;
   --color-placeholder: #c8beb3;
 }
@@ -200,6 +203,19 @@ button {
 
 img {
   display: block;
+}
+
+/* Text fields: mono (DM Mono, standing in for PP Fraktion Mono), 16px so iOS doesn't zoom in */
+input:not([type='range']):not([type='checkbox']):not([type='radio']),
+textarea {
+  font-family: var(--font-mono);
+  font-size: var(--fs-body);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-placeholder);
+  opacity: 1;
 }
 
 /* Text for screen readers only */

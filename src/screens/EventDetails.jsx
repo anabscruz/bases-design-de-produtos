@@ -4,7 +4,7 @@ import Attendees from '../components/Attendees.jsx'
 import Icon from '../components/Icon.jsx'
 import Price from '../components/Price.jsx'
 import SaveButton from '../components/SaveButton.jsx'
-import { attendeesLabel, getEvent } from '../data/events.js'
+import { attendeesLabel, formatPrice, getEvent } from '../data/events.js'
 import '../components/Screen.css'
 import './EventDetails.css'
 
@@ -53,6 +53,10 @@ function EventPage({ event, navigate, onBack, balanceHidden, onToggleBalance }) 
   const [expanded, setExpanded] = useState(event.tickets[0]?.id ?? null)
   const [quantities, setQuantities] = useState(() => Object.fromEntries(event.tickets.map((ticket) => [ticket.id, 0])))
   const total = Object.values(quantities).reduce((sum, quantity) => sum + quantity, 0)
+  const totalAmount = event.tickets.reduce((sum, ticket) => sum + ticket.amount * quantities[ticket.id], 0)
+  // While the total row folds away, keep showing the last amount instead of "R$ 0"
+  const lastTotal = useRef(0)
+  if (totalAmount > 0) lastTotal.current = totalAmount
   const map = mapUrls(event)
 
   const changeQuantity = (id, delta) =>
@@ -143,6 +147,7 @@ function EventPage({ event, navigate, onBack, balanceHidden, onToggleBalance }) 
         <section className="ticket-options" ref={ticketsRef} aria-labelledby="ticket-options-title">
           <h2 className="ticket-options__title" id="ticket-options-title">Ingressos</h2>
 
+          <div className="ticket-options__summary">
           <ul className="ticket-options__list">
             {event.tickets.map((option) => {
               const isOpen = expanded === option.id
@@ -197,6 +202,17 @@ function EventPage({ event, navigate, onBack, balanceHidden, onToggleBalance }) 
               )
             })}
           </ul>
+
+          {/* Figma 303:3149: total row, only with at least one ticket; it unfolds under the list */}
+          <div className={`ticket-total${total > 0 ? ' is-visible' : ''}`} aria-hidden={total === 0}>
+            <div className="ticket-total__clip">
+              <div className="ticket-total__row">
+                <span className="ticket-total__label">Total</span>
+                <Price className="ticket-total__price" value={formatPrice(lastTotal.current)} />
+              </div>
+            </div>
+          </div>
+          </div>
 
           <button type="button" className="buy-button" disabled={total === 0}>
             Finalizar compra

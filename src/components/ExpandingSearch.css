@@ -50,8 +50,10 @@
   border: 0;
   background: none;
   outline: none;
-  font: inherit;
+  /* Text fields are mono across the app (see global.css) */
+  font-family: var(--font-mono);
   font-size: var(--fs-body);
+  line-height: var(--lh-control);
   color: var(--color-text);
   opacity: 0;
   pointer-events: none;
@@ -61,7 +63,7 @@
 }
 
 .expanding-search__input::placeholder {
-  color: #9a9a9a;
+  color: var(--color-placeholder);
 }
 
 .expanding-search__input::-webkit-search-cancel-button {
