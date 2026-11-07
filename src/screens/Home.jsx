@@ -8,14 +8,11 @@ import cabaretVoltaire from '../assets/images/poster-home-cabaret-voltaire.png'
 import rtm from '../assets/images/poster-rtm.jpg'
 import afropunk from '../assets/images/poster-afropunk.jpg'
 import { EVENTS, eventPath } from '../data/events.js'
+import { MY_TICKETS } from '../data/tickets.js'
 import '../components/Screen.css'
 import '../components/Poster.css'
 import './Home.css'
 
-const UPCOMING = [
-  { id: 1, title: 'Show do Omah Lay', date: '20 mar', time: '21h' },
-  { id: 2, title: 'Show do Omah Lay', date: '20 mar', time: '21h' },
-]
 
 // "Em alta" posters: the artwork already carries the event's name, place and date
 const TOP_POSTERS = [
@@ -140,8 +137,15 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
       <section className="screen__section home__section">
         <SectionHeading title="Ingressos" linkLabel="ver seus ingressos" onOpen={() => navigate('ticket')} />
         <div className="carousel home__tickets" ref={ticketsRef}>
-          {UPCOMING.map((event) => (
-            <Ticket key={event.id} title={event.title} date={event.date} time={event.time} onOpen={() => navigate('ticket')} />
+          {/* The user's Lollapalooza tickets (src/data/tickets.js) */}
+          {MY_TICKETS.map((ticket) => (
+            <Ticket
+              key={ticket.id}
+              title={ticket.event}
+              date={ticket.shortDate}
+              time={ticket.time}
+              onOpen={() => navigate('ticket')}
+            />
           ))}
         </div>
       </section>

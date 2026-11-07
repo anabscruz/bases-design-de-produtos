@@ -2,33 +2,9 @@ import { useRef } from 'react'
 import Header from '../components/Header.jsx'
 import useDragScroll from '../hooks/useDragScroll.js'
 import barcode from '../assets/images/barcode.png'
+import { MY_TICKETS, TICKET_RULES } from '../data/tickets.js'
 import '../components/Screen.css'
 import './TicketDetails.css'
-
-const TICKETS = [
-  {
-    id: 1,
-    event: 'Lollapalooza 2027',
-    holder: 'Clinton Elvis',
-    date: '19 mar. 2027',
-    time: '14h',
-    type: 'Lounge',
-    orderId: '872847829',
-    location: 'Autódromo de Interlagos - SP',
-  },
-  {
-    id: 2,
-    event: 'Lollapalooza 2027',
-    holder: 'Clinton Elvis',
-    date: '19 mar. 2027',
-    time: '14h',
-    type: 'Lounge',
-    orderId: '872847829',
-    location: 'Autódromo de Interlagos - SP',
-  },
-]
-
-const RULES = ['Obrigatório apresentar documento com foto', 'Objetos proibidos no festival: latas, guarda-chuvas e armas']
 
 function Field({ label, value, wide = false }) {
   return (
@@ -53,7 +29,7 @@ export default function TicketDetails({ navigate, balanceHidden, onToggleBalance
       />
 
       <div className="carousel carousel--bleed ticket-details__cards" ref={cardsRef} tabIndex={0} aria-label="Ingressos">
-        {TICKETS.map((ticket) => (
+        {MY_TICKETS.map((ticket) => (
           // Paper ticket: details card + barcode stub, white in both themes
           <article className="ticket-card" key={ticket.id}>
             <div className="ticket-card__main">
@@ -80,7 +56,7 @@ export default function TicketDetails({ navigate, balanceHidden, onToggleBalance
       <section className="screen__section ticket-details__rules">
         <h2 className="section-title">Regras</h2>
         <ul>
-          {RULES.map((rule) => (
+          {TICKET_RULES.map((rule) => (
             <li key={rule}>{rule}</li>
           ))}
         </ul>

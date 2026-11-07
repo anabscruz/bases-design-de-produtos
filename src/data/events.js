@@ -74,7 +74,8 @@ function prepare(event) {
     endDate,
     dateLabel: endDate ? formatDayRange(date, endDate) : `${formatDay(date)} - ${formatTime(date)}`,
     tickets,
-    priceFrom: formatPrice(lowest),
+    priceFrom: formatPrice(lowest), // text for display ("37,50")
+    priceFromAmount: lowest, // number, for filtering and sorting
     posterUrl: imageUrl(event.poster),
     artistPhotoUrl: imageUrl(event.artistPhoto) ?? imageUrl(event.poster),
     attendees: event.attendees.map((person) => ({ ...person, photoUrl: imageUrl(person.photo) })),

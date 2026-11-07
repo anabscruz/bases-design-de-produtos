@@ -18,12 +18,13 @@
   color: var(--palette-black);
 }
 
+/* Same size as the event names in the Events list (.event-item__name) */
 .ticket__title {
   display: block;
   max-width: 152px;
   font-weight: var(--fw-medium);
-  font-size: var(--fs-heading);
-  line-height: var(--lh-heading);
+  font-size: var(--fs-headline);
+  line-height: var(--lh-headline);
 }
 
 .ticket__when {

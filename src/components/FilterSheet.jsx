@@ -12,7 +12,8 @@ import './FilterSheet.css'
 
 const PRICE_STEP = 10
 // Slider ceiling: the most expensive "a partir de" price, rounded up to the next R$ 100
-export const PRICE_MAX = Math.ceil(Math.max(...EVENTS.map((event) => event.priceFrom)) / 100) * 100
+// (priceFromAmount is a number; priceFrom is display text like "37,50" and can't be compared)
+export const PRICE_MAX = Math.ceil(Math.max(...EVENTS.map((event) => event.priceFromAmount)) / 100) * 100
 
 const TYPES = [
   { id: 'show', label: 'show' },
@@ -87,7 +88,7 @@ const normalize = (text) =>
 export function matchesFilters(event, filters, saved) {
   const place = normalize(filters.location.trim())
   if (place && !normalize([event.city, event.place, event.venue, event.address].join(' ')).includes(place)) return false
-  if (event.priceFrom < filters.price[0] || event.priceFrom > filters.price[1]) return false
+  if (event.priceFromAmount < filters.price[0] || event.priceFromAmount > filters.price[1]) return false
   if (filters.types.length && !filters.types.includes(event.type)) return false
   for (const quick of filters.quick) {
     if (quick === 'saved' && !saved.has(event.id)) return false
