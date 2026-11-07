@@ -62,6 +62,7 @@
 
 /* Horizontal carousels that bleed to the right edge of the screen */
 .carousel {
+  position: relative; /* useDragScroll measures items' offsetLeft from here */
   display: flex;
   align-items: center;
   margin-right: calc(var(--screen-padding) * -1);
@@ -94,7 +95,8 @@
   cursor: grab;
 }
 
-.carousel--bleed.is-dragging {
+/* Mouse drag (useDragScroll): snapping waits until the carousel is let go */
+.carousel.is-dragging {
   scroll-snap-type: none;
   cursor: grabbing;
   user-select: none;

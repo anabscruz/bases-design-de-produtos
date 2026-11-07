@@ -17,56 +17,6 @@
   letter-spacing: normal;
 }
 
-/* "Seus ingressos" marquee: full bleed, one line, endlessly sliding left */
-/* (.home__section prefix beats the `.home__section h2 { margin: 0 }` reset) */
-.home__section .home__marquee {
-  width: calc(100% + var(--screen-padding) * 2);
-  margin-left: calc(var(--screen-padding) * -1);
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.home__marquee-track {
-  display: flex;
-  width: max-content;
-  animation: home-marquee 24s linear infinite;
-}
-
-/* Touch and hold (or hover) to stop it and read */
-.home__marquee:hover .home__marquee-track,
-.home__marquee:active .home__marquee-track {
-  animation-play-state: paused;
-}
-
-.home__marquee-group {
-  display: flex;
-}
-
-/* Each repeat ends with a hyphen, so the loop reads "Seus ingressos - Seus ingressos -" */
-.home__marquee-item {
-  display: flex;
-  align-items: center;
-  padding-left: var(--screen-padding);
-}
-
-.home__marquee-item::after {
-  content: '-';
-  margin-left: var(--screen-padding);
-}
-
-@keyframes home-marquee {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-/* Reduced motion: no sliding, the first repeat stays aligned with the content */
-@media (prefers-reduced-motion: reduce) {
-  .home__marquee-track {
-    animation: none;
-  }
-}
-
 .home__top-title {
   text-align: left;
 }
@@ -94,15 +44,7 @@
   gap: 10px;
 }
 
-/* Each poster opens its event: pressed, it sinks a little into the wall */
-.home__poster {
-  transition: transform 160ms ease;
-}
-
-.home__poster:active {
-  transform: scale(0.97);
-}
-
+/* Each poster opens its event; only the keyboard focus ring marks it */
 .home__poster:focus-visible {
   outline: 2px solid var(--color-text);
   outline-offset: -4px;

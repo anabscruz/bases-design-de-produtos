@@ -21,7 +21,6 @@ export default function useDragScroll(ref) {
       moved = false
       startX = event.clientX
       startScroll = el.scrollLeft
-      el.setPointerCapture(event.pointerId)
     }
 
     const onPointerMove = (event) => {
@@ -30,6 +29,9 @@ export default function useDragScroll(ref) {
       if (!moved && Math.abs(dx) > 4) {
         moved = true
         el.classList.add('is-dragging')
+        // Capture only once it's a real drag: capturing on press would steal the
+        // click from the poster or ticket under the pointer
+        el.setPointerCapture(event.pointerId)
       }
       if (moved) el.scrollLeft = startScroll - dx
     }
@@ -59,13 +61,18 @@ export default function useDragScroll(ref) {
       }
     }
 
+    // No ghost image when dragging over a picture
+    const onDragStart = (event) => event.preventDefault()
+
     el.addEventListener('pointerdown', onPointerDown)
+    el.addEventListener('dragstart', onDragStart)
     el.addEventListener('pointermove', onPointerMove)
     el.addEventListener('pointerup', onPointerUp)
     el.addEventListener('pointercancel', onPointerUp)
     el.addEventListener('click', onClick, true)
     return () => {
       el.removeEventListener('pointerdown', onPointerDown)
+      el.removeEventListener('dragstart', onDragStart)
       el.removeEventListener('pointermove', onPointerMove)
       el.removeEventListener('pointerup', onPointerUp)
       el.removeEventListener('pointercancel', onPointerUp)

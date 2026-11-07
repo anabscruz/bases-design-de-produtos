@@ -1,4 +1,6 @@
+import { useRef } from 'react'
 import Header from '../components/Header.jsx'
+import useDragScroll from '../hooks/useDragScroll.js'
 import Ticket from '../components/Ticket.jsx'
 import benHoward from '../assets/images/poster-home-ben-howard.png'
 import placebo from '../assets/images/poster-home-placebo.png'
@@ -41,32 +43,40 @@ const FESTIVAL_POSTERS = [
   { id: 'afropunk', image: afropunk, trim: 1.06, alt: 'Afropunk: Parque de Exposições de Salvador, Salvador - BA, 02/11' },
 ]
 
+/** Home section title: big Neue Montreal + north-east arrow; the whole row is a link */
+function SectionHeading({ title, linkLabel, onOpen }) {
+  return (
+    <h2 className="home__top-heading">
+      <button type="button" className="section-header home__see-all" onClick={onOpen}>
+        <span className="section-title home__title home__top-title">{title}</span>
+        {/* Drawn edge to edge (no glyph padding) so it can sit on the text baseline */}
+        <svg className="home__arrow" width="32" height="32" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M1.6 22.4 22.4 1.6M6 1.6h16.4V18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3.2"
+            strokeLinejoin="miter"
+          />
+        </svg>
+        <span className="visually-hidden">{`: ${linkLabel}`}</span>
+      </button>
+    </h2>
+  )
+}
+
 /**
- * Home poster section: big title with a north-east arrow (opens Events, filtered)
- * + poster wall, where each poster opens its event page
+ * Home poster section: section title (opens Events, filtered) + poster wall,
+ * where each poster opens its event page
  */
 function PosterSection({ title, linkLabel, onOpen, onOpenPoster, posters }) {
+  const wallRef = useRef(null)
+  useDragScroll(wallRef) // mouse drag in the browser; touch already swipes
   return (
     <section className="screen__section home__section">
-      {/* The whole row (title + arrow) opens the Events screen */}
-      <h2 className="home__top-heading">
-        <button type="button" className="section-header home__see-all" onClick={onOpen}>
-          <span className="section-title home__title home__top-title">{title}</span>
-          {/* Drawn edge to edge (no glyph padding) so it can sit on the text baseline */}
-          <svg className="home__arrow" width="32" height="32" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M1.6 22.4 22.4 1.6M6 1.6h16.4V18"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3.2"
-              strokeLinejoin="miter"
-            />
-          </svg>
-          <span className="visually-hidden">{`: ${linkLabel}`}</span>
-        </button>
-      </h2>
+      <SectionHeading title={title} linkLabel={linkLabel} onOpen={onOpen} />
 
-      <div className="carousel home__posters">
+      <div className="carousel home__posters" ref={wallRef}>
         {posters.map((poster) => (
           <button
             type="button"
@@ -88,6 +98,8 @@ function PosterSection({ title, linkLabel, onOpen, onOpenPoster, posters }) {
 }
 
 export default function Home({ navigate, balanceHidden, onToggleBalance }) {
+  const ticketsRef = useRef(null)
+  useDragScroll(ticketsRef)
   return (
     <main className="screen screen--padded">
       <Header
@@ -106,23 +118,8 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
       />
 
       <section className="screen__section home__section">
-        {/* Marquee: the title repeats and keeps sliding left on one line.
-            Two identical groups make the loop seamless (the track moves by -50%). */}
-        <h2 className="section-title home__title home__marquee">
-          <span className="visually-hidden">Seus ingressos</span>
-          <span className="home__marquee-track" aria-hidden="true">
-            {[0, 1].map((group) => (
-              <span className="home__marquee-group" key={group}>
-                {[0, 1, 2].map((item) => (
-                  <span className="home__marquee-item" key={item}>
-                    Seus ingressos
-                  </span>
-                ))}
-              </span>
-            ))}
-          </span>
-        </h2>
-        <div className="carousel home__tickets">
+        <SectionHeading title="Ingressos" linkLabel="ver seus ingressos" onOpen={() => navigate('ticket')} />
+        <div className="carousel home__tickets" ref={ticketsRef}>
           {UPCOMING.map((event) => (
             <Ticket key={event.id} title={event.title} date={event.date} time={event.time} onOpen={() => navigate('ticket')} />
           ))}
