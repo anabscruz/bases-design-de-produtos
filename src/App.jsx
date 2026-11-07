@@ -30,9 +30,10 @@ function transitionBetween(from, to) {
   return TAB_ORDER.indexOf(to) >= TAB_ORDER.indexOf(from) ? 'forward' : 'back'
 }
 
-const THEME_KEY = 'theme'
+// New key: the old one saved every visit's theme automatically, so it can't be trusted as a choice
+const THEME_KEY = 'moov-theme'
 
-// Saved choice first, then the device setting
+// Dark mode is the default; only a theme the person picked with the toggle overrides it
 function initialTheme() {
   try {
     const saved = window.localStorage.getItem(THEME_KEY)
@@ -40,7 +41,7 @@ function initialTheme() {
   } catch {
     // storage unavailable (private mode, blocked site data)
   }
-  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  return 'dark'
 }
 
 function initialState() {
@@ -87,11 +88,6 @@ export default function App() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#161616' : '#eeeeee')
-    try {
-      window.localStorage.setItem(THEME_KEY, theme)
-    } catch {
-      // storage unavailable: the choice just won't survive a reload
-    }
   }, [theme])
 
   useEffect(() => {
@@ -123,7 +119,17 @@ export default function App() {
 
   const Screen = SCREENS[route]
   const darkMode = theme === 'dark'
-  const toggleDarkMode = () => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))
+  // Remembered only when the person switches, so the default stays dark for everyone else
+  const toggleDarkMode = () =>
+    setTheme((current) => {
+      const next = current === 'dark' ? 'light' : 'dark'
+      try {
+        window.localStorage.setItem(THEME_KEY, next)
+      } catch {
+        // storage unavailable: the choice just won't survive a reload
+      }
+      return next
+    })
 
   return (
     <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
