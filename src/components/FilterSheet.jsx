@@ -17,6 +17,9 @@ export const PRICE_MAX = Math.ceil(Math.max(...EVENTS.map((event) => event.price
 const TYPES = [
   { id: 'show', label: 'show' },
   { id: 'festival', label: 'festival' },
+  { id: 'exposicao', label: 'exposição' },
+  { id: 'teatro', label: 'teatro' },
+  { id: 'gastronomia', label: 'gastronomia' },
 ]
 
 const QUICK = [

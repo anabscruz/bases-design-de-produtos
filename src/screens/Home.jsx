@@ -7,7 +7,7 @@ import placebo from '../assets/images/poster-home-placebo.png'
 import cabaretVoltaire from '../assets/images/poster-home-cabaret-voltaire.png'
 import rtm from '../assets/images/poster-rtm.jpg'
 import afropunk from '../assets/images/poster-afropunk.jpg'
-import { eventPath } from '../data/events.js'
+import { EVENTS, eventPath } from '../data/events.js'
 import '../components/Screen.css'
 import '../components/Poster.css'
 import './Home.css'
@@ -42,6 +42,26 @@ const FESTIVAL_POSTERS = [
   { id: 'rtm', image: rtm, trim: 1.03, alt: 'RTM 2026: Parque de Exposições de Petrópolis, Itaipava - RJ, 02/11' },
   { id: 'afropunk', image: afropunk, trim: 1.06, alt: 'Afropunk: Parque de Exposições de Salvador, Salvador - BA, 02/11' },
 ]
+
+// Position of an id in an explicit order; ids not listed keep the JSON order, after the listed ones
+const rank = (order = [], id) => (order.includes(id) ? order.indexOf(id) : order.length)
+
+// Category sections, built from src/data/events.json ("type")
+const CATEGORY_SECTIONS = [
+  { type: 'exposicao', title: 'Exposições', linkLabel: 'ver todas as exposições' },
+  // `order` (optional): event ids in the order the posters should appear
+  { type: 'teatro', title: 'Teatro', linkLabel: 'ver todas as peças', order: ['piaf', 'on-your-feet', 'diabo-veste-prada'] },
+  { type: 'gastronomia', title: 'Gastronomia', linkLabel: 'ver todos os eventos de gastronomia' },
+].map((section) => ({
+  ...section,
+  posters: EVENTS.filter((event) => event.type === section.type)
+    .sort((a, b) => rank(section.order, a.id) - rank(section.order, b.id))
+    .map((event) => ({
+    id: event.id,
+    image: event.posterUrl,
+    alt: `${event.tour ? `${event.title}, ${event.tour}` : event.title}: ${event.place}, ${event.dateLabel}`,
+  })),
+}))
 
 /** Home section title: big Neue Montreal + north-east arrow; the whole row is a link */
 function SectionHeading({ title, linkLabel, onOpen }) {
@@ -133,6 +153,18 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
         onOpenPoster={(id) => navigate(eventPath(id))}
         posters={FESTIVAL_POSTERS}
       />
+
+      {/* Each title opens Events filtered by that category ("#/events/teatro") */}
+      {CATEGORY_SECTIONS.map((section) => (
+        <PosterSection
+          key={section.type}
+          title={section.title}
+          linkLabel={section.linkLabel}
+          onOpen={() => navigate(`events/${section.type}`)}
+          onOpenPoster={(id) => navigate(eventPath(id))}
+          posters={section.posters}
+        />
+      ))}
     </main>
   )
 }

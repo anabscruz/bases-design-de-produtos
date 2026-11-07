@@ -35,6 +35,18 @@ export function formatTime(date) {
   return `${Number(parts.hour)}h${parts.minute === '00' ? '' : parts.minute}`
 }
 
+/**
+ * Events that run over several days (exhibitions, food festivals) have an
+ * `endDateTime`: "12 a 14 de novembro", "27 de novembro a 4 de abril"
+ */
+export function formatDayRange(start, end) {
+  const from = formatDay(start)
+  const to = formatDay(end)
+  const [fromDay, ...fromMonth] = from.split(' de ')
+  const [, ...toMonth] = to.split(' de ')
+  return fromMonth.join(' de ') === toMonth.join(' de ') ? `${fromDay} a ${to}` : `${from} a ${to}`
+}
+
 /** 3000 → "3.000", 356.9 → "356,90" (the currency symbol is added by <Amount>) */
 export function formatPrice(amount) {
   const cents = !Number.isInteger(amount)
@@ -53,12 +65,14 @@ export function attendeesLabel(attendees) {
 
 function prepare(event) {
   const date = new Date(event.dateTime)
+  const endDate = event.endDateTime ? new Date(event.endDateTime) : null
   const tickets = Object.entries(event.prices).map(([id, ticket]) => ({ id, ...ticket, price: formatPrice(ticket.amount) }))
   const lowest = Math.min(...tickets.map((ticket) => ticket.amount))
   return {
     ...event,
     date,
-    dateLabel: `${formatDay(date)} - ${formatTime(date)}`,
+    endDate,
+    dateLabel: endDate ? formatDayRange(date, endDate) : `${formatDay(date)} - ${formatTime(date)}`,
     tickets,
     priceFrom: formatPrice(lowest),
     posterUrl: imageUrl(event.poster),

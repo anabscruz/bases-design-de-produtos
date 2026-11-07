@@ -253,5 +253,304 @@
     ],
     "poster": "poster-afropunk.jpg",
     "artistPhoto": "poster-afropunk.jpg"
+  },
+  {
+    "id": "historias-latino-americanas",
+    "type": "exposicao",
+    "title": "Histórias latino-americanas",
+    "dateTime": "2026-09-04T10:00:00-03:00",
+    "endDateTime": "2027-01-31T18:00:00-03:00",
+    "venue": "MASP",
+    "city": "São Paulo",
+    "place": "MASP - São Paulo",
+    "address": "Av. Paulista, 1578 - Bela Vista, São Paulo - SP",
+    "description": [
+      "Grande coletiva que fecha o ano dedicado à latinidade no MASP: obras de diferentes épocas e países contam as histórias da América Latina a partir de suas artistas, povos e territórios.",
+      "Em cartaz no Edifício Lina Bo Bardi até 31 de janeiro de 2027. Às terças-feiras a entrada é gratuita."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 75,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 37.5,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Bia",
+        "photo": "attendee-2.png"
+      },
+      {
+        "name": "Rafa",
+        "photo": "attendee-3.png"
+      },
+      {
+        "name": "Kim",
+        "photo": "notification-kim.png"
+      }
+    ],
+    "poster": "poster-historias-latino-americanas.jpg",
+    "artistPhoto": "poster-historias-latino-americanas.jpg"
+  },
+  {
+    "id": "jesus-soto",
+    "type": "exposicao",
+    "title": "Jesús Soto",
+    "dateTime": "2026-11-27T10:00:00-03:00",
+    "endDateTime": "2027-04-04T18:00:00-03:00",
+    "venue": "MASP",
+    "city": "São Paulo",
+    "place": "MASP - São Paulo",
+    "address": "Av. Paulista, 1578 - Bela Vista, São Paulo - SP",
+    "description": [
+      "O venezuelano Jesús Rafael Soto, um dos nomes centrais da arte cinética, ganha mostra no MASP. Suas obras vibram com o movimento de quem olha, e os famosos Penetráveis convidam o público a atravessar a obra.",
+      "Abertura em 27 de novembro de 2026, em cartaz até 4 de abril de 2027."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 75,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 37.5,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Jessica",
+        "photo": "notification-jessica.png"
+      },
+      {
+        "name": "Tom",
+        "photo": "attendee-1.png"
+      }
+    ],
+    "poster": "poster-jesus-soto.jpg",
+    "artistPhoto": "poster-jesus-soto.jpg"
+  },
+  {
+    "id": "diabo-veste-prada",
+    "type": "teatro",
+    "title": "O Diabo Veste Prada",
+    "tour": "O Musical",
+    "dateTime": "2027-02-25T20:00:00-03:00",
+    "venue": "Teatro Santander",
+    "city": "São Paulo",
+    "place": "Teatro Santander - São Paulo",
+    "address": "Av. Pres. Juscelino Kubitschek, 2041 - JK Iguatemi, São Paulo - SP",
+    "description": [
+      "O clássico da moda vira musical, com trilha original de Elton John e direção de José Possi Neto. Claudia Raia vive Miranda Priestly, ao lado de Myra Ruiz, Bruna Guerin e Maurício Xavier.",
+      "Estreia em 25 de fevereiro de 2027, com temporada até 27 de junho. Sessões de quinta a domingo."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 290,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 145,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Kim",
+        "photo": "notification-kim.png"
+      },
+      {
+        "name": "Jessica",
+        "photo": "notification-jessica.png"
+      },
+      {
+        "name": "Bia",
+        "photo": "attendee-2.png"
+      }
+    ],
+    "poster": "poster-diabo-veste-prada.png",
+    "artistPhoto": "event-diabo-veste-prada-hero.jpg"
+  },
+  {
+    "id": "on-your-feet",
+    "type": "teatro",
+    "title": "On Your Feet!",
+    "tour": "O Musical da Gloria Estefan",
+    "dateTime": "2026-11-06T20:00:00-03:00",
+    "venue": "Teatro Claro Mais",
+    "city": "São Paulo",
+    "place": "Teatro Claro Mais - São Paulo",
+    "address": "Shopping Vila Olímpia - R. Olimpíadas, 360, São Paulo - SP",
+    "description": [
+      "O musical conta a trajetória de Gloria e Emilio Estefan, de Cuba a Miami, embalado pelos sucessos que levaram a música latina para o mundo, como \"Conga\" e \"Rhythm Is Gonna Get You\".",
+      "Temporada a partir de 6 de novembro de 2026."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 220,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 110,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Carl",
+        "photo": "notification-carl.png"
+      },
+      {
+        "name": "Rafa",
+        "photo": "attendee-3.png"
+      }
+    ],
+    "poster": "poster-on-your-feet.png",
+    "artistPhoto": "event-on-your-feet-hero.jpg"
+  },
+  {
+    "id": "piaf",
+    "type": "teatro",
+    "title": "Piaf",
+    "tour": "Eu Não Me Arrependo",
+    "dateTime": "2026-10-10T20:00:00-03:00",
+    "endDateTime": "2026-11-01T19:00:00-03:00",
+    "venue": "Teatro Riachuelo Rio",
+    "city": "Rio de Janeiro",
+    "place": "Teatro Riachuelo - Rio de Janeiro",
+    "address": "Rua do Passeio, 38 - Centro, Rio de Janeiro - RJ",
+    "description": [
+      "Laila Garin vive Édith Piaf em um musical inédito sobre a cantora francesa, das ruas de Paris aos grandes palcos do mundo, com clássicos como \"La Vie en Rose\" e \"Non, je ne regrette rien\".",
+      "Direção de Sergio Módena, dramaturgia de Newton Moreno e Alessandro Toller e direção musical de Cláudia Elizeu, com orquestra ao vivo e 12 atores em cena."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 300,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 150,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      },
+      "balcao": {
+        "label": "Balcão",
+        "amount": 50,
+        "rules": "Lugares no balcão superior, com visão parcial do palco."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Jessica",
+        "photo": "notification-jessica.png"
+      },
+      {
+        "name": "Tom",
+        "photo": "attendee-1.png"
+      },
+      {
+        "name": "Bia",
+        "photo": "attendee-2.png"
+      }
+    ],
+    "poster": "poster-piaf.png",
+    "artistPhoto": "event-piaf-hero.jpg"
+  },
+  {
+    "id": "mesa-sp",
+    "type": "gastronomia",
+    "title": "Mesa São Paulo",
+    "dateTime": "2026-11-12T12:00:00-03:00",
+    "endDateTime": "2026-11-14T22:00:00-03:00",
+    "venue": "Memorial da América Latina",
+    "city": "São Paulo",
+    "place": "Memorial da América Latina - São Paulo",
+    "address": "Av. Auro Soares de Moura Andrade, 664 - Barra Funda, São Paulo - SP",
+    "description": [
+      "O maior encontro de gastronomia da América Latina: aulas-show com chefs do Brasil e do mundo, palestras, degustações e uma feira com produtores de todo o país.",
+      "De 12 a 14 de novembro de 2026, no Memorial da América Latina."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 180,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 90,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Tom",
+        "photo": "attendee-1.png"
+      },
+      {
+        "name": "Carl",
+        "photo": "notification-carl.png"
+      },
+      {
+        "name": "Kim",
+        "photo": "notification-kim.png"
+      }
+    ],
+    "poster": "poster-mesa-sp.png",
+    "artistPhoto": "event-mesa-sp-hero.png"
+  },
+  {
+    "id": "folha-gourmet",
+    "type": "gastronomia",
+    "title": "Folha Gourmet Festival",
+    "dateTime": "2026-11-07T12:00:00-03:00",
+    "endDateTime": "2026-11-15T20:00:00-03:00",
+    "venue": "Parque Villa-Lobos",
+    "city": "São Paulo",
+    "place": "Parque Villa-Lobos - São Paulo",
+    "address": "Av. Prof. Fonseca Rodrigues, 2001 - Alto de Pinheiros, São Paulo - SP",
+    "description": [
+      "Restaurantes, bares e food trucks da cidade montam suas barracas ao ar livre, com pratos em porções para provar de tudo, música ao vivo e área para crianças.",
+      "Em dois fins de semana: 7, 8, 14 e 15 de novembro de 2026, no Parque Villa-Lobos."
+    ],
+    "prices": {
+      "inteira": {
+        "label": "Inteira",
+        "amount": 40,
+        "rules": "Ingresso sem desconto, válido para todo o público."
+      },
+      "meia": {
+        "label": "Meia Entrada",
+        "amount": 20,
+        "rules": "Estudantes (apresentar DNE), jovens de baixa renda (apresentar ID Jovem), menores de 21 anos e maiores de 60 anos (apresentar documento oficial)."
+      }
+    },
+    "attendees": [
+      {
+        "name": "Rafa",
+        "photo": "attendee-3.png"
+      },
+      {
+        "name": "Bia",
+        "photo": "attendee-2.png"
+      },
+      {
+        "name": "Jessica",
+        "photo": "notification-jessica.png"
+      }
+    ],
+    "poster": "poster-folha-gourmet.png",
+    "artistPhoto": "event-folha-gourmet-hero.png"
   }
 ]
