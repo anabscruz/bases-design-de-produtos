@@ -72,28 +72,93 @@
   color: var(--color-accent);
 }
 
+/* Two lines: date, then place */
 .event-hero__when {
-  font-weight: var(--fw-medium);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   font-size: var(--fs-body-sm);
   color: var(--color-text-secondary);
-  white-space: pre;
 }
 
-/* Place in mono (--font-mono: DM Mono, standing in for the design's PP Fraktion Mono) */
+/* Date and place in mono (--font-mono: DM Mono, standing in for the design's PP Fraktion Mono) */
+.event-hero__date,
 .event-hero__place {
   font-family: var(--font-mono);
   font-weight: var(--fw-regular);
 }
 
-.event-hero__ctas {
+/* Save + share over the photo, right under the header (fixed white: they sit on the image) */
+.event-hero__actions {
+  position: absolute;
+  top: calc(var(--header-height) + 27px);
+  right: var(--screen-padding);
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
 .event-hero__icon-button {
   display: flex;
-  color: var(--color-icon);
+  color: #fff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+/* The saved heart keeps its orange */
+.event-hero__icon-button.is-saved {
+  color: var(--color-heart);
+}
+
+.event-hero__ctas {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+}
+
+/* "A partir de" 12px; the value in lilac on dark, black on light (like the order total) */
+.event-hero__price .price__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+}
+
+.event-hero__price .price__value {
+  color: var(--color-total);
+}
+
+/*
+ * Figma "Order" (304:3207): lilac pill, Neue Montreal Bold. Same 3D press as
+ * "Finalizar compra" (.buy-button): an outline 4px below; pressed, the button
+ * sinks onto it
+ */
+.event-hero__buy {
+  flex-shrink: 0;
+  margin-bottom: 4px;
+  padding: 3px 11px;
+  border-radius: 50px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-neue);
+  font-weight: var(--fw-bold);
+  font-size: 15px;
+  line-height: var(--lh-control);
+  letter-spacing: var(--tracking);
+  box-shadow:
+    0 4px 0 -1px var(--color-bg),
+    0 4px 0 0 var(--color-primary);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.event-hero__buy:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 -1px var(--color-bg),
+    0 1px 0 0 var(--color-primary);
 }
 
 /* ---------- Content ---------- */

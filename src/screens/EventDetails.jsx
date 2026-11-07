@@ -87,31 +87,36 @@ function EventPage({ event, navigate, onBack, balanceHidden, onToggleBalance }) 
           />
         </div>
 
+        {/* Figma 304:3176: save + share, top right under the header */}
+        <div className="event-hero__actions">
+          <SaveButton
+            className="event-hero__icon-button"
+            size={26}
+            saved={saved}
+            onToggle={() => setSaved((value) => !value)}
+          />
+          <button type="button" className="event-hero__icon-button" onClick={share} aria-label="Compartilhar evento">
+            <Icon name="share" size={24} />
+          </button>
+        </div>
+
         <div className="event-hero__content">
           <h1 className="event-hero__title">{event.title}</h1>
+          {/* Date on top, place underneath, both in mono */}
           <p className="event-hero__when">
-            <span className="event-hero__place">{event.place}</span>
-            <span aria-hidden="true">  ·  </span>
+            <span className="event-hero__date">{event.dateLabel}</span>
             <span className="visually-hidden">, </span>
-            {event.dateLabel}
+            <span className="event-hero__place">{event.place}</span>
           </p>
+          {/* Figma 304:3159: price on the left, order button on the right */}
           <div className="event-hero__ctas">
+            <Price className="event-hero__price" value={event.priceFrom} label="A partir de" />
             <button
               type="button"
-              className="button-primary"
+              className="event-hero__buy"
               onClick={() => ticketsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
             >
               Comprar
-            </button>
-            <Price value={event.priceFrom} label="A partir de" />
-            <SaveButton
-              className="event-hero__icon-button"
-              size={26}
-              saved={saved}
-              onToggle={() => setSaved((value) => !value)}
-            />
-            <button type="button" className="event-hero__icon-button" onClick={share} aria-label="Compartilhar evento">
-              <Icon name="share" size={24} />
             </button>
           </div>
         </div>

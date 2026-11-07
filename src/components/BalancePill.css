@@ -1,13 +1,38 @@
+/*
+ * Same 3D press as "Finalizar compra": a lime outline 4px below the pill, with a
+ * strip of the background between them; pressed, the pill sinks onto it.
+ * Tapping opens the Wallet.
+ */
 .balance-pill {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 6px;
+  margin-bottom: 4px;
   padding: 3px 7px 3px 3px;
   border-radius: 50px;
   background: var(--color-accent);
   color: #000;
+  text-decoration: none;
   white-space: nowrap;
+  box-shadow:
+    0 4px 0 -1px var(--color-bg),
+    0 4px 0 0 var(--color-accent);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.balance-pill:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 -1px var(--color-bg),
+    0 1px 0 0 var(--color-accent);
+}
+
+.balance-pill:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
 }
 
 /* The Figma coin is drawn upside down (rotated 180°) */
@@ -16,6 +41,7 @@
 }
 
 .balance-pill__value {
+  display: block;
   font-weight: var(--fw-bold);
   font-size: var(--fs-body-sm);
   line-height: var(--lh-caption);
