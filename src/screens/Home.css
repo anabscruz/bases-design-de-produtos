@@ -94,6 +94,20 @@
   gap: 10px;
 }
 
+/* Each poster opens its event: pressed, it sinks a little into the wall */
+.home__poster {
+  transition: transform 160ms ease;
+}
+
+.home__poster:active {
+  transform: scale(0.97);
+}
+
+.home__poster:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: -4px;
+}
+
 /* Posters side by side with no gap, like a wall of pasted bills */
 .home__posters {
   gap: 0;

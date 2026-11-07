@@ -5,6 +5,7 @@ import placebo from '../assets/images/poster-home-placebo.png'
 import cabaretVoltaire from '../assets/images/poster-home-cabaret-voltaire.png'
 import rtm from '../assets/images/poster-rtm.jpg'
 import afropunk from '../assets/images/poster-afropunk.jpg'
+import { eventPath } from '../data/events.js'
 import '../components/Screen.css'
 import '../components/Poster.css'
 import './Home.css'
@@ -40,8 +41,11 @@ const FESTIVAL_POSTERS = [
   { id: 'afropunk', image: afropunk, trim: 1.06, alt: 'Afropunk: Parque de Exposições de Salvador, Salvador - BA, 02/11' },
 ]
 
-/** Home poster section: big title with a north-east arrow (opens Events, filtered) + poster wall */
-function PosterSection({ title, linkLabel, onOpen, posters }) {
+/**
+ * Home poster section: big title with a north-east arrow (opens Events, filtered)
+ * + poster wall, where each poster opens its event page
+ */
+function PosterSection({ title, linkLabel, onOpen, onOpenPoster, posters }) {
   return (
     <section className="screen__section home__section">
       {/* The whole row (title + arrow) opens the Events screen */}
@@ -64,14 +68,19 @@ function PosterSection({ title, linkLabel, onOpen, posters }) {
 
       <div className="carousel home__posters">
         {posters.map((poster) => (
-          <article className="poster poster--featured" key={poster.id}>
+          <button
+            type="button"
+            className="poster poster--featured home__poster"
+            key={poster.id}
+            onClick={() => onOpenPoster(poster.id)}
+          >
             <img
               className="poster__image"
               src={poster.image}
               alt={poster.alt}
               style={poster.trim ? { transform: `scale(${poster.trim})` } : undefined}
             />
-          </article>
+          </button>
         ))}
       </div>
     </section>
@@ -92,6 +101,7 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
         title="Trending"
         linkLabel="ver os eventos em alta"
         onOpen={() => navigate('events/trending')}
+        onOpenPoster={(id) => navigate(eventPath(id))}
         posters={TOP_POSTERS}
       />
 
@@ -123,6 +133,7 @@ export default function Home({ navigate, balanceHidden, onToggleBalance }) {
         title="Festivais"
         linkLabel="ver todos os festivais"
         onOpen={() => navigate('events/festival')}
+        onOpenPoster={(id) => navigate(eventPath(id))}
         posters={FESTIVAL_POSTERS}
       />
     </main>
