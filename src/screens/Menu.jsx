@@ -8,7 +8,6 @@ const ITEMS = [
   { label: 'Carteira', route: 'wallet' },
   { label: 'Ingressos', route: 'ticket' },
   { label: 'Eventos', route: 'events' },
-  { label: 'Convite' },
   { label: 'Perfil' },
   { label: 'Sair' },
 ]
