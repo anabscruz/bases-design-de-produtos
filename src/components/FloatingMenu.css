@@ -64,7 +64,7 @@
   width: 100%;
   height: 100%;
   border-radius: 999px;
-  background: #fff;
+  background: var(--palette-black);
 }
 
 /* Thins out while stretched, then wobbles back when it lands */
@@ -104,12 +104,18 @@
   transform: scale(0.88);
 }
 
-/* Black ink on the lime bar and on the white pill, in both themes */
+/* Black ink on the lime bar, in both themes */
 .floating-menu__icon {
   color: var(--palette-black);
   transition:
     color 200ms ease,
     background-color 200ms ease;
+}
+
+/* On the black pill the icon takes the bar's lime, so it stays readable */
+.floating-menu__tab.is-active .floating-menu__icon {
+  color: var(--palette-lime);
+  transition-delay: 160ms;
 }
 
 .floating-menu__icon--svg {
