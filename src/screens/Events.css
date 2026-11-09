@@ -292,7 +292,7 @@
   mask: var(--icon) center / contain no-repeat;
 }
 
-/* The list runs to the bottom of the screen; the tab bar floats over its end */
+/* The list runs to the bottom of the screen; the tab bar sits over its end */
 .screen.events {
   padding-bottom: 0;
 }

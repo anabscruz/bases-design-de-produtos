@@ -16,7 +16,7 @@ const TABS = [
 const PILL_WIDTH = 48
 
 /**
- * Floating "glass" tab bar. The active pill behaves like liquid: its leading
+ * Tab bar fixed to the bottom (Figma 284:1112). The active pill behaves like liquid: its leading
  * edge shoots to the tapped tab while the trailing edge follows a moment later,
  * so it stretches across the bar, then contracts and settles with a squish.
  */

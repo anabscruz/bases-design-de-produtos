@@ -21,7 +21,7 @@
   flex-direction: column;
   gap: 40px;
   max-height: calc(100% - 11px);
-  padding: 0 0 140px; /* clears the floating tab bar */
+  padding: 0 0 140px; /* clears the tab bar */
   overflow-y: auto;
   overscroll-behavior: contain;
   scrollbar-width: none;
