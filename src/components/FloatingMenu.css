@@ -26,11 +26,7 @@
   pointer-events: none;
 }
 
-/*
- * Lime in both themes, rounded only at the top. The extra bottom padding keeps
- * the icons clear of the phone's home indicator. The Figma shadow (0 4 2) is
- * turned upward: at the bottom edge it is what lifts the bar off the content.
- */
+/* Lime in both themes, rounded only at the top; the bottom padding keeps the icons clear of the home indicator */
 .floating-menu__bar {
   position: relative;
   display: flex;
@@ -40,7 +36,6 @@
   padding: 12px 20px 20px;
   border-radius: 12px 12px 0 0;
   background: var(--palette-lime);
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* --- Liquid active pill --- */
